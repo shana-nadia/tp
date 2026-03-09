@@ -27,7 +27,7 @@ public class Day {
      * Returns true if a given string is a valid tuition rate.
      */
     public static boolean isValidDay(String test) {
-        return seedu.address.model.person.Day.Day.isValid(test);
+        return DayOfWeek.isValid(test);
     }
 
     @Override
@@ -55,14 +55,14 @@ public class Day {
         return value.hashCode();
     }
 
-    public enum Day {
+    public enum DayOfWeek {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 
         /**
          * Returns true if a given string matches any of the enum names (case-insensitive).
          */
         public static boolean isValid(String test) {
-            return Arrays.stream(seedu.address.model.person.Day.Day.values())
+            return Arrays.stream(Day.DayOfWeek.values())
                     .anyMatch(day -> day.name().equalsIgnoreCase(test));
         }
     }

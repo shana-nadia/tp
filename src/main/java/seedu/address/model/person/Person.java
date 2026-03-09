@@ -26,15 +26,28 @@ public class Person {
     private final Day day;
     private final Time startTime;
     private final Time endTime;
-    private final TuitionRate tuitionRate;
+    private final Rate rate;
     private final Set<Tag> tags = new HashSet<>();
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.day = null;
+        this.startTime = null;
+        this.endTime = null;
+        this.rate = null;
+    }
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Day day,
-                  Time startTime, Time endTime, TuitionRate tuitionRate, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, day, startTime, endTime, tuitionRate, tags);
+                  Time startTime, Time endTime, Rate rate, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, day, startTime, endTime, rate, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,7 +55,7 @@ public class Person {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.tuitionRate = tuitionRate;
+        this.rate = rate;
         this.tags.addAll(tags);
     }
 
@@ -74,8 +87,8 @@ public class Person {
         return endTime;
     }
 
-    public TuitionRate getTuitionRate() {
-        return tuitionRate;
+    public Rate getTuitionRate() {
+        return rate;
     }
 
     /**
@@ -135,10 +148,6 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("day", day)
-                .add("startTime", startTime)
-                .add("endTime", endTime)
-                .add("tuitionRate", tuitionRate)
                 .add("tags", tags)
                 .toString();
     }
