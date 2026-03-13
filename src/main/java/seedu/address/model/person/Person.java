@@ -23,10 +23,14 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Day day;
+    private final Time startTime;
+    private final Time endTime;
+    private final Rate rate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Old method: here as an overloaded because of dependencies with other parts.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -34,6 +38,27 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.tags.addAll(tags);
+        this.day = null;
+        this.startTime = null;
+        this.endTime = null;
+        this.rate = null;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Day day,
+                  Time startTime, Time endTime, Rate rate, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, day, startTime, endTime, rate, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.rate = rate;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +76,22 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
+    public Rate getRate() {
+        return rate;
     }
 
     /**
@@ -71,7 +112,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().isSameName(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**

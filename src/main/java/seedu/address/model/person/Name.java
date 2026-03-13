@@ -44,6 +44,17 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Returns true if two names are the same (case-insensitive)
+     */
+    public boolean isSameName(Name otherName) {
+        if (otherName == this) {
+            return true;
+        }
+
+        return this.fullName.equalsIgnoreCase(otherName.fullName);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

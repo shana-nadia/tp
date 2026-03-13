@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rate;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +23,19 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DAY = "Saturday";
+    public static final String DEFAULT_START_TIME = "10:00";
+    public static final String DEFAULT_END_TIME = "12:00";
+    public static final String DEFAULT_RATE = "40";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Day day;
+    private Time startTime;
+    private Time endTime;
+    private Rate rate;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +46,10 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        day = new Day(DEFAULT_DAY);
+        startTime = new Time(DEFAULT_START_TIME);
+        endTime = new Time(DEFAULT_END_TIME);
+        rate = new Rate(DEFAULT_RATE);
         tags = new HashSet<>();
     }
 
@@ -46,6 +61,10 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        day = personToCopy.getDay();
+        startTime = personToCopy.getStartTime();
+        endTime = personToCopy.getEndTime();
+        rate = personToCopy.getRate();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +108,40 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Day} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDay(String day) {
+        this.day = new Day(day);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Start Time} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStartTime(String startTime) {
+        this.startTime = new Time(startTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code End Time} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEndTime(String endTime) {
+        this.endTime = new Time(endTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRate(String rate) {
+        this.rate = new Rate(rate);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, day, startTime, endTime, rate, tags);
     }
 
 }
