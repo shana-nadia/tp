@@ -64,6 +64,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
 import seedu.address.model.person.Time;
+
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -76,12 +77,28 @@ public class AddCommandParserTest {
                 .withStartTime(VALID_START_TIME_BOB)
                 .withEndTime(VALID_END_TIME_BOB)
                 .withRate(VALID_RATE_BOB)
+                .withTags()
                 .build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB
                 + RATE_DESC_BOB, new AddCommand(expectedPerson));
+
+
+        // multiple tags - all accepted
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
+                .withDay(VALID_DAY_BOB)
+                .withStartTime(VALID_START_TIME_BOB)
+                .withEndTime(VALID_END_TIME_BOB)
+                .withRate(VALID_RATE_BOB)
+                .withTags()
+                .build();
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB
+                        + RATE_DESC_BOB,
+                new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -201,7 +218,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // no optional fields left because tags removed, but kept function in case
+        // zero tags
         Person expectedPerson = new PersonBuilder(AMY)
                 .withDay(VALID_DAY_AMY)
                 .withStartTime(VALID_START_TIME_AMY)
