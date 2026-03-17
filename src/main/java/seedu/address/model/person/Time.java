@@ -33,9 +33,14 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if this time occurs after a given time.
+     * @param other the other {@code Time} to compare against
+     * @return {@code true} if this time is strictly after {@code other}, {@code false} otherwise
+     */
     public boolean isAfter(Time other) {
-        String[] thisParts = value.split("");
-        String [] otherParts = other.value.split("");
+        String[] thisParts = value.split(":");
+        String [] otherParts = other.value.split(":");
         int thisHour = Integer.parseInt(thisParts[0]);
         int thisMin = Integer.parseInt(thisParts[1]);
         int otherHour = Integer.parseInt(otherParts[0]);
