@@ -157,6 +157,10 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && day.equals(otherPerson.day)
+                && startTime.equals(otherPerson.startTime)
+                && endTime.equals(otherPerson.endTime)
+                && rate.equals(otherPerson.rate)
                 && isPaid == otherPerson.isPaid
                 && tags.equals(otherPerson.tags);
     }
@@ -164,7 +168,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, isPaid, tags);
+        return Objects.hash(name, phone, email, address,
+                day, startTime, endTime, rate, isPaid, tags);
     }
 
     @Override
