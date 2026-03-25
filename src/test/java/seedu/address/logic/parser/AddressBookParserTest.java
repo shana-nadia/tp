@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ConfirmCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -49,6 +50,18 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
+    public void parseCommand_confirm() throws Exception {
+        ConfirmCommand command = (ConfirmCommand) parser.parseCommand("confirm clear");
+        assertEquals(new ConfirmCommand("clear"), command);
+    }
+
+    @Test
+    public void parseCommand_confirmEmpty() throws Exception {
+        ConfirmCommand command = (ConfirmCommand) parser.parseCommand("confirm ");
+        assertEquals(new ConfirmCommand(""), command);
     }
 
     @Test
