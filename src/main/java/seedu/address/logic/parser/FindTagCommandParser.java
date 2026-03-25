@@ -25,7 +25,6 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
-        System.out.println("[DEBUG] FindTagCommandParser tag keywords: " + tagKeywords);
         if (tagKeywords.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
