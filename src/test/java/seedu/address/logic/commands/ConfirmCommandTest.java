@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -46,5 +49,35 @@ public class ConfirmCommandTest {
 
         assertCommandSuccess(command, model,
                 ConfirmCommand.MESSAGE_SUCCESS_CLEAR, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ConfirmCommand clearCommand = new ConfirmCommand("clear");
+        ConfirmCommand clearCommandCopy = new ConfirmCommand("clear");
+        ConfirmCommand differentCommand = new ConfirmCommand("delete");
+
+        // same object -> true
+        assertTrue(clearCommand.equals(clearCommand));
+
+        // same values -> true
+        assertTrue(clearCommand.equals(clearCommandCopy));
+
+        // different type -> false
+        assertFalse(clearCommand.equals(1));
+
+        // null -> false
+        assertFalse(clearCommand.equals(null));
+
+        // different confirmType -> false
+        assertFalse(clearCommand.equals(differentCommand));
+    }
+
+    @Test
+    public void hashCode_sameValue_sameHashCode() {
+        ConfirmCommand c1 = new ConfirmCommand("clear");
+        ConfirmCommand c2 = new ConfirmCommand("clear");
+
+        assertEquals(c1.hashCode(), c2.hashCode());
     }
 }
