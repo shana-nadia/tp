@@ -36,4 +36,15 @@ public class ConfirmCommandTest {
 
         assertCommandSuccess(confirmUnknown, model, ConfirmCommand.MESSAGE_INVALID, model);
     }
+
+    @Test
+    public void execute_uppercaseInput_convertsToLowercase() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
+        ConfirmCommand command = new ConfirmCommand("CLEAR");
+
+        assertCommandSuccess(command, model,
+                ConfirmCommand.MESSAGE_SUCCESS_CLEAR, expectedModel);
+    }
 }
