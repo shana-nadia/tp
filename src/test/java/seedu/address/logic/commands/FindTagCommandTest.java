@@ -3,19 +3,19 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
 import seedu.address.model.person.TagsContainKeywordsPredicate;
 
 public class FindTagCommandTest {
     @Test
     public void equals() {
-        TagsContainKeywordsPredicate firstPredicate = new TagsContainKeywordsPredicate(Collections.singletonList("friends"));
-        TagsContainKeywordsPredicate secondPredicate = new TagsContainKeywordsPredicate(Collections.singletonList("colleagues"));
+        TagsContainKeywordsPredicate firstPredicate =
+            new TagsContainKeywordsPredicate(Collections.singletonList("friends"));
+        TagsContainKeywordsPredicate secondPredicate =
+            new TagsContainKeywordsPredicate(Collections.singletonList("colleagues"));
 
         FindTagCommand findFirstCommand = new FindTagCommand(firstPredicate);
         FindTagCommand findSecondCommand = new FindTagCommand(secondPredicate);
