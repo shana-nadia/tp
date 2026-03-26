@@ -184,6 +184,10 @@ Edits the details of an existing student in OnlyTutors.
 Editing tags with the `edit` command **replaces all existing tags**. If a student has tags `math` and `primary3`, running `edit 1 t/science` will result in only the `science` tag remaining.
 </div>
 
+<div markdown="block" class="alert alert-info">
+**Note: the same rules for adding a person applies here, i.e. person name must contain only alphabets, end time must be strictly after start time and so on.**
+</div>
+
 **Examples:**
 
 | Command | What it does |
