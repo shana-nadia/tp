@@ -140,17 +140,13 @@ OnlyTutors considers two contacts duplicates if they have the <strong>same name 
 and <strong>same phone number</strong>.
 
 This design is chosen because:
-<ul>
-<li>Names alone are not unique (e.g. many students may share the same name)</li>
-<li>Phone numbers alone are not reliable (e.g. siblings may share a parent’s number)</li>
-<li>Combining both provides a practical and reliable identifier for tutors</li>
-</ul>
+* Names alone are not unique (e.g. many students may share the same name)
+* Phone numbers alone are not reliable (e.g. siblings may share a parent’s number)
+* Combining both provides a practical and reliable identifier for tutors
 
 Additionally:
-<ul>
-<li>Duplicate detection is case-insensitive (e.g. <code>john doe</code> = <code>John Doe</code>)</li>
-<li>Names are displayed exactly as entered to preserve user formatting</li>
-</ul>
+* Duplicate detection is case-insensitive (e.g. <code>john doe</code> = <code>John Doe</code>)
+* Names are displayed exactly as entered to preserve user formatting
 </div>
 
 **Examples:**
@@ -168,16 +164,16 @@ Additionally:
 
 ### ⚠️ Common mistakes when adding a student
 
-| Mistake | Why it fails |
-|--------|-------------|
-| `r/$40` | Symbols are not allowed — rate must be a number |
-| `r/40.0` | Decimals are not allowed — must be an integer |
-| `n/John123` | Name cannot contain numbers |
-| `n/` | Name cannot be empty |
-| `p/12345678` | Must start with 6, 8, or 9 |
-| `d/Mon` | Must use full day name (e.g. Monday) |
-| `st/3pm` | Must use 24-hour format (e.g. 15:00) |
-| `et/14:00 st/15:00` | End time must be after start time |
+| Mistake | Why it fails                                   |
+|--------|------------------------------------------------|
+| `r/$40` | Symbols are not allowed; rate must be a number |
+| `r/40.0` | Decimals are not allowed; must be an integer   |
+| `n/John123` | Name cannot contain numbers                    |
+| `n/` | Name cannot be empty                           |
+| `p/12345678` | Must start with 6, 8, or 9                     |
+| `d/Mon` | Must use full day name (e.g. Monday)           |
+| `st/3pm` | Must use 24-hour format (e.g. 15:00)           |
+| `et/14:00 st/15:00` | End time must be after start time              |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Always follow the exact formats shown in the examples to avoid errors.
