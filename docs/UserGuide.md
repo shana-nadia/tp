@@ -24,6 +24,7 @@ A quick reference of all available commands. Click any command name to jump to i
 | [**List**](#listing-all-students-list) | `list` | `list` |
 | [**Edit**](#editing-a-student-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DAY] [st/START] [et/END] [r/RATE] [t/TAG]…​` | `edit 1 p/91234567 d/Friday` |
 | [**Find**](#finding-students-by-name-find) | `find KEYWORD [MORE_KEYWORDS]…​` | `find John Alice` |
+| [**Tag Find**](#finding-students-by-tag-findtag) | `findtag TAG [MORE_TAGS]…​` | `findtag math primary3` |
 | [**Delete**](#deleting-a-student-delete) | `delete INDEX` | `delete 3` |
 | [**Tag Add**](#adding-tags-to-a-student-tag-add) | `tag add INDEX t/TAG [t/TAG]…​` | `tag add 1 t/math t/primary3` |
 | [**Tag Delete**](#deleting-tags-from-a-student-tag-delete) | `tag delete INDEX t/TAG [t/TAG]…​` | `tag delete 1 t/math` |
@@ -255,6 +256,35 @@ Finds students whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After using `find`, use [`list`](#listing-all-students-list) to return to the full student list.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Finding students by tag: `findtag`
+
+Finds students who have at least one of the given tags.
+
+<div markdown="span" class="alert alert-success">
+**Format:** `findtag TAG [MORE_TAGS]…​`
+</div>
+
+* The search is **case-insensitive**. e.g. `Math` will match `math`.
+* Students matching **at least one** tag will be returned (i.e. `OR` search).
+* Tag values should be provided **without** the `t/` prefix.
+* Tags are alphanumeric only (no spaces).
+
+**Examples:**
+
+| Command | What it does |
+|---------|-------------|
+| `findtag math` | Returns students tagged with `math` |
+| `findtag primary3 science` | Returns students tagged with either `primary3` or `science` |
+
+**Expected output:**
+> `2 persons listed!`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+After using `findtag`, use [`list`](#listing-all-students-list) to return to the full student list.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
