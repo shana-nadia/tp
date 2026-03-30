@@ -24,7 +24,7 @@ A quick reference of all available commands. Click any command name to jump to i
 | [**List**](#listing-all-students-list) | `list` | `list` |
 | [**Edit**](#editing-a-student-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DAY] [st/START] [et/END] [r/RATE] [t/TAG]…​` | `edit 1 p/91234567 d/Friday` |
 | [**Find**](#finding-students-by-name-find) | `find KEYWORD [MORE_KEYWORDS]…​` | `find John Alice` |
-| [**Tag Find**](#finding-students-by-tag-tag-find) | `tag find TAG [MORE_TAGS]…​` | `tag find math primary3` |
+| [**Tag Find**](#finding-students-by-tag-tag-find) | `tag find t/TAG [t/TAG]…​` | `tag find t/math t/primary3` |
 | [**Delete**](#deleting-a-student-delete) | `delete INDEX [INDEX]…​` | `delete 1 3 7` |
 | [**Tag Add**](#adding-tags-to-a-student-tag-add) | `tag add INDEX [INDEX]…​ t/TAG [t/TAG]…​` | `tag add 1 2 3 t/math` |
 | [**Tag Delete**](#deleting-tags-from-a-student-tag-delete) | `tag delete INDEX [INDEX]…​ t/TAG [t/TAG]…​` | `tag delete 1 2 t/math` |
@@ -367,7 +367,7 @@ After using `find`, use [`list`](#listing-all-students-list) to return to the fu
 Finds students who match all of the given tags.
 
 <div markdown="span" class="alert alert-success">
-**Format:** `tag find t/TAG [t/TAGS]…​`
+**Format:** `tag find t/TAG [t/TAG]…​`
 </div>
 
 * The search is **case-insensitive**. e.g. `Math` will match `math`.
@@ -379,7 +379,7 @@ Finds students who match all of the given tags.
 | Command | What it does |
 |---------|-------------|
 | `tag find t/math` | Returns students tagged with `math` |
-| `tag find primary3 science` | Returns students tagged with both `primary3` and `science` |
+| `tag find t/primary3 t/science` | Returns students tagged with both `primary3` and `science` |
 
 **Expected output:**
 > `2 persons listed!`
