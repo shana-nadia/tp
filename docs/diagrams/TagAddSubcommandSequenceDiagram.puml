@@ -49,4 +49,7 @@ deactivate TagCommandParser
 TagCommandParser -[hidden]-> AddressBookParser
 destroy TagCommandParser
 
+[<-- AddressBookParser : t
+deactivate AddressBookParser
+
 @enduml
