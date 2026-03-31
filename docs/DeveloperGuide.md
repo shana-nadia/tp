@@ -115,6 +115,22 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+#### Subcommand-based parsing
+
+Some commands use an additional parsing layer after the top-level command word is identified. This is useful when multiple related operations share the same command prefix but need different parsing rules and execution logic.
+
+The `tag` command is implemented this way. After `AddressBookParser` identifies the top-level command word `tag`, it delegates the remaining input to `TagCommandParser`. `TagCommandParser` then extracts the subcommand word and forwards the rest of the input to the matching subcommand parser:
+
+* `tag add ...` -> `AddTagCommandParser`
+* `tag delete ...` -> `DeleteTagCommandParser`
+* `tag find ...` -> `FindTagCommandParser`
+
+This keeps the top-level parser simple while allowing each subcommand to validate a different argument format.
+
+The sequence diagram below shows an example of the subcommand-specific flow for `tag add 1 t/math`, showing the two-stage parsing process to return the resulting `AddTagCommand`.
+
+<img src="images/TagAddSubcommandSequenceDiagram.png" width="1000" />
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -375,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case 04: Tag a student**
 
 **Guarantees**
-* Tags are added to a student if and only if the `INDEX` parameter is valid and all `TAG` parameters are valid.
+* Tags are added to a student if and only if the `INDEX` parameter is valid, all `TAG` parameters are valid, and none of the specified tags already exist on that student.
 
 **MSS**
 1. Tutor enters the command to tag a student.
@@ -396,8 +412,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 * 2a. OnlyTutors detects that one or more tags already exist on the student
-  * 2a1. OnlyTutors ignores the duplicate tag(s) and adds only new tag(s).
-  * 2a2. OnlyTutors informs the tutor that the duplicate tags already exist on the student
+  * 2a1. OnlyTutors shows an error message.
+  * 2a2. No tags are added to the student.
 
     Use case ends.
     
