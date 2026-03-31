@@ -1,0 +1,55 @@
+@startuml TagAddSubcommandSequenceDiagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant ":AddTagCommandParser" as AddTagCommandParser LOGIC_COLOR
+participant "t:AddTagCommand" as AddTagCommand LOGIC_COLOR
+end box
+
+[-> AddressBookParser : parseCommand("tag add 1 t/math")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser -> TagCommandParser : parse(" add 1 t/math")
+activate TagCommandParser
+
+create AddTagCommandParser
+TagCommandParser -> AddTagCommandParser
+activate AddTagCommandParser
+
+AddTagCommandParser --> TagCommandParser
+deactivate AddTagCommandParser
+
+TagCommandParser -> AddTagCommandParser : parse("1 t/math")
+activate AddTagCommandParser
+
+create AddTagCommand
+AddTagCommandParser -> AddTagCommand
+activate AddTagCommand
+
+AddTagCommand --> AddTagCommandParser
+deactivate AddTagCommand
+
+AddTagCommandParser --> TagCommandParser : t
+deactivate AddTagCommandParser
+AddTagCommandParser -[hidden]-> TagCommandParser
+destroy AddTagCommandParser
+
+TagCommandParser --> AddressBookParser : t
+deactivate TagCommandParser
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
+
+[<-- AddressBookParser : t
+deactivate AddressBookParser
+
+@enduml
