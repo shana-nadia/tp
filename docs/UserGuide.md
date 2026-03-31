@@ -5,7 +5,7 @@ title: User Guide
 
 **OnlyTutors** is a desktop management suite purpose-built for private tutors in Singapore to streamline students, lessons, and payments.
 
-While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the lightning-fast efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard.
+While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard.
 
 OnlyTutors helps you manage your tutoring business more effectively than traditional apps by allowing you to maintain various data not seen in traditional apps.
 
