@@ -63,5 +63,6 @@ Email -[hidden]right-> Tag
 Tag -[hidden]right-> Day
 Day -[hidden]right-> Time
 Time -[hidden]right-> Rate
+
 ModelManager --> "~* filtered" Lesson
 @enduml
