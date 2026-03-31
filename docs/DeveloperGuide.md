@@ -333,13 +333,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. OnlyTutors detects missing or invalid parameter
-  * 1a1. OnlyTutors shows an error message. 
-    
+  * 1a1. OnlyTutors shows an error message.
+
     Use case ends.
 
 * 1b. OnlyTutors detects a duplicate student (based on name and phone number)
-  * 1b1. OnlyTutors rejects the add and gives a warning. 
-  
+  * 1b1. OnlyTutors rejects the add and gives a warning.
+
     Use case ends
 
 
@@ -365,7 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case 03: List all students**
 
 **Guarantees**
-* Displays all students currently stored in the system, including all their details 
+* Displays all students currently stored in the system, including all their details
 (name, phone, address, lesson day/time, tuition rate, payment status, tags).
 * If no students exist, displays an empty list message.
 
@@ -384,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. OnlyTutors detects no existing student contacts in the system
     * 2a1. OnlyTutors displays a notification message.
-  
+
         Use case ends.
 
 
@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a2. No tags are added to the student.
 
     Use case ends.
-    
+
 
 **Use case 05: Delete tags from a student**
 
