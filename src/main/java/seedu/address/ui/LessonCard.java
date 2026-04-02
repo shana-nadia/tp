@@ -31,21 +31,21 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label entryHeader;
     @FXML
-    private Label name;
+    private Label nameLabel;
     @FXML
-    private Label id;
+    private Label idLabel;
     @FXML
-    private Label phone;
+    private Label phoneLabel;
     @FXML
-    private Label address;
+    private Label addressLabel;
     @FXML
-    private Label email;
+    private Label emailLabel;
     @FXML
-    private Label lesson;
+    private Label lessonLabel;
     @FXML
-    private Label rate;
+    private Label rateLabel;
     @FXML
-    private Label paymentStatus;
+    private Label paymentStatusLabel;
     @FXML
     private FlowPane tags;
 
@@ -56,31 +56,31 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         entryHeader.setText("ENTRY " + displayedIndex);
-        id.setText(String.valueOf(displayedIndex));
-        name.setText(lesson.getName().fullName);
-        phone.setText(lesson.getPhone().value);
-        email.setText(lesson.getEmail().value);
-        address.setText(lesson.getAddress().value);
+        idLabel.setText(String.valueOf(displayedIndex));
+        nameLabel.setText(lesson.getName().fullName);
+        phoneLabel.setText(lesson.getPhone().value);
+        emailLabel.setText(lesson.getEmail().value);
+        addressLabel.setText(lesson.getAddress().value);
 
         if (lesson.getDay() != null && lesson.getStartTime() != null && lesson.getEndTime() != null) {
-            this.lesson.setText("Lesson: " + lesson.getDay().value + " "
+            this.lessonLabel.setText("Lesson: " + lesson.getDay().value + " "
                     + lesson.getStartTime().value + "-" + lesson.getEndTime().value);
         } else {
-            this.lesson.setText("");
+            this.lessonLabel.setText("");
         }
 
         if (lesson.getRate() != null) {
-            rate.setText("$" + lesson.getRate().value);
+            rateLabel.setText("$" + lesson.getRate().value);
         } else {
-            rate.setText("");
+            rateLabel.setText("");
         }
 
         if (lesson.isPaid()) {
-            paymentStatus.setText("Paid");
-            paymentStatus.getStyleClass().add("payment-paid");
+            paymentStatusLabel.setText("Paid");
+            paymentStatusLabel.getStyleClass().add("payment-paid");
         } else {
-            paymentStatus.setText("Unpaid");
-            paymentStatus.getStyleClass().add("payment-unpaid");
+            paymentStatusLabel.setText("Unpaid");
+            paymentStatusLabel.getStyleClass().add("payment-unpaid");
         }
 
         lesson.getTags().stream()

@@ -18,15 +18,15 @@ public class LessonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     @FXML
-    private ListView<Lesson> LessonListView;
+    private ListView<Lesson> lessonListView;
 
     /**
      * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
      */
-    public LessonListPanel(ObservableList<Lesson> LessonList) {
+    public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
-        LessonListView.setItems(LessonList);
-        LessonListView.setCellFactory(listView -> new LessonListViewCell());
+        lessonListView.setItems(lessonList);
+        lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
     /**
