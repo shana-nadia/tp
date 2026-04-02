@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_LESSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.Typicallessons.ALICE;
+import static seedu.address.testutil.Typicallessons.BENSON;
+import static seedu.address.testutil.Typicallessons.DANIEL;
+import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.TagsContainKeywordsPredicate;
+import seedu.address.model.lesson.TagsContainKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindTagCommand}.
@@ -50,25 +50,25 @@ public class FindTagCommandTest {
     }
 
     @Test
-    public void execute_noMatchingTags_noPersonFound() {
+    public void execute_noMatchingTags_nolessonFound() {
         String expectedMessage = FindTagCommand.MESSAGE_TAG_NOT_FOUND;
         TagsContainKeywordsPredicate predicate = preparePredicate("unknownTag");
         FindTagCommand command = new FindTagCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredLessonList(predicate);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredLessonList());
     }
 
     @Test
-    public void execute_singleMatchingTag_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_singleMatchingTag_multiplelessonsFound() {
+        String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 3);
         TagsContainKeywordsPredicate predicate = preparePredicate("friends");
         FindTagCommand command = new FindTagCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredLessonList(predicate);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredLessonList());
     }
 
     @Test

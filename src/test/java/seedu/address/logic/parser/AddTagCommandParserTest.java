@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
 
 import java.util.List;
 import java.util.Set;
@@ -21,7 +21,7 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Set<Tag> tags = Set.of(new Tag("classmate"), new Tag("friend"));
-        AddTagCommand expectedCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tags);
+        AddTagCommand expectedCommand = new AddTagCommand(List.of(INDEX_FIRST_lesson), tags);
         assertParseSuccess(parser, "1" + TAG_DESC_FRIEND + " t/classmate", expectedCommand);
     }
 

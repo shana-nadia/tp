@@ -41,11 +41,11 @@
           <Label id="appTitle" text="OnlyTutors" />
         </HBox>
 
-        <VBox fx:id="personList" id="personListArea" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="LessonList" id="LessonListArea" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="LessonListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" id="resultDisplayArea"

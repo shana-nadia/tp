@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
 
 import java.util.List;
 import java.util.Set;
@@ -19,7 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,14 +31,14 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToUpdate = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Lesson lessonToUpdate = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
 
-        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_SUCCESS, Messages.format(personToUpdate));
+        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_SUCCESS, Messages.format(lessonToUpdate));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteTagsFromPerson(personToUpdate, tagsToDelete);
+        expectedModel.deleteTagsFromLesson(lessonToUpdate, tagsToDelete);
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -46,32 +46,32 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_tagNotFound_throwsCommandException() {
         Set<Tag> tagsToDelete = Set.of(new Tag("classmate"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
 
         assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_TAG_NOT_FOUND);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(outOfBoundIndex), tagsToDelete);
 
-        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
         Set<Tag> firstTags = Set.of(new Tag("friends"));
         Set<Tag> secondTags = Set.of(new Tag("teammate"));
-        DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), firstTags);
-        DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(List.of(INDEX_SECOND_PERSON), secondTags);
+        DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), firstTags);
+        DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(List.of(INDEX_SECOND_lesson), secondTags);
         DeleteTagCommand deleteFirstCommandDifferentTags =
-                new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), secondTags);
+                new DeleteTagCommand(List.of(INDEX_FIRST_lesson), secondTags);
 
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
-        DeleteTagCommand deleteFirstCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), firstTags);
+        DeleteTagCommand deleteFirstCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), firstTags);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         assertFalse(deleteFirstCommand.equals(1));
@@ -83,8 +83,8 @@ public class DeleteTagCommandTest {
     @Test
     public void hashCodeMethod() {
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tagsToDelete);
-        DeleteTagCommand deleteTagCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
+        DeleteTagCommand deleteTagCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
 
         assertEquals(deleteTagCommand.hashCode(), deleteTagCommandCopy.hashCode());
     }
@@ -92,9 +92,9 @@ public class DeleteTagCommandTest {
     @Test
     public void toStringMethod() {
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
         String expected = DeleteTagCommand.class.getCanonicalName()
-                + "{targetIndices=" + List.of(INDEX_FIRST_PERSON) + ", tagsToDelete=" + tagsToDelete + "}";
+                + "{targetIndices=" + List.of(INDEX_FIRST_lesson) + ", tagsToDelete=" + tagsToDelete + "}";
         assertEquals(expected, deleteTagCommand.toString());
     }
 }

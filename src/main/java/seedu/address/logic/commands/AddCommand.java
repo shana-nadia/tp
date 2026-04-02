@@ -14,10 +14,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 
 /**
- * Adds a person to the address book.
+ * Adds a lesson to the address book.
  */
 public class AddCommand extends Command {
 
@@ -45,27 +45,27 @@ public class AddCommand extends Command {
             + PREFIX_RATE + "150 ";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in OnlyTutors";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This contact already exists in OnlyTutors";
 
-    private final Person toAdd;
+    private final Lesson toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code lesson}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Lesson lesson) {
+        requireNonNull(lesson);
+        toAdd = lesson;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasLesson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        model.addPerson(toAdd);
+        model.addLesson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

@@ -7,14 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code lesson}.
  */
-public class PersonCard extends UiPart<Region> {
+public class LessonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "LessonListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Lesson lesson;
 
     @FXML
     private HBox cardPane;
@@ -50,32 +50,32 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code lessonCode} with the given {@code lesson} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.lesson = lesson;
         entryHeader.setText("ENTRY " + displayedIndex);
         id.setText(String.valueOf(displayedIndex));
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        address.setText(person.getAddress().value);
+        name.setText(lesson.getName().fullName);
+        phone.setText(lesson.getPhone().value);
+        email.setText(lesson.getEmail().value);
+        address.setText(lesson.getAddress().value);
 
-        if (person.getDay() != null && person.getStartTime() != null && person.getEndTime() != null) {
-            lesson.setText("Lesson: " + person.getDay().value + " "
-                    + person.getStartTime().value + "-" + person.getEndTime().value);
+        if (lesson.getDay() != null && lesson.getStartTime() != null && lesson.getEndTime() != null) {
+            this.lesson.setText("Lesson: " + lesson.getDay().value + " "
+                    + lesson.getStartTime().value + "-" + lesson.getEndTime().value);
         } else {
-            lesson.setText("");
+            this.lesson.setText("");
         }
 
-        if (person.getRate() != null) {
-            rate.setText("$" + person.getRate().value);
+        if (lesson.getRate() != null) {
+            rate.setText("$" + lesson.getRate().value);
         } else {
             rate.setText("");
         }
 
-        if (person.isPaid()) {
+        if (lesson.isPaid()) {
             paymentStatus.setText("Paid");
             paymentStatus.getStyleClass().add("payment-paid");
         } else {
@@ -83,7 +83,7 @@ public class PersonCard extends UiPart<Region> {
             paymentStatus.getStyleClass().add("payment-unpaid");
         }
 
-        person.getTags().stream()
+        lesson.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

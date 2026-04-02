@@ -12,13 +12,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Day;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Time;
+import seedu.address.model.lesson.Address;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Email;
+import seedu.address.model.lesson.Name;
+import seedu.address.model.lesson.Phone;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
 
 /**

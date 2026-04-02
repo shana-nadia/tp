@@ -12,7 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 
 /**
  * Marks one or more students' payment status as unpaid.
@@ -27,14 +27,14 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX [INDEX]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked student as unpaid: %1$s";
-    public static final String MESSAGE_UNMARK_PERSONS_SUCCESS = "Marked %1$d students as unpaid: %2$s";
+    public static final String MESSAGE_UNMARK_LESSON_SUCCESS = "Marked student as unpaid: %1$s";
+    public static final String MESSAGE_UNMARK_LESSONS_SUCCESS = "Marked %1$d students as unpaid: %2$s";
     public static final String MESSAGE_ALREADY_UNPAID = "This student has already been marked as unpaid.";
 
     private final List<Index> targetIndices;
 
     /**
-     * Creates an UnmarkCommand to mark the persons at {@code targetIndices} as unpaid.
+     * Creates an UnmarkCommand to mark the lessons at {@code targetIndices} as unpaid.
      */
     public UnmarkCommand(List<Index> targetIndices) {
         requireNonNull(targetIndices);
@@ -44,40 +44,40 @@ public class UnmarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Lesson> lastShownList = model.getFilteredLessonList();
 
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
         }
 
-        List<Person> personsToUnmark = new ArrayList<>();
+        List<Lesson> lessonsToUnmark = new ArrayList<>();
         for (Index index : targetIndices) {
-            Person person = lastShownList.get(index.getZeroBased());
-            if (!person.isPaid()) {
+            Lesson lesson = lastShownList.get(index.getZeroBased());
+            if (!lesson.isPaid()) {
                 throw new CommandException(MESSAGE_ALREADY_UNPAID);
             }
-            personsToUnmark.add(person);
+            lessonsToUnmark.add(lesson);
         }
 
-        List<Person> unmarkedPersons = new ArrayList<>();
-        for (Person personToUnmark : personsToUnmark) {
-            Person unmarkedPerson = new Person(
-                    personToUnmark.getName(), personToUnmark.getPhone(), personToUnmark.getEmail(),
-                    personToUnmark.getAddress(), personToUnmark.getDay(), personToUnmark.getStartTime(),
-                    personToUnmark.getEndTime(), personToUnmark.getRate(), false, personToUnmark.getTags());
-            model.setPerson(personToUnmark, unmarkedPerson);
-            unmarkedPersons.add(unmarkedPerson);
+        List<Lesson> unmarkedLessons = new ArrayList<>();
+        for (Lesson lessonToUnmark : lessonsToUnmark) {
+            Lesson unmarkedLesson = new Lesson(
+                    lessonToUnmark.getName(), lessonToUnmark.getPhone(), lessonToUnmark.getEmail(),
+                    lessonToUnmark.getAddress(), lessonToUnmark.getDay(), lessonToUnmark.getStartTime(),
+                    lessonToUnmark.getEndTime(), lessonToUnmark.getRate(), false, lessonToUnmark.getTags());
+            model.setLesson(lessonToUnmark, unmarkedLesson);
+            unmarkedLessons.add(unmarkedLesson);
         }
 
-        if (unmarkedPersons.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS,
-                    Messages.format(unmarkedPersons.get(0))));
+        if (unmarkedLessons.size() == 1) {
+            return new CommandResult(String.format(MESSAGE_UNMARK_LESSON_SUCCESS,
+                    Messages.format(unmarkedLessons.get(0))));
         }
-        String names = unmarkedPersons.stream()
+        String names = unmarkedLessons.stream()
                 .map(p -> p.getName().toString()).collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_UNMARK_PERSONS_SUCCESS, unmarkedPersons.size(), names));
+        return new CommandResult(String.format(MESSAGE_UNMARK_LESSONS_SUCCESS, unmarkedLessons.size(), names));
     }
 
     @Override

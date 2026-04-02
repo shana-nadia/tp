@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Lesson {
 
     // Identity fields
     private final Name name;
@@ -32,9 +32,9 @@ public class Person {
 
     /**
      * Every field must be present and not null. Accepts an explicit {@code isPaid} status.
-     * Used when constructing a Person with a known payment state (e.g. Mark/Unmark commands).
+     * Used when constructing a lesson with a known payment state (e.g. Mark/Unmark commands).
      */
-    public Person(Name name, Phone phone, Email email, Address address, Day day,
+    public Lesson(Name name, Phone phone, Email email, Address address, Day day,
                   Time startTime, Time endTime, Rate rate, boolean isPaid, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, day, startTime, endTime, rate, tags);
 
@@ -99,22 +99,22 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both lessons have the same name.
+     * This defines a weaker notion of equality between two lessons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameLesson(Lesson otherLesson) {
+        if (otherLesson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().isSameName(getName())
-                && otherPerson.getPhone().equals(getPhone());
+        return otherLesson != null
+                && otherLesson.getName().isSameName(getName())
+                && otherLesson.getPhone().equals(getPhone());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both lessons have the same identity and data fields.
+     * This defines a stronger notion of equality between two lessons.
      */
     @Override
     public boolean equals(Object other) {
@@ -123,21 +123,21 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Lesson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && day.equals(otherPerson.day)
-                && startTime.equals(otherPerson.startTime)
-                && endTime.equals(otherPerson.endTime)
-                && rate.equals(otherPerson.rate)
-                && isPaid == otherPerson.isPaid
-                && tags.equals(otherPerson.tags);
+        Lesson otherLesson = (Lesson) other;
+        return name.equals(otherLesson.name)
+                && phone.equals(otherLesson.phone)
+                && email.equals(otherLesson.email)
+                && address.equals(otherLesson.address)
+                && day.equals(otherLesson.day)
+                && startTime.equals(otherLesson.startTime)
+                && endTime.equals(otherLesson.endTime)
+                && rate.equals(otherLesson.rate)
+                && isPaid == otherLesson.isPaid
+                && tags.equals(otherLesson.tags);
     }
 
     @Override

@@ -16,14 +16,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Day;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Time;
+import seedu.address.model.lesson.Address;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Email;
+import seedu.address.model.lesson.Name;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Phone;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -59,9 +59,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Time end = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
 
-        Person person = new Person(name, phone, email, address, day, start, end, rate, false, tagList);
+        Lesson lesson = new Lesson(name, phone, email, address, day, start, end, rate, false, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(lesson);
     }
 
     /**

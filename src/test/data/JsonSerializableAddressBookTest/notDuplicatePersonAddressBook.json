@@ -1,6 +1,6 @@
 {
   "_comment": "This .json file checks OnlyTutors no longer only checks duplicate by checking if the name is the same.",
-  "persons": [ {
+  "lessons": [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",

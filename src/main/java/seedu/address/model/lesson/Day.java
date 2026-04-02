@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -48,11 +48,11 @@ public class Day {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Day)) {
+        if (!(other instanceof seedu.address.model.lesson.Day)) {
             return false;
         }
 
-        seedu.address.model.person.Day otherDay = (seedu.address.model.person.Day) other;
+        seedu.address.model.lesson.Day otherDay = (seedu.address.model.lesson.Day) other;
         return value.equals(otherDay.value);
     }
 

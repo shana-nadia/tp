@@ -1,10 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's tuition rate in the address book.
+ * Represents a lesson's tuition rate in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRate(String)}
  */
 public class Rate {

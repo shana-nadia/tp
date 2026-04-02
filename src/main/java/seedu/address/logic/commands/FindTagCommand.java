@@ -7,14 +7,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagsContainKeywordsPredicate;
+import seedu.address.model.lesson.TagsContainKeywordsPredicate;
 
 /**
  * Finds and lists all tags in address book that match the argument keyword.
  * Keyword matching is case insensitive.
  */
 public class FindTagCommand extends Command {
-    public static final String MESSAGE_TAG_NOT_FOUND = "No persons found with the specified tag(s).";
+    public static final String MESSAGE_TAG_NOT_FOUND = "No lessons found with the specified tag(s).";
 
     public static final String SUBCOMMAND_WORD = "find";
     public static final String COMMAND_PHRASE = TagCommand.COMMAND_WORD + " " + SUBCOMMAND_WORD;
@@ -34,13 +34,13 @@ public class FindTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        int found = model.getFilteredPersonList().size();
+        model.updateFilteredLessonList(predicate);
+        int found = model.getFilteredLessonList().size();
         if (found == 0) {
             return new CommandResult(MESSAGE_TAG_NOT_FOUND);
         }
         return new CommandResult(
-            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, found));
+            String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, found));
     }
 
     @Override
