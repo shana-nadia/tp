@@ -10,12 +10,16 @@ UniqueTagList -[hidden]down- UniqueLessonList
 UniqueTagList -[hidden]down- UniqueLessonList
 
 UniqueTagList -right-> "*" Tag
-UniqueLessonList -right-> lesson
+UniqueLessonList -right-> Lesson
 
-lesson -up-> "*" Tag
+Lesson -up-> "*" Tag
 
-lesson *--> Name
-lesson *--> Phone
-lesson *--> Email
-lesson *--> Address
+Lesson *--> Name
+Lesson *--> Phone
+Lesson *--> Email
+Lesson *--> Address
+Lesson *--> "1" Day
+Lesson *--> "1" Time : startTime
+Lesson *--> "1" Time : endTime
+Lesson *--> "1" Rate
 @enduml

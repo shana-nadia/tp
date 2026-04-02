@@ -115,6 +115,22 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+#### Subcommand-based parsing
+
+Some commands use an additional parsing layer after the top-level command word is identified. This is useful when multiple related operations share the same command prefix but need different parsing rules and execution logic.
+
+The `tag` command is implemented this way. After `AddressBookParser` identifies the top-level command word `tag`, it delegates the remaining input to `TagCommandParser`. `TagCommandParser` then extracts the subcommand word and forwards the rest of the input to the matching subcommand parser:
+
+* `tag add ...` -> `AddTagCommandParser`
+* `tag delete ...` -> `DeleteTagCommandParser`
+* `tag find ...` -> `FindTagCommandParser`
+
+This keeps the top-level parser simple while allowing each subcommand to validate a different argument format.
+
+The sequence diagram below shows an example of the subcommand-specific flow for `tag add 1 t/math`, showing the two-stage parsing process to return the resulting `AddTagCommand`.
+
+<img src="images/TagAddSubcommandSequenceDiagram.png" width="1000" />
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -155,6 +171,28 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Confirmation for Clear Feature
+
+#### Implementation
+
+The clear confirmation mechanism is designed to prevent accidental data loss. When a user inputs the `clear` command, instead of immediately purging the `Model`, the system transitions to a 'pending confirmation' state.
+
+The following activity diagram summarizes the workflow when a user executes the clear command:
+
+<img src="images/ClearActivityDiagram.png" width="300" />
+
+#### Design considerations:
+
+**Aspect: How the confirmation is handled:**
+
+* **Alternative 1 (current choice):** Internal state flag in `LogicManager`.
+    * Pros: Simple to implement within the existing command execution flow.
+    * Cons: Increases complexity of the `Logic` component state.
+
+* **Alternative 2:** Use a specialized `ConfirmCommand`.
+    * Pros: Keeps commands atomic and follows the Command Pattern more strictly.
+    * Cons: Requires more boilerplate code to pass the intended action to the confirmation handler.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -317,13 +355,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. OnlyTutors detects missing or invalid parameter
-  * 1a1. OnlyTutors shows an error message. 
-    
+  * 1a1. OnlyTutors shows an error message.
+
     Use case ends.
 
 * 1b. OnlyTutors detects a duplicate student (based on name and phone number)
-  * 1b1. OnlyTutors rejects the add and gives a warning. 
-  
+  * 1b1. OnlyTutors rejects the add and gives a warning.
+
     Use case ends
 
 
@@ -349,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case 03: List all students**
 
 **Guarantees**
-* Displays all students currently stored in the system, including all their details 
+* Displays all students currently stored in the system, including all their details
 (name, phone, address, lesson day/time, tuition rate, payment status, tags).
 * If no students exist, displays an empty list message.
 
@@ -368,14 +406,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. OnlyTutors detects no existing student contacts in the system
     * 2a1. OnlyTutors displays a notification message.
-  
+
         Use case ends.
 
 
 **Use case 04: Tag a student**
 
 **Guarantees**
-* Tags are added to a student if and only if the `INDEX` parameter is valid and all `TAG` parameters are valid.
+* Tags are added to a student if and only if the `INDEX` parameter is valid, all `TAG` parameters are valid, and none of the specified tags already exist on that student.
 
 **MSS**
 1. Tutor enters the command to tag a student.
@@ -396,11 +434,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 * 2a. OnlyTutors detects that one or more tags already exist on the student
-  * 2a1. OnlyTutors ignores the duplicate tag(s) and adds only new tag(s).
-  * 2a2. OnlyTutors informs the tutor that the duplicate tags already exist on the student
+  * 2a1. OnlyTutors shows an error message.
+  * 2a2. No tags are added to the student.
 
     Use case ends.
-    
+
 
 **Use case 05: Delete tags from a student**
 
@@ -427,6 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. OnlyTutors detects that one or more specified tags do not exist on the student
   * 2a1. OnlyTutors shows an error message.
+  * 2a2. No tags are deleted from the student.
 
     Use case ends.
 
