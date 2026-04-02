@@ -59,7 +59,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditlessonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditLessonDescriptor;
 import seedu.address.model.lesson.Address;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Email;
@@ -68,7 +68,7 @@ import seedu.address.model.lesson.Phone;
 import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditlessonDescriptorBuilder;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -140,7 +140,7 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND
                 + RATE_DESC_AMY + START_TIME_DESC_AMY + END_TIME_DESC_AMY + DAY_DESC_AMY;
 
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withDay(VALID_DAY_AMY).withStartTime(VALID_START_TIME_AMY).withEndTime(VALID_END_TIME_AMY)
                 .withRate(VALID_RATE_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
@@ -155,7 +155,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY
                 + RATE_DESC_BOB + DAY_DESC_BOB;
 
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).withRate(VALID_RATE_BOB).withDay(VALID_DAY_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -167,55 +167,55 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_lesson;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditlessonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditLessonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // day
         userInput = targetIndex.getOneBased() + DAY_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withDay(VALID_DAY_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withDay(VALID_DAY_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // start time
         userInput = targetIndex.getOneBased() + START_TIME_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withStartTime(VALID_START_TIME_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withStartTime(VALID_START_TIME_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // end time
         userInput = targetIndex.getOneBased() + END_TIME_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withEndTime(VALID_END_TIME_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withEndTime(VALID_END_TIME_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // rate
         userInput = targetIndex.getOneBased() + RATE_DESC_AMY;
-        descriptor = new EditlessonDescriptorBuilder().withRate(VALID_RATE_AMY).build();
+        descriptor = new EditLessonDescriptorBuilder().withRate(VALID_RATE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -277,7 +277,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_lesson;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder().withTags().build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

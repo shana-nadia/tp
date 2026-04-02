@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
-import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code UnmarkCommand}.
@@ -33,12 +33,12 @@ public class UnmarkCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         // Set lesson as paid first so unmark has something to do
         Lesson lessonToUnmark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson paidLesson = new lessonBuilder(lessonToUnmark).withPaid(true).build();
+        Lesson paidLesson = new LessonBuilder(lessonToUnmark).withPaid(true).build();
         model.setLesson(lessonToUnmark, paidLesson);
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
 
-        Lesson unmarkedLesson = new lessonBuilder(paidLesson).withPaid(false).build();
+        Lesson unmarkedLesson = new LessonBuilder(paidLesson).withPaid(false).build();
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_LESSON_SUCCESS,
                 Messages.format(unmarkedLesson));
 
@@ -60,7 +60,7 @@ public class UnmarkCommandTest {
     public void execute_validIndexFilteredList_success() {
         // Set lesson as paid first so unmark has something to do
         Lesson lessonToUnmark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson paidLesson = new lessonBuilder(lessonToUnmark).withPaid(true).build();
+        Lesson paidLesson = new LessonBuilder(lessonToUnmark).withPaid(true).build();
         model.setLesson(lessonToUnmark, paidLesson);
 
         showlessonAtIndex(model, INDEX_FIRST_lesson);
@@ -68,7 +68,7 @@ public class UnmarkCommandTest {
         Lesson lessonInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
         UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
 
-        Lesson unmarkedLesson = new lessonBuilder(lessonInFilteredList).withPaid(false).build();
+        Lesson unmarkedLesson = new LessonBuilder(lessonInFilteredList).withPaid(false).build();
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_LESSON_SUCCESS,
                 Messages.format(unmarkedLesson));
 
@@ -103,15 +103,15 @@ public class UnmarkCommandTest {
     public void execute_batchValidIndicesUnfilteredList_success() {
         Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
         Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_lesson.getZeroBased());
-        Lesson paidFirst = new lessonBuilder(firstLesson).withPaid(true).build();
-        Lesson paidSecond = new lessonBuilder(secondLesson).withPaid(true).build();
+        Lesson paidFirst = new LessonBuilder(firstLesson).withPaid(true).build();
+        Lesson paidSecond = new LessonBuilder(secondLesson).withPaid(true).build();
         model.setLesson(firstLesson, paidFirst);
         model.setLesson(secondLesson, paidSecond);
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson, INDEX_SECOND_lesson));
 
-        Lesson unmarkedFirst = new lessonBuilder(paidFirst).withPaid(false).build();
-        Lesson unmarkedSecond = new lessonBuilder(paidSecond).withPaid(false).build();
+        Lesson unmarkedFirst = new LessonBuilder(paidFirst).withPaid(false).build();
+        Lesson unmarkedSecond = new LessonBuilder(paidSecond).withPaid(false).build();
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setLesson(paidFirst, unmarkedFirst);

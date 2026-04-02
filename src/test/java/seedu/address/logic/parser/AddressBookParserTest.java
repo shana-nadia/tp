@@ -19,7 +19,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditlessonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditLessonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -30,8 +30,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditlessonDescriptorBuilder;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.lessonUtil;
 
 public class AddressBookParserTest {
@@ -40,7 +40,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Lesson lesson = new lessonBuilder().build();
+        Lesson lesson = new LessonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(lessonUtil.getAddCommand(lesson));
         assertEquals(new AddCommand(lesson), command);
     }
@@ -102,10 +102,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Lesson lesson = new lessonBuilder().build();
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder(lesson).build();
+        Lesson lesson = new LessonBuilder().build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_lesson.getOneBased() + " " + lessonUtil.getEditlessonDescriptorDetails(descriptor));
+                + INDEX_FIRST_lesson.getOneBased() + " " + lessonUtil.getEditLessonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_lesson, descriptor), command);
     }
 

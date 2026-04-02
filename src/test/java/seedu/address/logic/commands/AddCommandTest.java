@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.Typicallessons.ALICE;
+import static seedu.address.testutil.TypicalLessons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class AddCommandTest {
 
@@ -37,7 +37,7 @@ public class AddCommandTest {
     @Test
     public void execute_lessonAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
-        Lesson validLesson = new lessonBuilder().build();
+        Lesson validLesson = new LessonBuilder().build();
 
         CommandResult commandResult = new AddCommand(validLesson).execute(modelStub);
 
@@ -48,7 +48,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateLesson_throwsCommandException() {
-        Lesson validLesson = new lessonBuilder().build();
+        Lesson validLesson = new LessonBuilder().build();
         AddCommand addCommand = new AddCommand(validLesson);
         ModelStub modelStub = new ModelStubWithLesson(validLesson);
 
@@ -57,8 +57,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Lesson alice = new lessonBuilder().withName("Alice").build();
-        Lesson bob = new lessonBuilder().withName("Bob").build();
+        Lesson alice = new LessonBuilder().withName("Alice").build();
+        Lesson bob = new LessonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

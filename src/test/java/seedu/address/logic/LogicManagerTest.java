@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.START_TIME_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.Typicallessons.AMY;
+import static seedu.address.testutil.TypicalLessons.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -35,7 +35,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -172,7 +172,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DAY_DESC_AMY + START_TIME_DESC_AMY
                 + END_TIME_DESC_AMY + RATE_DESC_AMY;
-        Lesson expectedLesson = new lessonBuilder(AMY).withTags().build();
+        Lesson expectedLesson = new LessonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addLesson(expectedLesson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

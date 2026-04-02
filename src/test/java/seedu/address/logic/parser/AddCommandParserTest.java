@@ -49,8 +49,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.Typicallessons.AMY;
-import static seedu.address.testutil.Typicallessons.BOB;
+import static seedu.address.testutil.TypicalLessons.AMY;
+import static seedu.address.testutil.TypicalLessons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,14 +64,14 @@ import seedu.address.model.lesson.Name;
 import seedu.address.model.lesson.Phone;
 import seedu.address.model.lesson.Rate;
 import seedu.address.model.lesson.Time;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Lesson expectedLesson = new lessonBuilder(BOB)
+        Lesson expectedLesson = new LessonBuilder(BOB)
                 .withDay(VALID_DAY_BOB)
                 .withStartTime(VALID_START_TIME_BOB)
                 .withEndTime(VALID_END_TIME_BOB)
@@ -86,7 +86,7 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Lesson expectedLessonMultipleTags = new lessonBuilder(BOB)
+        Lesson expectedLessonMultipleTags = new LessonBuilder(BOB)
                 .withDay(VALID_DAY_BOB)
                 .withStartTime(VALID_START_TIME_BOB)
                 .withEndTime(VALID_END_TIME_BOB)
@@ -218,7 +218,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Lesson expectedLesson = new lessonBuilder(AMY)
+        Lesson expectedLesson = new LessonBuilder(AMY)
                 .withDay(VALID_DAY_AMY)
                 .withStartTime(VALID_START_TIME_AMY)
                 .withEndTime(VALID_END_TIME_AMY)

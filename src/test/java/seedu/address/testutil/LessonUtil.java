@@ -13,14 +13,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditlessonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditLessonDescriptor;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for lesson.
  */
-public class lessonUtil {
+public class LessonUtil {
 
     /**
      * Returns an add command string for adding the {@code lesson}.
@@ -49,9 +49,9 @@ public class lessonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditlessonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditLessonDescriptor}'s details.
      */
-    public static String getEditlessonDescriptorDetails(EditlessonDescriptor descriptor) {
+    public static String getEditLessonDescriptorDetails(EditLessonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name ->
                 sb.append(PREFIX_NAME).append(name.fullName).append(" "));

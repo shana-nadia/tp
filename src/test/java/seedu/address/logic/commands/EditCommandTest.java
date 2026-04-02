@@ -18,20 +18,20 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
-import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditCommand.EditlessonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditLessonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.testutil.EditlessonDescriptorBuilder;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -42,8 +42,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Lesson editedLesson = new lessonBuilder().build();
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder(editedLesson).build();
+        Lesson editedLesson = new LessonBuilder().build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_lesson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(editedLesson));
@@ -59,11 +59,11 @@ public class EditCommandTest {
         Index indexLastlesson = Index.fromOneBased(model.getFilteredLessonList().size());
         Lesson lastLesson = model.getFilteredLessonList().get(indexLastlesson.getZeroBased());
 
-        lessonBuilder lessonInList = new lessonBuilder(lastLesson);
+        LessonBuilder lessonInList = new LessonBuilder(lastLesson);
         Lesson editedLesson = lessonInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastlesson, descriptor);
 
@@ -77,7 +77,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_lesson, new EditlessonDescriptor());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_lesson, new EditLessonDescriptor());
         Lesson editedLesson = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(editedLesson));
@@ -92,9 +92,9 @@ public class EditCommandTest {
         showlessonAtIndex(model, INDEX_FIRST_lesson);
 
         Lesson lessonInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson editedLesson = new lessonBuilder(lessonInFilteredList).withName(VALID_NAME_BOB).build();
+        Lesson editedLesson = new LessonBuilder(lessonInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_lesson,
-                new EditlessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(editedLesson));
 
@@ -107,7 +107,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateLessonUnfilteredList_failure() {
         Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder(firstLesson).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(firstLesson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_lesson, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_LESSON);
@@ -120,7 +120,7 @@ public class EditCommandTest {
         // edit lesson in filtered list into a duplicate in address book
         Lesson lessonInList = model.getAddressBook().getLessonList().get(INDEX_SECOND_lesson.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_lesson,
-                new EditlessonDescriptorBuilder(lessonInList).build());
+                new EditLessonDescriptorBuilder(lessonInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_LESSON);
     }
@@ -128,7 +128,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidlessonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
-        EditlessonDescriptor descriptor = new EditlessonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
@@ -146,7 +146,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getLessonList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditlessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
@@ -156,7 +156,7 @@ public class EditCommandTest {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_lesson, DESC_AMY);
 
         // same values -> returns true
-        EditlessonDescriptor copyDescriptor = new EditlessonDescriptor(DESC_AMY);
+        EditLessonDescriptor copyDescriptor = new EditLessonDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_lesson, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -176,32 +176,32 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_lesson, DESC_BOB)));
 
         // different day -> returns false
-        EditlessonDescriptor differentDay = new EditlessonDescriptorBuilder(DESC_AMY)
+        EditLessonDescriptor differentDay = new EditLessonDescriptorBuilder(DESC_AMY)
                 .withDay(VALID_DAY_BOB)
                 .build();
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_lesson, differentDay)));
 
         // different start time -> returns false
-        EditlessonDescriptor differentStart = new EditlessonDescriptorBuilder(DESC_AMY)
+        EditLessonDescriptor differentStart = new EditLessonDescriptorBuilder(DESC_AMY)
                 .withStartTime(VALID_START_TIME_BOB)
                 .build();
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_lesson, differentStart)));
 
         // different end time -> returns false
-        EditlessonDescriptor differentEnd = new EditlessonDescriptorBuilder(DESC_AMY)
+        EditLessonDescriptor differentEnd = new EditLessonDescriptorBuilder(DESC_AMY)
                 .withEndTime(VALID_END_TIME_BOB)
                 .build();
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_lesson, differentEnd)));
 
         // different rate -> returns false
-        EditlessonDescriptor differentRate = new EditlessonDescriptorBuilder(DESC_AMY)
+        EditLessonDescriptor differentRate = new EditLessonDescriptorBuilder(DESC_AMY)
                 .withRate(VALID_RATE_BOB)
                 .build();
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_lesson, differentRate)));
 
 
         // different isPaid -> returns false
-        EditlessonDescriptor differentIsPaid = new EditlessonDescriptorBuilder(DESC_AMY)
+        EditLessonDescriptor differentIsPaid = new EditLessonDescriptorBuilder(DESC_AMY)
                 .withIsPaid(VALID_IS_PAID_BOB)
                 .build();
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_lesson, differentRate)));
@@ -210,10 +210,10 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditlessonDescriptor editlessonDescriptor = new EditlessonDescriptor();
-        EditCommand editCommand = new EditCommand(index, editlessonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editlessonDescriptor="
-                + editlessonDescriptor + "}";
+        EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+        EditCommand editCommand = new EditCommand(index, editLessonDescriptor);
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editLessonDescriptor="
+                + editLessonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

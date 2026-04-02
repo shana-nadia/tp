@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.Typicallessons.ALICE;
-import static seedu.address.testutil.Typicallessons.BOB;
+import static seedu.address.testutil.TypicalLessons.ALICE;
+import static seedu.address.testutil.TypicalLessons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class UniqueLessonListTest {
 
@@ -44,7 +44,7 @@ public class UniqueLessonListTest {
     @Test
     public void contains_lessonWithSameIdentityFieldsInList_returnsTrue() {
         UniqueLessonList.add(ALICE);
-        Lesson editedAlice = new lessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(UniqueLessonList.contains(editedAlice));
     }
@@ -87,7 +87,7 @@ public class UniqueLessonListTest {
     @Test
     public void setLesson_editedlessonHasSameIdentity_success() {
         UniqueLessonList.add(ALICE);
-        Lesson editedAlice = new lessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         UniqueLessonList.setLesson(ALICE, editedAlice);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
@@ -133,7 +133,7 @@ public class UniqueLessonListTest {
         UniqueLessonList.add(ALICE);
         UniqueLessonList.addTagsToLesson(ALICE, Set.of(new Tag("classmate")));
 
-        Lesson expectedLesson = new lessonBuilder(ALICE).withTags("friends", "classmate").build();
+        Lesson expectedLesson = new LessonBuilder(ALICE).withTags("friends", "classmate").build();
         assertTrue(UniqueLessonList.contains(expectedLesson));
     }
 
@@ -159,7 +159,7 @@ public class UniqueLessonListTest {
         UniqueLessonList.add(ALICE);
         UniqueLessonList.deleteTagsFromLesson(ALICE, Set.of(new Tag("friends")));
 
-        Lesson expectedLesson = new lessonBuilder(ALICE).withTags().build();
+        Lesson expectedLesson = new LessonBuilder(ALICE).withTags().build();
         assertTrue(UniqueLessonList.contains(expectedLesson));
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
@@ -43,34 +43,34 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new lessonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new LessonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new lessonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new LessonBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new lessonBuilder().withName("Alice Carol").build()));
+        assertTrue(predicate.test(new LessonBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new lessonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new LessonBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new lessonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new LessonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new lessonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new LessonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("69781234", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new lessonBuilder().withName("Alice").withPhone("69781234")
+        assertFalse(predicate.test(new LessonBuilder().withName("Alice").withPhone("69781234")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 

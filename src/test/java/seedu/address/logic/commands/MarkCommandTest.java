@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
-import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code MarkCommand}.
@@ -34,7 +34,7 @@ public class MarkCommandTest {
         Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
 
-        Lesson markedLesson = new lessonBuilder(lessonToMark).withPaid(true).build();
+        Lesson markedLesson = new LessonBuilder(lessonToMark).withPaid(true).build();
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_LESSON_SUCCESS,
                 Messages.format(markedLesson));
 
@@ -59,7 +59,7 @@ public class MarkCommandTest {
         Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
 
-        Lesson markedLesson = new lessonBuilder(lessonToMark).withPaid(true).build();
+        Lesson markedLesson = new LessonBuilder(lessonToMark).withPaid(true).build();
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_LESSON_SUCCESS,
                 Messages.format(markedLesson));
 
@@ -85,7 +85,7 @@ public class MarkCommandTest {
     @Test
     public void execute_alreadyPaid_throwsCommandException() {
         Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson alreadyPaidLesson = new lessonBuilder(lessonToMark).withPaid(true).build();
+        Lesson alreadyPaidLesson = new LessonBuilder(lessonToMark).withPaid(true).build();
         model.setLesson(lessonToMark, alreadyPaidLesson);
 
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
@@ -99,8 +99,8 @@ public class MarkCommandTest {
         Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_lesson.getZeroBased());
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson, INDEX_SECOND_lesson));
 
-        Lesson markedFirst = new lessonBuilder(firstLesson).withPaid(true).build();
-        Lesson markedSecond = new lessonBuilder(secondLesson).withPaid(true).build();
+        Lesson markedFirst = new LessonBuilder(firstLesson).withPaid(true).build();
+        Lesson markedSecond = new LessonBuilder(secondLesson).withPaid(true).build();
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setLesson(firstLesson, markedFirst);

@@ -17,7 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building lesson objects.
  */
-public class lessonBuilder {
+public class LessonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -40,9 +40,9 @@ public class lessonBuilder {
     private boolean isPaid;
 
     /**
-     * Creates a {@code lessonBuilder} with the default details.
+     * Creates a {@code LessonBuilder} with the default details.
      */
-    public lessonBuilder() {
+    public LessonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -56,9 +56,9 @@ public class lessonBuilder {
     }
 
     /**
-     * Initializes the lessonBuilder with the data of {@code lessonToCopy}.
+     * Initializes the LessonBuilder with the data of {@code lessonToCopy}.
      */
-    public lessonBuilder(Lesson lessonToCopy) {
+    public LessonBuilder(Lesson lessonToCopy) {
         name = lessonToCopy.getName();
         phone = lessonToCopy.getPhone();
         email = lessonToCopy.getEmail();
@@ -74,7 +74,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Name} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withName(String name) {
+    public LessonBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -82,7 +82,7 @@ public class lessonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code lesson} that we are building.
      */
-    public lessonBuilder withTags(String ... tags) {
+    public LessonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -90,7 +90,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Address} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withAddress(String address) {
+    public LessonBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -98,7 +98,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Phone} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withPhone(String phone) {
+    public LessonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -106,7 +106,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Email} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withEmail(String email) {
+    public LessonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
@@ -114,7 +114,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Day} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withDay(String day) {
+    public LessonBuilder withDay(String day) {
         this.day = new Day(day);
         return this;
     }
@@ -122,7 +122,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Start Time} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withStartTime(String startTime) {
+    public LessonBuilder withStartTime(String startTime) {
         this.startTime = new Time(startTime);
         return this;
     }
@@ -130,7 +130,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code End Time} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withEndTime(String endTime) {
+    public LessonBuilder withEndTime(String endTime) {
         this.endTime = new Time(endTime);
         return this;
     }
@@ -138,7 +138,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code Rate} of the {@code lesson} that we are building.
      */
-    public lessonBuilder withRate(String rate) {
+    public LessonBuilder withRate(String rate) {
         this.rate = new Rate(rate);
         return this;
     }
@@ -146,7 +146,7 @@ public class lessonBuilder {
     /**
      * Sets the {@code isPaid} status of the {@code lesson} that we are building.
      */
-    public lessonBuilder withPaid(boolean isPaid) {
+    public LessonBuilder withPaid(boolean isPaid) {
         this.isPaid = isPaid;
         return this;
     }

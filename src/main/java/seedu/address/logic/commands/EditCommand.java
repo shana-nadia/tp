@@ -56,18 +56,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book.";
 
     private final Index index;
-    private final EditlessonDescriptor editlessonDescriptor;
+    private final EditLessonDescriptor editLessonDescriptor;
 
     /**
      * @param index of the lesson in the filtered lesson list to edit
-     * @param editlessonDescriptor details to edit the lesson with
+     * @param editLessonDescriptor details to edit the lesson with
      */
-    public EditCommand(Index index, EditlessonDescriptor editlessonDescriptor) {
+    public EditCommand(Index index, EditLessonDescriptor editLessonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editlessonDescriptor);
+        requireNonNull(editLessonDescriptor);
 
         this.index = index;
-        this.editlessonDescriptor = new EditlessonDescriptor(editlessonDescriptor);
+        this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         }
 
         Lesson lessonToEdit = lastShownList.get(index.getZeroBased());
-        Lesson editedLesson = createEditedlesson(lessonToEdit, editlessonDescriptor);
+        Lesson editedLesson = createEditedlesson(lessonToEdit, editLessonDescriptor);
 
         if (!lessonToEdit.isSameLesson(editedLesson) && model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
@@ -93,21 +93,21 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code lesson} with the details of {@code lessonToEdit}
-     * edited with {@code editlessonDescriptor}.
+     * edited with {@code editLessonDescriptor}.
      */
-    private static Lesson createEditedlesson(Lesson lessonToEdit, EditlessonDescriptor editlessonDescriptor) {
+    private static Lesson createEditedlesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
 
-        Name updatedName = editlessonDescriptor.getName().orElse(lessonToEdit.getName());
-        Phone updatedPhone = editlessonDescriptor.getPhone().orElse(lessonToEdit.getPhone());
-        Email updatedEmail = editlessonDescriptor.getEmail().orElse(lessonToEdit.getEmail());
-        Address updatedAddress = editlessonDescriptor.getAddress().orElse(lessonToEdit.getAddress());
-        Day updatedDay = editlessonDescriptor.getDay().orElse(lessonToEdit.getDay());
-        Time updatedStartTime = editlessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
-        Time updatedEndTime = editlessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
-        Rate updatedRate = editlessonDescriptor.getRate().orElse(lessonToEdit.getRate());
-        boolean updatedIsPaid = editlessonDescriptor.getIsPaid().orElse(lessonToEdit.isPaid());
-        Set<Tag> updatedTags = editlessonDescriptor.getTags().orElse(lessonToEdit.getTags());
+        Name updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getName());
+        Phone updatedPhone = editLessonDescriptor.getPhone().orElse(lessonToEdit.getPhone());
+        Email updatedEmail = editLessonDescriptor.getEmail().orElse(lessonToEdit.getEmail());
+        Address updatedAddress = editLessonDescriptor.getAddress().orElse(lessonToEdit.getAddress());
+        Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
+        Time updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
+        Time updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
+        Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
+        boolean updatedIsPaid = editLessonDescriptor.getIsPaid().orElse(lessonToEdit.isPaid());
+        Set<Tag> updatedTags = editLessonDescriptor.getTags().orElse(lessonToEdit.getTags());
 
         return new Lesson(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedDay, updatedStartTime, updatedEndTime, updatedRate, updatedIsPaid, updatedTags);
@@ -126,14 +126,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editlessonDescriptor.equals(otherEditCommand.editlessonDescriptor);
+                && editLessonDescriptor.equals(otherEditCommand.editLessonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editlessonDescriptor", editlessonDescriptor)
+                .add("editLessonDescriptor", editLessonDescriptor)
                 .toString();
     }
 
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
      * Stores the details to edit the lesson with. Each non-empty field value will replace the
      * corresponding field value of the lesson.
      */
-    public static class EditlessonDescriptor {
+    public static class EditLessonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -153,13 +153,13 @@ public class EditCommand extends Command {
         private Boolean isPaid;
         private Set<Tag> tags;
 
-        public EditlessonDescriptor() {}
+        public EditLessonDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditlessonDescriptor(EditlessonDescriptor toCopy) {
+        public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -274,21 +274,21 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditlessonDescriptor)) {
+            if (!(other instanceof EditLessonDescriptor)) {
                 return false;
             }
 
-            EditlessonDescriptor otherEditlessonDescriptor = (EditlessonDescriptor) other;
-            return Objects.equals(name, otherEditlessonDescriptor.name)
-                    && Objects.equals(phone, otherEditlessonDescriptor.phone)
-                    && Objects.equals(email, otherEditlessonDescriptor.email)
-                    && Objects.equals(address, otherEditlessonDescriptor.address)
-                    && Objects.equals(day, otherEditlessonDescriptor.day)
-                    && Objects.equals(startTime, otherEditlessonDescriptor.startTime)
-                    && Objects.equals(endTime, otherEditlessonDescriptor.endTime)
-                    && Objects.equals(rate, otherEditlessonDescriptor.rate)
-                    && Objects.equals(isPaid, otherEditlessonDescriptor.isPaid)
-                    && Objects.equals(tags, otherEditlessonDescriptor.tags);
+            EditLessonDescriptor otherEditLessonDescriptor = (EditLessonDescriptor) other;
+            return Objects.equals(name, otherEditLessonDescriptor.name)
+                    && Objects.equals(phone, otherEditLessonDescriptor.phone)
+                    && Objects.equals(email, otherEditLessonDescriptor.email)
+                    && Objects.equals(address, otherEditLessonDescriptor.address)
+                    && Objects.equals(day, otherEditLessonDescriptor.day)
+                    && Objects.equals(startTime, otherEditLessonDescriptor.startTime)
+                    && Objects.equals(endTime, otherEditLessonDescriptor.endTime)
+                    && Objects.equals(rate, otherEditLessonDescriptor.rate)
+                    && Objects.equals(isPaid, otherEditLessonDescriptor.isPaid)
+                    && Objects.equals(tags, otherEditLessonDescriptor.tags);
         }
 
         @Override

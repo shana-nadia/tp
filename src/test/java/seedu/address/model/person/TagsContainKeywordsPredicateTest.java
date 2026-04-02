@@ -8,14 +8,14 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 class TagsContainKeywordsPredicateTest {
     @Test
     void test_singleKeywordMatch() {
         TagsContainKeywordsPredicate predicate =
             new TagsContainKeywordsPredicate(Collections.singletonList("friends"));
-        Lesson lesson = new lessonBuilder().withTags("friends").build();
+        Lesson lesson = new LessonBuilder().withTags("friends").build();
         assertTrue(predicate.test(lesson));
     }
 
@@ -23,7 +23,7 @@ class TagsContainKeywordsPredicateTest {
     void test_singleKeywordNoMatch() {
         TagsContainKeywordsPredicate predicate =
             new TagsContainKeywordsPredicate(Collections.singletonList("colleagues"));
-        Lesson lesson = new lessonBuilder().withTags("friends").build();
+        Lesson lesson = new LessonBuilder().withTags("friends").build();
         assertFalse(predicate.test(lesson));
     }
 
@@ -31,7 +31,7 @@ class TagsContainKeywordsPredicateTest {
     void test_multipleKeywordsAllMatch() {
         TagsContainKeywordsPredicate predicate =
             new TagsContainKeywordsPredicate(Arrays.asList("friends", "colleagues"));
-        Lesson lesson = new lessonBuilder().withTags("friends", "colleagues").build();
+        Lesson lesson = new LessonBuilder().withTags("friends", "colleagues").build();
         assertTrue(predicate.test(lesson));
     }
 
@@ -39,7 +39,7 @@ class TagsContainKeywordsPredicateTest {
     void test_multipleKeywordsPartialMatch() {
         TagsContainKeywordsPredicate predicate =
             new TagsContainKeywordsPredicate(Arrays.asList("friends", "colleagues"));
-        Lesson lesson = new lessonBuilder().withTags("friends").build();
+        Lesson lesson = new LessonBuilder().withTags("friends").build();
         assertFalse(predicate.test(lesson));
     }
 }

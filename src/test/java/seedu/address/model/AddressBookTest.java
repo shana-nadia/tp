@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.Typicallessons.ALICE;
-import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLessons.ALICE;
+import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.lessonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class AddressBookTest {
 
@@ -48,7 +48,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatelessons_throwsDuplicateLessonException() {
         // Two lessons with the same identity fields
-        Lesson editedAlice = new lessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Lesson> newLessons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newLessons);
@@ -75,7 +75,7 @@ public class AddressBookTest {
     @Test
     public void hasLesson_lessonWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addLesson(ALICE);
-        Lesson editedAlice = new lessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasLesson(editedAlice));
     }
@@ -95,7 +95,7 @@ public class AddressBookTest {
         addressBook.addLesson(ALICE);
         addressBook.addTagsToLesson(ALICE, Set.of(new Tag("classmate")));
 
-        Lesson expectedLesson = new lessonBuilder(ALICE).withTags("friends", "classmate").build();
+        Lesson expectedLesson = new LessonBuilder(ALICE).withTags("friends", "classmate").build();
         assertTrue(addressBook.hasLesson(expectedLesson));
     }
 
@@ -115,7 +115,7 @@ public class AddressBookTest {
         addressBook.addLesson(ALICE);
         addressBook.deleteTagsFromLesson(ALICE, Set.of(new Tag("friends")));
 
-        Lesson expectedLesson = new lessonBuilder(ALICE).withTags().build();
+        Lesson expectedLesson = new LessonBuilder(ALICE).withTags().build();
         assertTrue(addressBook.hasLesson(expectedLesson));
     }
 

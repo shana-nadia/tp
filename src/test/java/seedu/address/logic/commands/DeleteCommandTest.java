@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
-import static seedu.address.testutil.Typicallessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
 

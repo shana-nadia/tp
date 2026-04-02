@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.testutil.Typicallessons;
+import seedu.address.testutil.TypicalLessons;
 
 public class JsonSerializableAddressBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
     private static final Path TYPICAL_LESSONS_FILE =
-            TEST_DATA_FOLDER.resolve("typicallessonsAddressBook.json");
+            TEST_DATA_FOLDER.resolve("TypicalLessonsAddressBook.json");
     private static final Path INVALID_LESSON_EMAIL_FILE =
             TEST_DATA_FOLDER.resolve("invalidlessonEmailAddressBook.json");
     private static final Path INVALID_LESSON_DAY_FILE =
@@ -33,12 +33,12 @@ public class JsonSerializableAddressBookTest {
             TEST_DATA_FOLDER.resolve("notDuplicatelessonAddressBook.json");
 
     @Test
-    public void toModelType_typicallessonsFile_success() throws Exception {
+    public void toModelType_TypicalLessonsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_LESSONS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicallessonsAddressBook = Typicallessons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicallessonsAddressBook);
+        AddressBook TypicalLessonsAddressBook = TypicalLessons.getTypicalAddressBook();
+        assertEquals(addressBookFromFile, TypicalLessonsAddressBook);
     }
 
     @Test
