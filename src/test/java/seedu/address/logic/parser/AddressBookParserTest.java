@@ -32,7 +32,7 @@ import seedu.address.model.lesson.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.LessonBuilder;
-import seedu.address.testutil.lessonUtil;
+import seedu.address.testutil.LessonUtil;
 
 public class AddressBookParserTest {
 
@@ -41,7 +41,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Lesson lesson = new LessonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(lessonUtil.getAddCommand(lesson));
+        AddCommand command = (AddCommand) parser.parseCommand(LessonUtil.getAddCommand(lesson));
         assertEquals(new AddCommand(lesson), command);
     }
 
@@ -105,7 +105,7 @@ public class AddressBookParserTest {
         Lesson lesson = new LessonBuilder().build();
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_lesson.getOneBased() + " " + lessonUtil.getEditLessonDescriptorDetails(descriptor));
+                + INDEX_FIRST_lesson.getOneBased() + " " + LessonUtil.getEditLessonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_lesson, descriptor), command);
     }
 
