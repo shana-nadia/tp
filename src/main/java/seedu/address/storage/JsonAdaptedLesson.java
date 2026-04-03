@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Lesson}.
  */
-class JsonAdaptedlesson {
+class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "lesson's %s field is missing!";
 
@@ -39,10 +39,10 @@ class JsonAdaptedlesson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedlesson} with the given lesson details.
+     * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedlesson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedLesson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("day") String day, @JsonProperty("startTime") String startTime,
                              @JsonProperty("endTime") String endTime, @JsonProperty("rate") String rate,
@@ -65,7 +65,7 @@ class JsonAdaptedlesson {
     /**
      * Converts a given {@code lesson} into this class for Jackson use.
      */
-    public JsonAdaptedlesson(Lesson source) {
+    public JsonAdaptedLesson(Lesson source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;

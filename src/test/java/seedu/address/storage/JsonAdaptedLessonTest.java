@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedlesson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLessons.BENSON;
 
@@ -45,14 +45,14 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_validlessonDetails_returnslesson() throws Exception {
-        JsonAdaptedlesson lesson = new JsonAdaptedlesson(BENSON);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(BENSON);
         assertEquals(BENSON, lesson.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DAY,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DAY,
                         VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -60,7 +60,7 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson = new JsonAdaptedlesson(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -68,8 +68,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -77,7 +77,7 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson = new JsonAdaptedlesson(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
                 VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -85,8 +85,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -94,7 +94,7 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson = new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
                 VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -102,8 +102,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -111,7 +111,7 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson = new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
                 VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -121,16 +121,16 @@ public class JsonAdaptedLessonTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, invalidTags);
         assertThrows(IllegalValueException.class, lesson::toModelType);
     }
 
     @Test
     public void toModelType_invalidDay_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         INVALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Day.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -138,8 +138,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullDay_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         null, VALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -147,8 +147,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidStartTime_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, INVALID_START_TIME, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Time.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -156,8 +156,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullStartTime_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, null, VALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -165,8 +165,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidEndTime_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, INVALID_END_TIME, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = Time.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -174,8 +174,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullEndTime_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, null, VALID_RATE, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -183,8 +183,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidRate_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, VALID_END_TIME, INVALID_RATE, false, VALID_TAGS);
         String expectedMessage = Rate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -192,8 +192,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullRate_throwsIllegalValueException() {
-        JsonAdaptedlesson lesson =
-                new JsonAdaptedlesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DAY, VALID_START_TIME, VALID_END_TIME, null, false, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);

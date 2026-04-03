@@ -21,13 +21,13 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_LESSON = "lessons list contains duplicate lesson(s).";
 
-    private final List<JsonAdaptedlesson> lessons = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given lessons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("lessons") List<JsonAdaptedlesson> lessons) {
+    public JsonSerializableAddressBook(@JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.lessons.addAll(lessons);
     }
 
@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        lessons.addAll(source.getLessonList().stream().map(JsonAdaptedlesson::new).collect(Collectors.toList()));
+        lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,8 +47,8 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedlesson jsonAdaptedlesson : lessons) {
-            Lesson lesson = jsonAdaptedlesson.toModelType();
+        for (JsonAdaptedLesson JsonAdaptedLesson : lessons) {
+            Lesson lesson = JsonAdaptedLesson.toModelType();
             if (addressBook.hasLesson(lesson)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
