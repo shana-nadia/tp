@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
@@ -32,11 +32,11 @@ public class UnmarkCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         // Set lesson as paid first so unmark has something to do
-        Lesson lessonToUnmark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
+        Lesson lessonToUnmark = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         Lesson paidLesson = new LessonBuilder(lessonToUnmark).withPaid(true).build();
         model.setLesson(lessonToUnmark, paidLesson);
 
-        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_LESSON));
 
         Lesson unmarkedLesson = new LessonBuilder(paidLesson).withPaid(false).build();
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_LESSON_SUCCESS,
@@ -59,14 +59,14 @@ public class UnmarkCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         // Set lesson as paid first so unmark has something to do
-        Lesson lessonToUnmark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
+        Lesson lessonToUnmark = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         Lesson paidLesson = new LessonBuilder(lessonToUnmark).withPaid(true).build();
         model.setLesson(lessonToUnmark, paidLesson);
 
-        showlessonAtIndex(model, INDEX_FIRST_lesson);
+        showlessonAtIndex(model, INDEX_FIRST_LESSON);
 
-        Lesson lessonInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
+        Lesson lessonInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_LESSON));
 
         Lesson unmarkedLesson = new LessonBuilder(lessonInFilteredList).withPaid(false).build();
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_LESSON_SUCCESS,
@@ -74,16 +74,16 @@ public class UnmarkCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setLesson(lessonInFilteredList, unmarkedLesson);
-        showlessonAtIndex(expectedModel, INDEX_FIRST_lesson);
+        showlessonAtIndex(expectedModel, INDEX_FIRST_LESSON);
 
         assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showlessonAtIndex(model, INDEX_FIRST_lesson);
+        showlessonAtIndex(model, INDEX_FIRST_LESSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_lesson;
+        Index outOfBoundIndex = INDEX_SECOND_LESSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getLessonList().size());
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(outOfBoundIndex));
@@ -94,21 +94,21 @@ public class UnmarkCommandTest {
     @Test
     public void execute_alreadyUnpaid_throwsCommandException() {
         // Typical lessons default to isPaid = false
-        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_LESSON));
 
         assertCommandFailure(unmarkCommand, model, UnmarkCommand.MESSAGE_ALREADY_UNPAID);
     }
 
     @Test
     public void execute_batchValidIndicesUnfilteredList_success() {
-        Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_lesson.getZeroBased());
+        Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
         Lesson paidFirst = new LessonBuilder(firstLesson).withPaid(true).build();
         Lesson paidSecond = new LessonBuilder(secondLesson).withPaid(true).build();
         model.setLesson(firstLesson, paidFirst);
         model.setLesson(secondLesson, paidSecond);
 
-        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson, INDEX_SECOND_lesson));
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_LESSON, INDEX_SECOND_LESSON));
 
         Lesson unmarkedFirst = new LessonBuilder(paidFirst).withPaid(false).build();
         Lesson unmarkedSecond = new LessonBuilder(paidSecond).withPaid(false).build();
@@ -125,14 +125,14 @@ public class UnmarkCommandTest {
 
     @Test
     public void equals() {
-        UnmarkCommand unmarkFirstCommand = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
-        UnmarkCommand unmarkSecondCommand = new UnmarkCommand(List.of(INDEX_SECOND_lesson));
+        UnmarkCommand unmarkFirstCommand = new UnmarkCommand(List.of(INDEX_FIRST_LESSON));
+        UnmarkCommand unmarkSecondCommand = new UnmarkCommand(List.of(INDEX_SECOND_LESSON));
 
         // same object -> returns true
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
 
         // same values -> returns true
-        UnmarkCommand unmarkFirstCommandCopy = new UnmarkCommand(List.of(INDEX_FIRST_lesson));
+        UnmarkCommand unmarkFirstCommandCopy = new UnmarkCommand(List.of(INDEX_FIRST_LESSON));
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommandCopy));
 
         // different types -> returns false

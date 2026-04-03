@@ -50,9 +50,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_LESSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -135,7 +135,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_lesson;
+        Index targetIndex = INDEX_SECOND_LESSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND
                 + RATE_DESC_AMY + START_TIME_DESC_AMY + END_TIME_DESC_AMY + DAY_DESC_AMY;
@@ -151,7 +151,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_lesson;
+        Index targetIndex = INDEX_FIRST_LESSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY
                 + RATE_DESC_BOB + DAY_DESC_BOB;
 
@@ -165,7 +165,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_lesson;
+        Index targetIndex = INDEX_THIRD_LESSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -226,7 +226,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_lesson;
+        Index targetIndex = INDEX_FIRST_LESSON;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
@@ -274,7 +274,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_lesson;
+        Index targetIndex = INDEX_THIRD_LESSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withTags().build();

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
@@ -31,8 +31,8 @@ public class MarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
+        Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_LESSON));
 
         Lesson markedLesson = new LessonBuilder(lessonToMark).withPaid(true).build();
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_LESSON_SUCCESS,
@@ -54,10 +54,10 @@ public class MarkCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showlessonAtIndex(model, INDEX_FIRST_lesson);
+        showlessonAtIndex(model, INDEX_FIRST_LESSON);
 
-        Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
+        Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_LESSON));
 
         Lesson markedLesson = new LessonBuilder(lessonToMark).withPaid(true).build();
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_LESSON_SUCCESS,
@@ -65,16 +65,16 @@ public class MarkCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setLesson(lessonToMark, markedLesson);
-        showlessonAtIndex(expectedModel, INDEX_FIRST_lesson);
+        showlessonAtIndex(expectedModel, INDEX_FIRST_LESSON);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showlessonAtIndex(model, INDEX_FIRST_lesson);
+        showlessonAtIndex(model, INDEX_FIRST_LESSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_lesson;
+        Index outOfBoundIndex = INDEX_SECOND_LESSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getLessonList().size());
 
         MarkCommand markCommand = new MarkCommand(List.of(outOfBoundIndex));
@@ -84,20 +84,20 @@ public class MarkCommandTest {
 
     @Test
     public void execute_alreadyPaid_throwsCommandException() {
-        Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
+        Lesson lessonToMark = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         Lesson alreadyPaidLesson = new LessonBuilder(lessonToMark).withPaid(true).build();
         model.setLesson(lessonToMark, alreadyPaidLesson);
 
-        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
+        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_LESSON));
 
         assertCommandFailure(markCommand, model, MarkCommand.MESSAGE_ALREADY_PAID);
     }
 
     @Test
     public void execute_batchValidIndicesUnfilteredList_success() {
-        Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_lesson.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_lesson, INDEX_SECOND_lesson));
+        Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
+        MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_LESSON, INDEX_SECOND_LESSON));
 
         Lesson markedFirst = new LessonBuilder(firstLesson).withPaid(true).build();
         Lesson markedSecond = new LessonBuilder(secondLesson).withPaid(true).build();
@@ -114,14 +114,14 @@ public class MarkCommandTest {
 
     @Test
     public void equals() {
-        MarkCommand markFirstCommand = new MarkCommand(List.of(INDEX_FIRST_lesson));
-        MarkCommand markSecondCommand = new MarkCommand(List.of(INDEX_SECOND_lesson));
+        MarkCommand markFirstCommand = new MarkCommand(List.of(INDEX_FIRST_LESSON));
+        MarkCommand markSecondCommand = new MarkCommand(List.of(INDEX_SECOND_LESSON));
 
         // same object -> returns true
         assertTrue(markFirstCommand.equals(markFirstCommand));
 
         // same values -> returns true
-        MarkCommand markFirstCommandCopy = new MarkCommand(List.of(INDEX_FIRST_lesson));
+        MarkCommand markFirstCommandCopy = new MarkCommand(List.of(INDEX_FIRST_LESSON));
         assertTrue(markFirstCommand.equals(markFirstCommandCopy));
 
         // different types -> returns false

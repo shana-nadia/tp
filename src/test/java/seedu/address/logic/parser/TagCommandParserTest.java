@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 
 import java.util.List;
 import java.util.Set;
@@ -22,14 +22,14 @@ public class TagCommandParserTest {
     @Test
     public void parse_addSubcommand_success() {
         AddTagCommand expectedCommand =
-                new AddTagCommand(List.of(INDEX_FIRST_lesson), Set.of(new Tag("friend")));
+                new AddTagCommand(List.of(INDEX_FIRST_LESSON), Set.of(new Tag("friend")));
         assertParseSuccess(parser, "add 1" + TAG_DESC_FRIEND, expectedCommand);
     }
 
     @Test
     public void parse_deleteSubcommand_success() {
         DeleteTagCommand expectedCommand =
-                new DeleteTagCommand(List.of(INDEX_FIRST_lesson), Set.of(new Tag("friend")));
+                new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), Set.of(new Tag("friend")));
         assertParseSuccess(parser, "delete 1" + TAG_DESC_FRIEND, expectedCommand);
     }
 

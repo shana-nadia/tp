@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 
 import java.util.List;
 
@@ -25,13 +25,13 @@ public class UnmarkCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsUnmarkCommand() {
-        assertParseSuccess(parser, "1", new UnmarkCommand(List.of(INDEX_FIRST_lesson)));
+        assertParseSuccess(parser, "1", new UnmarkCommand(List.of(INDEX_FIRST_LESSON)));
     }
 
     @Test
     public void parse_multipleValidArgs_returnsUnmarkCommand() {
         assertParseSuccess(parser, "1 2",
-                new UnmarkCommand(List.of(INDEX_FIRST_lesson, INDEX_SECOND_lesson)));
+                new UnmarkCommand(List.of(INDEX_FIRST_LESSON, INDEX_SECOND_LESSON)));
     }
 
     @Test

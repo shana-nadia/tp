@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showlessonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
@@ -31,8 +31,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_lesson));
+        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_LESSON));
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 Messages.format(lessonToDelete));
@@ -53,10 +53,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showlessonAtIndex(model, INDEX_FIRST_lesson);
+        showlessonAtIndex(model, INDEX_FIRST_LESSON);
 
-        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_lesson));
+        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_LESSON));
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 Messages.format(lessonToDelete));
@@ -70,9 +70,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showlessonAtIndex(model, INDEX_FIRST_lesson);
+        showlessonAtIndex(model, INDEX_FIRST_LESSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_lesson;
+        Index outOfBoundIndex = INDEX_SECOND_LESSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getLessonList().size());
 
@@ -83,9 +83,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_batchValidIndicesUnfilteredList_success() {
-        Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
-        Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_lesson.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_lesson, INDEX_SECOND_lesson));
+        Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        Lesson secondLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_LESSON, INDEX_SECOND_LESSON));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteLesson(firstLesson);
@@ -99,14 +99,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(List.of(INDEX_FIRST_lesson));
-        DeleteCommand deleteSecondCommand = new DeleteCommand(List.of(INDEX_SECOND_lesson));
+        DeleteCommand deleteFirstCommand = new DeleteCommand(List.of(INDEX_FIRST_LESSON));
+        DeleteCommand deleteSecondCommand = new DeleteCommand(List.of(INDEX_SECOND_LESSON));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(List.of(INDEX_FIRST_lesson));
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(List.of(INDEX_FIRST_LESSON));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

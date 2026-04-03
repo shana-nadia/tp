@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -95,8 +95,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_lesson.getOneBased());
-        assertEquals(new DeleteCommand(List.of(INDEX_FIRST_lesson)), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_LESSON.getOneBased());
+        assertEquals(new DeleteCommand(List.of(INDEX_FIRST_LESSON)), command);
     }
 
 
@@ -105,8 +105,8 @@ public class AddressBookParserTest {
         Lesson lesson = new LessonBuilder().build();
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_lesson.getOneBased() + " " + LessonUtil.getEditLessonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_lesson, descriptor), command);
+                + INDEX_FIRST_LESSON.getOneBased() + " " + LessonUtil.getEditLessonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_LESSON, descriptor), command);
     }
 
     @Test
@@ -138,25 +138,25 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_mark() throws Exception {
         MarkCommand command = (MarkCommand) parser.parseCommand(
-                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_lesson.getOneBased());
-        assertEquals(new MarkCommand(List.of(INDEX_FIRST_lesson)), command);
+                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_LESSON.getOneBased());
+        assertEquals(new MarkCommand(List.of(INDEX_FIRST_LESSON)), command);
     }
 
     @Test
     public void parseCommand_unmark() throws Exception {
         UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
-                UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_lesson.getOneBased());
-        assertEquals(new UnmarkCommand(List.of(INDEX_FIRST_lesson)), command);
+                UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_LESSON.getOneBased());
+        assertEquals(new UnmarkCommand(List.of(INDEX_FIRST_LESSON)), command);
     }
 
     @Test
     public void parseCommand_tag() throws Exception {
         AddTagCommand addTagCommand = (AddTagCommand) parser.parseCommand("tag add 1 t/friends");
-        assertEquals(new AddTagCommand(List.of(INDEX_FIRST_lesson), java.util.Set.of(new Tag("friends"))),
+        assertEquals(new AddTagCommand(List.of(INDEX_FIRST_LESSON), java.util.Set.of(new Tag("friends"))),
                 addTagCommand);
 
         DeleteTagCommand deleteTagCommand = (DeleteTagCommand) parser.parseCommand("tag delete 1 t/friends");
-        assertEquals(new DeleteTagCommand(List.of(INDEX_FIRST_lesson), java.util.Set.of(new Tag("friends"))),
+        assertEquals(new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), java.util.Set.of(new Tag("friends"))),
                 deleteTagCommand);
     }
 

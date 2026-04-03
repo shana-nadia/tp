@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
@@ -31,9 +31,9 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Lesson lessonToTag = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
+        Lesson lessonToTag = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_lesson), tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_LESSON), tagsToAdd);
 
         String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, Messages.format(lessonToTag));
 
@@ -56,13 +56,13 @@ public class AddTagCommandTest {
     public void equals() {
         Set<Tag> firstTags = Set.of(new Tag("classmate"));
         Set<Tag> secondTags = Set.of(new Tag("teammate"));
-        AddTagCommand addFirstCommand = new AddTagCommand(List.of(INDEX_FIRST_lesson), firstTags);
-        AddTagCommand addSecondCommand = new AddTagCommand(List.of(INDEX_SECOND_lesson), secondTags);
-        AddTagCommand addFirstCommandDifferentTags = new AddTagCommand(List.of(INDEX_FIRST_lesson), secondTags);
+        AddTagCommand addFirstCommand = new AddTagCommand(List.of(INDEX_FIRST_LESSON), firstTags);
+        AddTagCommand addSecondCommand = new AddTagCommand(List.of(INDEX_SECOND_LESSON), secondTags);
+        AddTagCommand addFirstCommandDifferentTags = new AddTagCommand(List.of(INDEX_FIRST_LESSON), secondTags);
 
         assertTrue(addFirstCommand.equals(addFirstCommand));
 
-        AddTagCommand addFirstCommandCopy = new AddTagCommand(List.of(INDEX_FIRST_lesson), firstTags);
+        AddTagCommand addFirstCommandCopy = new AddTagCommand(List.of(INDEX_FIRST_LESSON), firstTags);
         assertTrue(addFirstCommand.equals(addFirstCommandCopy));
 
         assertFalse(addFirstCommand.equals(1));
@@ -74,8 +74,8 @@ public class AddTagCommandTest {
     @Test
     public void hashCodeMethod() {
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_lesson), tagsToAdd);
-        AddTagCommand addTagCommandCopy = new AddTagCommand(List.of(INDEX_FIRST_lesson), tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_LESSON), tagsToAdd);
+        AddTagCommand addTagCommandCopy = new AddTagCommand(List.of(INDEX_FIRST_LESSON), tagsToAdd);
 
         assertEquals(addTagCommand.hashCode(), addTagCommandCopy.hashCode());
     }
@@ -83,9 +83,9 @@ public class AddTagCommandTest {
     @Test
     public void toStringMethod() {
         Set<Tag> tagsToAdd = Set.of(new Tag("classmate"));
-        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_lesson), tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_LESSON), tagsToAdd);
         String expected = AddTagCommand.class.getCanonicalName()
-                + "{targetIndices=" + List.of(INDEX_FIRST_lesson) + ", tagsToAdd=" + tagsToAdd + "}";
+                + "{targetIndices=" + List.of(INDEX_FIRST_LESSON) + ", tagsToAdd=" + tagsToAdd + "}";
         assertEquals(expected, addTagCommand.toString());
     }
 }

@@ -46,7 +46,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatelessons_throwsDuplicateLessonException() {
+    public void resetData_withDuplicateLessons_throwsDuplicateLessonException() {
         // Two lessons with the same identity fields
         Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();

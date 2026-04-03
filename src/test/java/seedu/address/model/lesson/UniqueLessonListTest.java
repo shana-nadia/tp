@@ -23,207 +23,207 @@ import seedu.address.testutil.LessonBuilder;
 
 public class UniqueLessonListTest {
 
-    private final UniqueLessonList UniqueLessonList = new UniqueLessonList();
+    private final UniqueLessonList uniqueLessonList = new UniqueLessonList();
 
     @Test
     public void contains_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.contains(null));
     }
 
     @Test
     public void contains_lessonNotInList_returnsFalse() {
-        assertFalse(UniqueLessonList.contains(ALICE));
+        assertFalse(uniqueLessonList.contains(ALICE));
     }
 
     @Test
     public void contains_lessonInList_returnsTrue() {
-        UniqueLessonList.add(ALICE);
-        assertTrue(UniqueLessonList.contains(ALICE));
+        uniqueLessonList.add(ALICE);
+        assertTrue(uniqueLessonList.contains(ALICE));
     }
 
     @Test
     public void contains_lessonWithSameIdentityFieldsInList_returnsTrue() {
-        UniqueLessonList.add(ALICE);
+        uniqueLessonList.add(ALICE);
         Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(UniqueLessonList.contains(editedAlice));
+        assertTrue(uniqueLessonList.contains(editedAlice));
     }
 
     @Test
     public void add_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.add(null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.add(null));
     }
 
     @Test
     public void add_duplicateLesson_throwsDuplicateLessonException() {
-        UniqueLessonList.add(ALICE);
-        assertThrows(DuplicateLessonException.class, () -> UniqueLessonList.add(ALICE));
+        uniqueLessonList.add(ALICE);
+        assertThrows(DuplicateLessonException.class, () -> uniqueLessonList.add(ALICE));
     }
 
     @Test
     public void setLesson_nullTargetLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.setLesson(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLesson(null, ALICE));
     }
 
     @Test
     public void setLesson_nullEditedLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.setLesson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLesson(ALICE, null));
     }
 
     @Test
-    public void setLesson_targetlessonNotInList_throwsLessonNotFoundException() {
-        assertThrows(LessonNotFoundException.class, () -> UniqueLessonList.setLesson(ALICE, ALICE));
+    public void setLesson_targetLessonNotInList_throwsLessonNotFoundException() {
+        assertThrows(LessonNotFoundException.class, () -> uniqueLessonList.setLesson(ALICE, ALICE));
     }
 
     @Test
-    public void setLesson_editedlessonisSameLesson_success() {
-        UniqueLessonList.add(ALICE);
-        UniqueLessonList.setLesson(ALICE, ALICE);
+    public void setLesson_editedLessonIsSameLesson_success() {
+        uniqueLessonList.add(ALICE);
+        uniqueLessonList.setLesson(ALICE, ALICE);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
         expectedUniqueLessonList.add(ALICE);
-        assertEquals(expectedUniqueLessonList, UniqueLessonList);
+        assertEquals(expectedUniqueLessonList, uniqueLessonList);
     }
 
     @Test
-    public void setLesson_editedlessonHasSameIdentity_success() {
-        UniqueLessonList.add(ALICE);
+    public void setLesson_editedLessonHasSameIdentity_success() {
+        uniqueLessonList.add(ALICE);
         Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        UniqueLessonList.setLesson(ALICE, editedAlice);
+        uniqueLessonList.setLesson(ALICE, editedAlice);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
         expectedUniqueLessonList.add(editedAlice);
-        assertEquals(expectedUniqueLessonList, UniqueLessonList);
+        assertEquals(expectedUniqueLessonList, uniqueLessonList);
     }
 
     @Test
-    public void setLesson_editedlessonHasDifferentIdentity_success() {
-        UniqueLessonList.add(ALICE);
-        UniqueLessonList.setLesson(ALICE, BOB);
+    public void setLesson_editedLessonHasDifferentIdentity_success() {
+        uniqueLessonList.add(ALICE);
+        uniqueLessonList.setLesson(ALICE, BOB);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
         expectedUniqueLessonList.add(BOB);
-        assertEquals(expectedUniqueLessonList, UniqueLessonList);
+        assertEquals(expectedUniqueLessonList, uniqueLessonList);
     }
 
     @Test
-    public void setLesson_editedlessonHasNonUniqueIdentity_throwsDuplicateLessonException() {
-        UniqueLessonList.add(ALICE);
-        UniqueLessonList.add(BOB);
-        assertThrows(DuplicateLessonException.class, () -> UniqueLessonList.setLesson(ALICE, BOB));
+    public void setLesson_editedLessonHasNonUniqueIdentity_throwsDuplicateLessonException() {
+        uniqueLessonList.add(ALICE);
+        uniqueLessonList.add(BOB);
+        assertThrows(DuplicateLessonException.class, () -> uniqueLessonList.setLesson(ALICE, BOB));
     }
 
     @Test
     public void addTagsToLesson_nullTarget_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.addTagsToLesson(null,
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.addTagsToLesson(null,
             Set.of(new Tag("friends"))));
     }
 
     @Test
     public void addTagsToLesson_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.addTagsToLesson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.addTagsToLesson(ALICE, null));
     }
 
     @Test
     public void addTagsToLesson_targetNotInList_throwsLessonNotFoundException() {
-        assertThrows(LessonNotFoundException.class, () -> UniqueLessonList.addTagsToLesson(ALICE,
+        assertThrows(LessonNotFoundException.class, () -> uniqueLessonList.addTagsToLesson(ALICE,
             Set.of(new Tag("friends"))));
     }
 
     @Test
     public void addTagsToLesson_targetInList_success() {
-        UniqueLessonList.add(ALICE);
-        UniqueLessonList.addTagsToLesson(ALICE, Set.of(new Tag("classmate")));
+        uniqueLessonList.add(ALICE);
+        uniqueLessonList.addTagsToLesson(ALICE, Set.of(new Tag("classmate")));
 
         Lesson expectedLesson = new LessonBuilder(ALICE).withTags("friends", "classmate").build();
-        assertTrue(UniqueLessonList.contains(expectedLesson));
+        assertTrue(uniqueLessonList.contains(expectedLesson));
     }
 
     @Test
     public void deleteTagsFromLesson_nullTarget_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.deleteTagsFromLesson(null,
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.deleteTagsFromLesson(null,
             Set.of(new Tag("friends"))));
     }
 
     @Test
     public void deleteTagsFromLesson_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.deleteTagsFromLesson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.deleteTagsFromLesson(ALICE, null));
     }
 
     @Test
     public void deleteTagsFromLesson_targetNotInList_throwsLessonNotFoundException() {
-        assertThrows(LessonNotFoundException.class, () -> UniqueLessonList.deleteTagsFromLesson(ALICE,
+        assertThrows(LessonNotFoundException.class, () -> uniqueLessonList.deleteTagsFromLesson(ALICE,
             Set.of(new Tag("friends"))));
     }
 
     @Test
     public void deleteTagsFromLesson_targetInList_success() {
-        UniqueLessonList.add(ALICE);
-        UniqueLessonList.deleteTagsFromLesson(ALICE, Set.of(new Tag("friends")));
+        uniqueLessonList.add(ALICE);
+        uniqueLessonList.deleteTagsFromLesson(ALICE, Set.of(new Tag("friends")));
 
         Lesson expectedLesson = new LessonBuilder(ALICE).withTags().build();
-        assertTrue(UniqueLessonList.contains(expectedLesson));
+        assertTrue(uniqueLessonList.contains(expectedLesson));
     }
 
     @Test
     public void remove_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.remove(null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.remove(null));
     }
 
     @Test
     public void remove_lessonDoesNotExist_throwsLessonNotFoundException() {
-        assertThrows(LessonNotFoundException.class, () -> UniqueLessonList.remove(ALICE));
+        assertThrows(LessonNotFoundException.class, () -> uniqueLessonList.remove(ALICE));
     }
 
     @Test
     public void remove_existingLesson_removeslesson() {
-        UniqueLessonList.add(ALICE);
-        UniqueLessonList.remove(ALICE);
+        uniqueLessonList.add(ALICE);
+        uniqueLessonList.remove(ALICE);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
-        assertEquals(expectedUniqueLessonList, UniqueLessonList);
+        assertEquals(expectedUniqueLessonList, uniqueLessonList);
     }
 
     @Test
     public void setLessons_nullUniqueLessonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.setLessons((UniqueLessonList) null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLessons((UniqueLessonList) null));
     }
 
     @Test
-    public void setLessons_UniqueLessonList_replacesOwnListWithProvidedUniqueLessonList() {
-        UniqueLessonList.add(ALICE);
+    public void setLessons_uniqueLessonList_replacesOwnListWithProvidedUniqueLessonList() {
+        uniqueLessonList.add(ALICE);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
         expectedUniqueLessonList.add(BOB);
-        UniqueLessonList.setLessons(expectedUniqueLessonList);
-        assertEquals(expectedUniqueLessonList, UniqueLessonList);
+        uniqueLessonList.setLessons(expectedUniqueLessonList);
+        assertEquals(expectedUniqueLessonList, uniqueLessonList);
     }
 
     @Test
     public void setLessons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> UniqueLessonList.setLessons((List<Lesson>) null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLessons((List<Lesson>) null));
     }
 
     @Test
     public void setLessons_list_replacesOwnListWithProvidedList() {
-        UniqueLessonList.add(ALICE);
-        List<Lesson> LessonList = Collections.singletonList(BOB);
-        UniqueLessonList.setLessons(LessonList);
+        uniqueLessonList.add(ALICE);
+        List<Lesson> lessonList = Collections.singletonList(BOB);
+        uniqueLessonList.setLessons(lessonList);
         UniqueLessonList expectedUniqueLessonList = new UniqueLessonList();
         expectedUniqueLessonList.add(BOB);
-        assertEquals(expectedUniqueLessonList, UniqueLessonList);
+        assertEquals(expectedUniqueLessonList, uniqueLessonList);
     }
 
     @Test
-    public void setLessons_listWithDuplicatelessons_throwsDuplicateLessonException() {
+    public void setLessons_listWithDuplicateLessons_throwsDuplicateLessonException() {
         List<Lesson> listWithDuplicateLessons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateLessonException.class, () -> UniqueLessonList.setLessons(listWithDuplicateLessons));
+        assertThrows(DuplicateLessonException.class, () -> uniqueLessonList.setLessons(listWithDuplicateLessons));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> UniqueLessonList.asUnmodifiableObservableList().remove(0));
+            -> uniqueLessonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        assertEquals(UniqueLessonList.asUnmodifiableObservableList().toString(), UniqueLessonList.toString());
+        assertEquals(uniqueLessonList.asUnmodifiableObservableList().toString(), uniqueLessonList.toString());
     }
 }

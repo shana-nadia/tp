@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_lesson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_lesson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.List;
@@ -31,9 +31,9 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Lesson lessonToUpdate = model.getFilteredLessonList().get(INDEX_FIRST_lesson.getZeroBased());
+        Lesson lessonToUpdate = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), tagsToDelete);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_SUCCESS, Messages.format(lessonToUpdate));
 
@@ -46,7 +46,7 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_tagNotFound_throwsCommandException() {
         Set<Tag> tagsToDelete = Set.of(new Tag("classmate"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), tagsToDelete);
 
         assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_TAG_NOT_FOUND);
     }
@@ -64,14 +64,14 @@ public class DeleteTagCommandTest {
     public void equals() {
         Set<Tag> firstTags = Set.of(new Tag("friends"));
         Set<Tag> secondTags = Set.of(new Tag("teammate"));
-        DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), firstTags);
-        DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(List.of(INDEX_SECOND_lesson), secondTags);
+        DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), firstTags);
+        DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(List.of(INDEX_SECOND_LESSON), secondTags);
         DeleteTagCommand deleteFirstCommandDifferentTags =
-                new DeleteTagCommand(List.of(INDEX_FIRST_lesson), secondTags);
+                new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), secondTags);
 
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
-        DeleteTagCommand deleteFirstCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), firstTags);
+        DeleteTagCommand deleteFirstCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), firstTags);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         assertFalse(deleteFirstCommand.equals(1));
@@ -83,8 +83,8 @@ public class DeleteTagCommandTest {
     @Test
     public void hashCodeMethod() {
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
-        DeleteTagCommand deleteTagCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), tagsToDelete);
+        DeleteTagCommand deleteTagCommandCopy = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), tagsToDelete);
 
         assertEquals(deleteTagCommand.hashCode(), deleteTagCommandCopy.hashCode());
     }
@@ -92,9 +92,9 @@ public class DeleteTagCommandTest {
     @Test
     public void toStringMethod() {
         Set<Tag> tagsToDelete = Set.of(new Tag("friends"));
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_lesson), tagsToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(INDEX_FIRST_LESSON), tagsToDelete);
         String expected = DeleteTagCommand.class.getCanonicalName()
-                + "{targetIndices=" + List.of(INDEX_FIRST_lesson) + ", tagsToDelete=" + tagsToDelete + "}";
+                + "{targetIndices=" + List.of(INDEX_FIRST_LESSON) + ", tagsToDelete=" + tagsToDelete + "}";
         assertEquals(expected, deleteTagCommand.toString());
     }
 }
