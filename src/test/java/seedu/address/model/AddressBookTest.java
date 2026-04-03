@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalLessons.ALICE;
+import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,10 +19,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.LessonBuilder;
 
 public class AddressBookTest {
 
@@ -30,7 +30,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getLessonList());
     }
 
     @Test
@@ -46,103 +46,103 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateLessons_throwsDuplicateLessonException() {
+        // Two lessons with the same identity fields
+        Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Lesson> newLessons = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newLessons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateLessonException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasLesson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasLesson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        addressBook.addLesson(ALICE);
+        assertTrue(addressBook.hasLesson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasLesson_lessonWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addLesson(ALICE);
+        Lesson editedAlice = new LessonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasLesson(editedAlice));
     }
 
     @Test
-    public void addTagsToPerson_nullTarget_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.addTagsToPerson(null, Set.of(new Tag("friends"))));
+    public void addTagsToLesson_nullTarget_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addTagsToLesson(null, Set.of(new Tag("friends"))));
     }
 
     @Test
-    public void addTagsToPerson_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.addTagsToPerson(ALICE, null));
+    public void addTagsToLesson_nullTags_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addTagsToLesson(ALICE, null));
     }
 
     @Test
-    public void addTagsToPerson_targetInAddressBook_success() {
-        addressBook.addPerson(ALICE);
-        addressBook.addTagsToPerson(ALICE, Set.of(new Tag("classmate")));
+    public void addTagsToLesson_targetInAddressBook_success() {
+        addressBook.addLesson(ALICE);
+        addressBook.addTagsToLesson(ALICE, Set.of(new Tag("classmate")));
 
-        Person expectedPerson = new PersonBuilder(ALICE).withTags("friends", "classmate").build();
-        assertTrue(addressBook.hasPerson(expectedPerson));
+        Lesson expectedLesson = new LessonBuilder(ALICE).withTags("friends", "classmate").build();
+        assertTrue(addressBook.hasLesson(expectedLesson));
     }
 
     @Test
-    public void deleteTagsFromPerson_nullTarget_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.deleteTagsFromPerson(null,
+    public void deleteTagsFromLesson_nullTarget_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.deleteTagsFromLesson(null,
             Set.of(new Tag("friends"))));
     }
 
     @Test
-    public void deleteTagsFromPerson_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.deleteTagsFromPerson(ALICE, null));
+    public void deleteTagsFromLesson_nullTags_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.deleteTagsFromLesson(ALICE, null));
     }
 
     @Test
-    public void deleteTagsFromPerson_targetInAddressBook_success() {
-        addressBook.addPerson(ALICE);
-        addressBook.deleteTagsFromPerson(ALICE, Set.of(new Tag("friends")));
+    public void deleteTagsFromLesson_targetInAddressBook_success() {
+        addressBook.addLesson(ALICE);
+        addressBook.deleteTagsFromLesson(ALICE, Set.of(new Tag("friends")));
 
-        Person expectedPerson = new PersonBuilder(ALICE).withTags().build();
-        assertTrue(addressBook.hasPerson(expectedPerson));
+        Lesson expectedLesson = new LessonBuilder(ALICE).withTags().build();
+        assertTrue(addressBook.hasLesson(expectedLesson));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getLessonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getLessonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{lessons=" + addressBook.getLessonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose lessons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Lesson> lessons) {
+            this.lessons.setAll(lessons);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Lesson> getLessonList() {
+            return lessons;
         }
     }
 

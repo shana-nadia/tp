@@ -1,0 +1,13 @@
+{
+  "lessons": [ {
+    "name": "Valid Lesson",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street"
+  }, {
+    "name": "Lesson With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "address": "4th street"
+  } ]
+}

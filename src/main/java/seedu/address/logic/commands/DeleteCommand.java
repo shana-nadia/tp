@@ -12,27 +12,27 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 
 /**
- * Deletes one or more persons identified using their displayed indices from the address book.
+ * Deletes one or more lessons identified using their displayed indices from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person(s) identified by the index number(s) used in the displayed person list.\n"
+            + ": Deletes the lesson(s) identified by the index number(s) used in the displayed lesson list.\n"
             + "Parameters: INDEX [INDEX]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_PERSONS_SUCCESS = "Deleted %1$d persons: %2$s";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
+    public static final String MESSAGE_DELETE_LESSONS_SUCCESS = "Deleted %1$d lessons: %2$s";
 
     private final List<Index> targetIndices;
 
     /**
-     * Creates a DeleteCommand to delete persons at {@code targetIndices}.
+     * Creates a DeleteCommand to delete lessons at {@code targetIndices}.
      */
     public DeleteCommand(List<Index> targetIndices) {
         requireNonNull(targetIndices);
@@ -42,30 +42,30 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Lesson> lastShownList = model.getFilteredLessonList();
 
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
         }
 
-        List<Person> personsToDelete = new ArrayList<>();
+        List<Lesson> lessonsToDelete = new ArrayList<>();
         for (Index index : targetIndices) {
-            personsToDelete.add(lastShownList.get(index.getZeroBased()));
+            lessonsToDelete.add(lastShownList.get(index.getZeroBased()));
         }
 
-        for (Person person : personsToDelete) {
-            model.deletePerson(person);
+        for (Lesson lesson : lessonsToDelete) {
+            model.deleteLesson(lesson);
         }
 
-        if (personsToDelete.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                    Messages.format(personsToDelete.get(0))));
+        if (lessonsToDelete.size() == 1) {
+            return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS,
+                    Messages.format(lessonsToDelete.get(0))));
         }
-        String names = personsToDelete.stream()
+        String names = lessonsToDelete.stream()
                 .map(p -> p.getName().toString()).collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSONS_SUCCESS, personsToDelete.size(), names));
+        return new CommandResult(String.format(MESSAGE_DELETE_LESSONS_SUCCESS, lessonsToDelete.size(), names));
     }
 
     @Override

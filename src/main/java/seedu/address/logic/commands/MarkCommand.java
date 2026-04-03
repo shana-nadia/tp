@@ -12,7 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 
 /**
  * Marks one or more students' payment status as paid.
@@ -27,14 +27,14 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX [INDEX]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked student as paid: %1$s";
-    public static final String MESSAGE_MARK_PERSONS_SUCCESS = "Marked %1$d students as paid: %2$s";
+    public static final String MESSAGE_MARK_LESSON_SUCCESS = "Marked student as paid: %1$s";
+    public static final String MESSAGE_MARK_LESSONS_SUCCESS = "Marked %1$d students as paid: %2$s";
     public static final String MESSAGE_ALREADY_PAID = "This student has already been marked as paid.";
 
     private final List<Index> targetIndices;
 
     /**
-     * Creates a MarkCommand to mark the persons at {@code targetIndices} as paid.
+     * Creates a MarkCommand to mark the lessons at {@code targetIndices} as paid.
      */
     public MarkCommand(List<Index> targetIndices) {
         requireNonNull(targetIndices);
@@ -44,40 +44,40 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Lesson> lastShownList = model.getFilteredLessonList();
 
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
         }
 
-        List<Person> personsToMark = new ArrayList<>();
+        List<Lesson> lessonsToMark = new ArrayList<>();
         for (Index index : targetIndices) {
-            Person person = lastShownList.get(index.getZeroBased());
-            if (person.isPaid()) {
+            Lesson lesson = lastShownList.get(index.getZeroBased());
+            if (lesson.isPaid()) {
                 throw new CommandException(MESSAGE_ALREADY_PAID);
             }
-            personsToMark.add(person);
+            lessonsToMark.add(lesson);
         }
 
-        List<Person> markedPersons = new ArrayList<>();
-        for (Person personToMark : personsToMark) {
-            Person markedPerson = new Person(
-                    personToMark.getName(), personToMark.getPhone(), personToMark.getEmail(),
-                    personToMark.getAddress(), personToMark.getDay(), personToMark.getStartTime(),
-                    personToMark.getEndTime(), personToMark.getRate(), true, personToMark.getTags());
-            model.setPerson(personToMark, markedPerson);
-            markedPersons.add(markedPerson);
+        List<Lesson> markedLessons = new ArrayList<>();
+        for (Lesson lessonToMark : lessonsToMark) {
+            Lesson markedLesson = new Lesson(
+                    lessonToMark.getName(), lessonToMark.getPhone(), lessonToMark.getEmail(),
+                    lessonToMark.getAddress(), lessonToMark.getDay(), lessonToMark.getStartTime(),
+                    lessonToMark.getEndTime(), lessonToMark.getRate(), true, lessonToMark.getTags());
+            model.setLesson(lessonToMark, markedLesson);
+            markedLessons.add(markedLesson);
         }
 
-        if (markedPersons.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
-                    Messages.format(markedPersons.get(0))));
+        if (markedLessons.size() == 1) {
+            return new CommandResult(String.format(MESSAGE_MARK_LESSON_SUCCESS,
+                    Messages.format(markedLessons.get(0))));
         }
-        String names = markedPersons.stream()
+        String names = markedLessons.stream()
                 .map(p -> p.getName().toString()).collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_MARK_PERSONS_SUCCESS, markedPersons.size(), names));
+        return new CommandResult(String.format(MESSAGE_MARK_LESSONS_SUCCESS, markedLessons.size(), names));
     }
 
     @Override

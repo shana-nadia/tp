@@ -49,29 +49,29 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalLessons.AMY;
+import static seedu.address.testutil.TypicalLessons.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Day;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Time;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.lesson.Address;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Email;
+import seedu.address.model.lesson.Name;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Phone;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Time;
+import seedu.address.testutil.LessonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB)
+        Lesson expectedLesson = new LessonBuilder(BOB)
                 .withDay(VALID_DAY_BOB)
                 .withStartTime(VALID_START_TIME_BOB)
                 .withEndTime(VALID_END_TIME_BOB)
@@ -82,11 +82,11 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB
-                + RATE_DESC_BOB, new AddCommand(expectedPerson));
+                + RATE_DESC_BOB, new AddCommand(expectedLesson));
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
+        Lesson expectedLessonMultipleTags = new LessonBuilder(BOB)
                 .withDay(VALID_DAY_BOB)
                 .withStartTime(VALID_START_TIME_BOB)
                 .withEndTime(VALID_END_TIME_BOB)
@@ -97,128 +97,128 @@ public class AddCommandParserTest {
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB
                         + RATE_DESC_BOB,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedLessonMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedLessonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB
                 + RATE_DESC_BOB;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple days of the week
-        assertParseFailure(parser, DAY_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, DAY_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DAY));
 
         // multiple start times
-        assertParseFailure(parser, START_TIME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, START_TIME_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START));
 
         // multiple end times
-        assertParseFailure(parser, END_TIME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, END_TIME_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_END));
 
         // multiple tuition rates
-        assertParseFailure(parser, RATE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, RATE_DESC_AMY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                validExpectedLessonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + DAY_DESC_AMY + START_TIME_DESC_AMY + END_TIME_DESC_AMY + RATE_DESC_AMY
-                        + validExpectedPersonString,
+                        + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
                         PREFIX_DAY, PREFIX_START, PREFIX_END, PREFIX_RATE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // invalid day of the week
-        assertParseFailure(parser, INVALID_DAY_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_DAY_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DAY));
 
         // invalid start time
-        assertParseFailure(parser, INVALID_START_TIME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_START_TIME_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START));
 
         // invalid end time
-        assertParseFailure(parser, INVALID_END_TIME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_END_TIME_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_END));
 
         // invalid tuition rate
-        assertParseFailure(parser, INVALID_RATE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_RATE_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // invalid day of the week
-        assertParseFailure(parser, validExpectedPersonString + INVALID_DAY_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_DAY_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DAY));
 
         // invalid start time
-        assertParseFailure(parser, validExpectedPersonString + INVALID_START_TIME_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_START_TIME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_START));
 
         // invalid end time
-        assertParseFailure(parser, validExpectedPersonString + INVALID_END_TIME_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_END_TIME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_END));
 
         // invalid tuition rate
-        assertParseFailure(parser, validExpectedPersonString + INVALID_RATE_DESC,
+        assertParseFailure(parser, validExpectedLessonString + INVALID_RATE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY)
+        Lesson expectedLesson = new LessonBuilder(AMY)
                 .withDay(VALID_DAY_AMY)
                 .withStartTime(VALID_START_TIME_AMY)
                 .withEndTime(VALID_END_TIME_AMY)
@@ -227,7 +227,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + DAY_DESC_AMY + START_TIME_DESC_AMY + END_TIME_DESC_AMY + RATE_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedLesson));
     }
 
     @Test

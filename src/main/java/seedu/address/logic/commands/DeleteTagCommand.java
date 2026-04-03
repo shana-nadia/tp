@@ -13,11 +13,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes tags from one or more existing persons in the address book.
+ * Deletes tags from one or more existing lessons in the address book.
  */
 public class DeleteTagCommand extends TagCommand {
 
@@ -25,7 +25,7 @@ public class DeleteTagCommand extends TagCommand {
     public static final String COMMAND_PHRASE = TagCommand.COMMAND_WORD + " " + SUBCOMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_PHRASE
-            + ": Deletes tag(s) from person(s) in the address book. "
+            + ": Deletes tag(s) from lesson(s) in the address book. "
             + "Parameters: "
             + "INDEX [INDEX]... (must be positive integers) "
             + PREFIX_TAG + "TAG (must be a non-empty string)\n"
@@ -34,12 +34,12 @@ public class DeleteTagCommand extends TagCommand {
             + PREFIX_TAG + "Primary1 "
             + PREFIX_TAG + "Mathematics";
 
-    public static final String MESSAGE_SUCCESS = "Tag(s) removed from person: %1$s";
-    public static final String MESSAGE_BATCH_SUCCESS = "Tag(s) removed from %1$d persons: %2$s";
-    public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist for this person.";
+    public static final String MESSAGE_SUCCESS = "Tag(s) removed from lesson: %1$s";
+    public static final String MESSAGE_BATCH_SUCCESS = "Tag(s) removed from %1$d lessons: %2$s";
+    public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist for this lesson.";
 
     /**
-     * Creates a DeleteTagCommand to remove tags from persons at {@code targetIndices}.
+     * Creates a DeleteTagCommand to remove tags from lessons at {@code targetIndices}.
      */
     public DeleteTagCommand(List<Index> targetIndices, Set<Tag> tagsToDelete) {
         super(targetIndices, tagsToDelete);
@@ -48,24 +48,24 @@ public class DeleteTagCommand extends TagCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> personsToUpdate = getTargetPersons(model);
+        List<Lesson> lessonsToUpdate = getTargetLessons(model);
 
-        for (Person person : personsToUpdate) {
-            if (!person.getTags().containsAll(getTags())) {
+        for (Lesson lesson : lessonsToUpdate) {
+            if (!lesson.getTags().containsAll(getTags())) {
                 throw new CommandException(MESSAGE_TAG_NOT_FOUND);
             }
         }
 
-        for (Person person : personsToUpdate) {
-            model.deleteTagsFromPerson(person, getTags());
+        for (Lesson lesson : lessonsToUpdate) {
+            model.deleteTagsFromLesson(lesson, getTags());
         }
 
-        if (personsToUpdate.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personsToUpdate.get(0))));
+        if (lessonsToUpdate.size() == 1) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(lessonsToUpdate.get(0))));
         }
-        String names = personsToUpdate.stream()
+        String names = lessonsToUpdate.stream()
                 .map(p -> p.getName().toString()).collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_BATCH_SUCCESS, personsToUpdate.size(), names));
+        return new CommandResult(String.format(MESSAGE_BATCH_SUCCESS, lessonsToUpdate.size(), names));
     }
 
     @Override

@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +23,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Lesson> filteredLessons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,7 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
     }
 
     public ModelManager() {
@@ -90,54 +90,54 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLesson(lesson);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteLesson(Lesson target) {
+        addressBook.removeLesson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addLesson(Lesson lesson) {
+        addressBook.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
-    public void addTagsToPerson(Person target, Set<Tag> tagsToAdd) {
-        addressBook.addTagsToPerson(target, tagsToAdd);
+    public void addTagsToLesson(Lesson target, Set<Tag> tagsToAdd) {
+        addressBook.addTagsToLesson(target, tagsToAdd);
     }
 
     @Override
-    public void deleteTagsFromPerson(Person target, Set<Tag> tagsToDelete) {
-        addressBook.deleteTagsFromPerson(target, tagsToDelete);
+    public void deleteTagsFromLesson(Lesson target, Set<Tag> tagsToDelete) {
+        addressBook.deleteTagsFromLesson(target, tagsToDelete);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setLesson(target, editedLesson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Lesson List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredLessons.setPredicate(predicate);
     }
 
     @Override
@@ -154,6 +154,6 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
             && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredPersons.equals(otherModelManager.filteredPersons);
+            && filteredLessons.equals(otherModelManager.filteredLessons);
     }
 }

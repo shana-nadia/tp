@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,25 +21,25 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Day;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Time;
+import seedu.address.model.lesson.Address;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Email;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Name;
+import seedu.address.model.lesson.Phone;
+import seedu.address.model.lesson.Rate;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing lesson in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson identified "
+            + "by the index number used in the displayed lesson list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -51,65 +51,65 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditLessonDescriptor editLessonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the lesson in the filtered lesson list to edit
+     * @param editLessonDescriptor details to edit the lesson with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditLessonDescriptor editLessonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editLessonDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Lesson> lastShownList = model.getFilteredLessonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Lesson lessonToEdit = lastShownList.get(index.getZeroBased());
+        Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!lessonToEdit.isSameLesson(editedLesson) && model.hasLesson(editedLesson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.setLesson(lessonToEdit, editedLesson);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(editedLesson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
+     * edited with {@code editLessonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+        assert lessonToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Day updatedDay = editPersonDescriptor.getDay().orElse(personToEdit.getDay());
-        Time updatedStartTime = editPersonDescriptor.getStartTime().orElse(personToEdit.getStartTime());
-        Time updatedEndTime = editPersonDescriptor.getEndTime().orElse(personToEdit.getEndTime());
-        Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
-        boolean updatedIsPaid = editPersonDescriptor.getIsPaid().orElse(personToEdit.isPaid());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getName());
+        Phone updatedPhone = editLessonDescriptor.getPhone().orElse(lessonToEdit.getPhone());
+        Email updatedEmail = editLessonDescriptor.getEmail().orElse(lessonToEdit.getEmail());
+        Address updatedAddress = editLessonDescriptor.getAddress().orElse(lessonToEdit.getAddress());
+        Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
+        Time updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
+        Time updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
+        Rate updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getRate());
+        boolean updatedIsPaid = editLessonDescriptor.getIsPaid().orElse(lessonToEdit.isPaid());
+        Set<Tag> updatedTags = editLessonDescriptor.getTags().orElse(lessonToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+        return new Lesson(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedDay, updatedStartTime, updatedEndTime, updatedRate, updatedIsPaid, updatedTags);
     }
 
@@ -126,22 +126,22 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editLessonDescriptor.equals(otherEditCommand.editLessonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editLessonDescriptor", editLessonDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the lesson with. Each non-empty field value will replace the
+     * corresponding field value of the lesson.
      */
-    public static class EditPersonDescriptor {
+    public static class EditLessonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -153,13 +153,13 @@ public class EditCommand extends Command {
         private Boolean isPaid;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditLessonDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -274,21 +274,21 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditLessonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(day, otherEditPersonDescriptor.day)
-                    && Objects.equals(startTime, otherEditPersonDescriptor.startTime)
-                    && Objects.equals(endTime, otherEditPersonDescriptor.endTime)
-                    && Objects.equals(rate, otherEditPersonDescriptor.rate)
-                    && Objects.equals(isPaid, otherEditPersonDescriptor.isPaid)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditLessonDescriptor otherEditLessonDescriptor = (EditLessonDescriptor) other;
+            return Objects.equals(name, otherEditLessonDescriptor.name)
+                    && Objects.equals(phone, otherEditLessonDescriptor.phone)
+                    && Objects.equals(email, otherEditLessonDescriptor.email)
+                    && Objects.equals(address, otherEditLessonDescriptor.address)
+                    && Objects.equals(day, otherEditLessonDescriptor.day)
+                    && Objects.equals(startTime, otherEditLessonDescriptor.startTime)
+                    && Objects.equals(endTime, otherEditLessonDescriptor.endTime)
+                    && Objects.equals(rate, otherEditLessonDescriptor.rate)
+                    && Objects.equals(isPaid, otherEditLessonDescriptor.isPaid)
+                    && Objects.equals(tags, otherEditLessonDescriptor.tags);
         }
 
         @Override

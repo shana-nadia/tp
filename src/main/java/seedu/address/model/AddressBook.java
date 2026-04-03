@@ -7,17 +7,17 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameLesson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueLessonList lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,13 +27,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        lessons = new UniqueLessonList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Lessons in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -43,11 +43,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the lesson list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons.setLessons(lessons);
     }
 
     /**
@@ -56,66 +56,66 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setLessons(newData.getLessonList());
     }
 
-    //// person-level operations
+    //// lesson-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.contains(lesson);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a lesson to the address book.
+     * The lesson must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addLesson(Lesson p) {
+        lessons.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireNonNull(editedLesson);
 
-        persons.setPerson(target, editedPerson);
+        lessons.setLesson(target, editedLesson);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeLesson(Lesson key) {
+        lessons.remove(key);
     }
 
     /**
-     * Adds the given tags to the person.
+     * Adds the given tags to the lesson.
      * {@code target} must exist in the address book.
      */
-    public void addTagsToPerson(Person target, Set<Tag> tagsToAdd) {
+    public void addTagsToLesson(Lesson target, Set<Tag> tagsToAdd) {
         requireNonNull(target);
         requireNonNull(tagsToAdd);
 
-        persons.addTagsToPerson(target, tagsToAdd);
+        lessons.addTagsToLesson(target, tagsToAdd);
     }
 
     /**
-     * Deletes the given tags from the person.
+     * Deletes the given tags from the lesson.
      * {@code target} must exist in the address book.
      */
-    public void deleteTagsFromPerson(Person target, Set<Tag> tagsToDelete) {
+    public void deleteTagsFromLesson(Lesson target, Set<Tag> tagsToDelete) {
         requireNonNull(target);
         requireNonNull(tagsToDelete);
 
-        persons.deleteTagsFromPerson(target, tagsToDelete);
+        lessons.deleteTagsFromLesson(target, tagsToDelete);
     }
 
     //// util methods
@@ -123,13 +123,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("lessons", lessons)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Lesson> getLessonList() {
+        return lessons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -144,11 +144,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return lessons.equals(otherAddressBook.lessons);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return lessons.hashCode();
     }
 }

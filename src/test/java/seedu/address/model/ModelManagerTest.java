@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalLessons.ALICE;
+import static seedu.address.testutil.TypicalLessons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,8 +16,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.NameContainsKeywordsPredicate;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -76,47 +76,47 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasLesson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasLesson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        modelManager.addLesson(ALICE);
+        assertTrue(modelManager.hasLesson(ALICE));
     }
 
     @Test
-    public void addTagsToPerson_validTarget_success() {
-        modelManager.addPerson(ALICE);
-        modelManager.addTagsToPerson(ALICE, Set.of(new Tag("classmate")));
+    public void addTagsToLesson_validTarget_success() {
+        modelManager.addLesson(ALICE);
+        modelManager.addTagsToLesson(ALICE, Set.of(new Tag("classmate")));
 
-        Person updatedPerson = modelManager.getFilteredPersonList().get(0);
-        assertTrue(updatedPerson.getTags().contains(new Tag("classmate")));
+        Lesson updatedLesson = modelManager.getFilteredLessonList().get(0);
+        assertTrue(updatedLesson.getTags().contains(new Tag("classmate")));
     }
 
     @Test
-    public void deleteTagsFromPerson_validTarget_success() {
-        modelManager.addPerson(ALICE);
-        modelManager.deleteTagsFromPerson(ALICE, Set.of(new Tag("friends")));
+    public void deleteTagsFromLesson_validTarget_success() {
+        modelManager.addLesson(ALICE);
+        modelManager.deleteTagsFromLesson(ALICE, Set.of(new Tag("friends")));
 
-        Person updatedPerson = modelManager.getFilteredPersonList().get(0);
-        assertFalse(updatedPerson.getTags().contains(new Tag("friends")));
+        Lesson updatedLesson = modelManager.getFilteredLessonList().get(0);
+        assertFalse(updatedLesson.getTags().contains(new Tag("friends")));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredLessonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredLessonList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withLesson(ALICE).withLesson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -139,11 +139,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredLessonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,18 +31,18 @@ public abstract class TagCommand extends Command {
         this.tags = new HashSet<>(tags);
     }
 
-    protected List<Person> getTargetPersons(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> targetPersons = new ArrayList<>();
+    protected List<Lesson> getTargetLessons(Model model) throws CommandException {
+        List<Lesson> lastShownList = model.getFilteredLessonList();
+        List<Lesson> targetLessons = new ArrayList<>();
 
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
-            targetPersons.add(lastShownList.get(index.getZeroBased()));
+            targetLessons.add(lastShownList.get(index.getZeroBased()));
         }
 
-        return targetPersons;
+        return targetLessons;
     }
 
     protected List<Index> getTargetIndices() {

@@ -177,8 +177,8 @@
     -fx-text-fill: white;
 }
 
-/* Person list area */
-#personListArea {
+/* Lesson list area */
+#lessonListArea {
     -fx-background-color: #e8eded;
 }
 
@@ -386,7 +386,7 @@
     -fx-prompt-text-fill: #999999;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #lessonListPanel, #lessonWebpage {
     -fx-effect: innershadow(gaussian, #cccccc, 10, 0, 0, 0);
 }
 

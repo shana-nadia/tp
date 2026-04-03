@@ -295,7 +295,7 @@ Use `list` after a [`find`](#finding-students-by-name-find) command to return to
 </div>
 
 **Expected output:**
-> `Listed all persons`
+> `Listed all lessons`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -314,7 +314,7 @@ Edits the details of an existing student in OnlyTutors.
 **Editing Tags:**
 * When editing tags with `t/`, existing tags are **replaced entirely**. 
 * Remove all tags by typing `t/` without specifying any tags after it (not true for other fields since they must be nonempty).
-* Note the same rules for adding a person apply here, i.e. person name must contain only alphabets, end time must be strictly after start time and so on.
+* Note the same rules for adding a lesson apply here, i.e. lesson name must contain only alphabets, end time must be strictly after start time and so on.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 Editing tags with the `edit` command **replaces all existing tags**. If a student has tags `math` and `primary3`, running `edit 1 t/science` will result in only the `science` tag remaining.
@@ -336,7 +336,7 @@ To add tags without replacing, use [`tag add`](#adding-tags-to-a-student-tag-add
 | `edit 3 d/Friday st/14:00 et/16:00` | Changes the lesson day and time for the 3rd student |
 
 **Expected output** (on success):
-> `Edited Person: Elliot; Phone: ...`
+> `Edited Lesson: Elliot; Phone: ...`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -362,7 +362,7 @@ Finds students whose names contain any of the given keywords.
 | `find alex david` | Returns `Alex Yeoh` and `David Li` |
 
 **Expected output:**
-> `2 persons listed!`
+> `2 lessons listed!`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After using `find`, use [`list`](#listing-all-students-list) to return to the full student list.
@@ -390,7 +390,7 @@ Finds students who match all of the given tags.
 | `tag find t/primary3 t/science` | Returns students tagged with both `primary3` and `science` |
 
 **Expected output:**
-> `2 persons listed!`
+> `2 lessons listed!`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After using `tag find`, use [`list`](#listing-all-students-list) to return to the full student list.
@@ -427,7 +427,7 @@ This action cannot be undone. Make sure you have selected the correct student(s)
 | `find Betsy` then `delete 1` | Deletes the 1st student in the `find` results |
 
 **Expected output** (on success):
-> `Deleted Person: Betsy Crowe; Phone: ...`
+> `Deleted Lesson: Betsy Crowe; Phone: ...`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -458,7 +458,7 @@ You can tag multiple students at once by specifying multiple indices. e.g. `tag 
 | `tag add 1 2 3 t/math` | Adds the tag `math` to the 1st, 2nd, and 3rd students |
 
 **Expected output** (on success):
-> `Tag(s) added to person: John Doe; Phone: ...`
+> `Tag(s) added to lesson: John Doe; Phone: ...`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -488,7 +488,7 @@ You can remove tags from multiple students at once by specifying multiple indice
 | `tag delete 1 2 3 t/math` | Removes the `math` tag from the 1st, 2nd, and 3rd students |
 
 **Expected output** (on success):
-> `Tag(s) removed from person: John Doe; Phone: ...`
+> `Tag(s) removed from lesson: John Doe; Phone: ...`
 
 --------------------------------------------------------------------------------------------------------------------
 
