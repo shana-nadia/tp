@@ -24,7 +24,8 @@ public class Rate {
     public Rate(String tuitionRate) {
         requireNonNull(tuitionRate);
         checkArgument(isValidRate(tuitionRate), MESSAGE_CONSTRAINTS);
-        value = tuitionRate;
+        // Replace all leading zeros, but keep a single "0" if the string is just "000"
+        this.value = tuitionRate.replaceFirst("^0+(?!$)", "");
     }
 
     /**

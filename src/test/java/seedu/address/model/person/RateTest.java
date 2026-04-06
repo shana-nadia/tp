@@ -33,8 +33,9 @@ public class RateTest {
         assertFalse(Rate.isValidRate("-40"), "Error: Negative numbers hould not be allowed."); // implied negative
 
         // valid Rate numbers
-        assertTrue(Rate.isValidRate("0"), "Error: 0 should be allowed."); // free
+        assertTrue(Rate.isValidRate("0"), "Error: 0 should be allowed."); // free ratee
         assertTrue(Rate.isValidRate("40"), "Error: 40 should be allowed.");
+        assertTrue(Rate.isValidRate("0040"), "Error: leading zeroes should be allowed, e.g. 0040");
         // long tuition rate (may exclude this next time)
         assertTrue(Rate.isValidRate("99999999999999"),
                 "Error: 99999999999999 should be allowed.");
@@ -46,6 +47,9 @@ public class RateTest {
 
         // same values -> returns true
         assertTrue(rate.equals(new Rate("40")));
+
+        // leading zeroes but same value -> returns true
+        assertTrue(rate.equals(new Rate("000040")));
 
         // same object -> returns true
         assertTrue(rate.equals(rate));
