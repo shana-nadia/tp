@@ -33,7 +33,7 @@ public class RateTest {
         assertFalse(Rate.isValidRate("-40"), "Error: Negative numbers hould not be allowed."); // implied negative
 
         // valid Rate numbers
-        assertTrue(Rate.isValidRate("0"), "Error: 0 should be allowed."); // free ratee
+        assertTrue(Rate.isValidRate("0"), "Error: 0 should be allowed."); // free rate
         assertTrue(Rate.isValidRate("40"), "Error: 40 should be allowed.");
         assertTrue(Rate.isValidRate("0040"), "Error: leading zeroes should be allowed, e.g. 0040");
         // long tuition rate (may exclude this next time)

@@ -134,7 +134,7 @@ A GUI similar to the screenshot below should appear within a few seconds. The ap
 
 ---
 
-### Troubleshooting Installationgt
+### Troubleshooting Installation
 
 | Problem | Likely cause | Fix |
 |---------|-------------|-----|
