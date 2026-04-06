@@ -82,17 +82,17 @@ If the output shows `java version "17"` or higher, skip to [Step 2](#step-2-down
 
 1. Go to the [OnlyTutors Releases page](https://github.com/AY2526S2-CS2103T-T17-3/tp/releases).
 2. Find the **latest release** at the top of the list.
-3. Under **Assets**, click `addressbook.jar` to download it.
+3. Under **Assets**, click `onlytutors.jar` to download it.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Do not rename the `.jar` file. Keep it as `addressbook.jar` to match the run command.
+Do not rename the `.jar` file. Keep it as `onlytutors.jar` to match the run command.
 </div>
 
 ---
 
 ### Step 3: Set Up a Home Folder
 
-Create a dedicated folder for OnlyTutors (e.g., `OnlyTutors` on your Desktop). Move the downloaded `addressbook.jar` into that folder.
+Create a dedicated folder for OnlyTutors (e.g., `OnlyTutors` on your Desktop). Move the downloaded `onlytutors.jar` into that folder.
 
 This folder will become the **home folder** — OnlyTutors will store all your data here in a `data/` subfolder automatically.
 
@@ -105,26 +105,26 @@ Open a terminal and navigate to your home folder, then run the app:
 **Windows (Command Prompt):**
 ```
 cd C:\Users\YourName\Desktop\OnlyTutors
-java -jar addressbook.jar
+java -jar onlytutors.jar
 ```
 
 **Windows (PowerShell):**
 ```
 cd C:\Users\YourName\Desktop\OnlyTutors
-java -jar addressbook.jar
+java -jar onlytutors.jar
 ```
 
 **macOS / Linux:**
 ```
 cd ~/Desktop/OnlyTutors
-java -jar addressbook.jar
+java -jar onlytutors.jar
 ```
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Alternative: Double-click to launch**
 
-On most systems you can double-click `addressbook.jar` to launch OnlyTutors directly. However, using the terminal is recommended so you can see error messages if something goes wrong.
+On most systems you can double-click `onlytutors.jar` to launch OnlyTutors directly. However, using the terminal is recommended so you can see error messages if something goes wrong.
 
 </div>
 
@@ -136,13 +136,13 @@ A GUI similar to the screenshot below should appear within a few seconds. The ap
 
 ### Troubleshooting Installation
 
-| Problem | Likely cause | Fix |
-|---------|-------------|-----|
-| `java: command not found` | Java is not installed or not on PATH | Install Java 17 (see Step 1) |
-| `Error: Unable to access jarfile addressbook.jar` | Terminal is not in the correct folder | Run `cd` to navigate to the folder containing `addressbook.jar` |
-| App launches but GUI looks broken (macOS) | Wrong JDK version | Follow the [macOS-specific guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) |
-| Blank/white screen on launch | JavaFX rendering issue | Try adding `--add-opens java.base/java.lang=ALL-UNNAMED` to the run command |
-| App opens off-screen | Previously used a second monitor | Delete `preferences.json` in the home folder and relaunch |
+| Problem                                          | Likely cause | Fix                                                                                                   |
+|--------------------------------------------------|-------------|-------------------------------------------------------------------------------------------------------|
+| `java: command not found`                        | Java is not installed or not on PATH | Install Java 17 (see Step 1)                                                                          |
+| `Error: Unable to access jarfile onlytutors.jar` | Terminal is not in the correct folder | Run `cd` to navigate to the folder containing `onlytutors.jar`                                        |
+| App launches but GUI looks broken (macOS)        | Wrong JDK version | Follow the [macOS-specific guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) |
+| Blank/white screen on launch                     | JavaFX rendering issue | Try adding `--add-opens java.base/java.lang=ALL-UNNAMED` to the run command                           |
+| App opens off-screen                             | Previously used a second monitor | Delete `preferences.json` in the home folder and relaunch                                             |
 
 ### Understanding the Interface
 
