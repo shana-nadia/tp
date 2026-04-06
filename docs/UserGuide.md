@@ -202,7 +202,7 @@ Refer to the [Features](#features) section below for the full details of each co
 
 | Parameter | Prefix | Constraints                                                                                          | Example |
 |-----------|--------|------------------------------------------------------------------------------------------------------|---------|
-| **Name** | `n/` | Letters and spaces only; cannot be blank                                                             | `n/John Doe` |
+| **Name** | `n/` | Letters, spaces and "/" only; cannot be blank                                                         | `n/John Doe` |
 | **Phone** | `p/` | Exactly 8 digits, starting with 6, 8, or 9 (Singapore format)                                        | `p/91234567` |
 | **Email** | `e/` | Standard email format (`local@domain`)                                                               | `e/john@example.com` |
 | **Address** | `a/` | Any non-blank text                                                                                   | `a/Blk 30, Geylang St 29` |
@@ -261,7 +261,7 @@ This design is chosen because:
 > `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags:`
 
 **Expected output** (on fail):
-> `Names should contain only alphanumeric characters, with words separated by a single space or '/', e.g. 'Tan Ah Kow' or 'Raj S/O Kumar'. Names must not start or end with a space or '/', and must not contain consecutive spaces or '/' characters`
+> `Names should contain only English characters, with words separated by a single space or '/', e.g. 'Tan Ah Kow' or 'Raj S/O Kumar'. Names must not start or end with a space or '/', and must not contain consecutive spaces or '/' characters`
 
 ### ⚠️ Common mistakes when adding a student
 
