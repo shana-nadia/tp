@@ -38,7 +38,7 @@ public class AddTagCommand extends TagCommand {
 
     private final List<Index> affectedIndices = new ArrayList<>();
     private final List<Person> affectedPersons = new ArrayList<>();
-        private final List<Set<Tag>> tagsAddedByPerson = new ArrayList<>();
+    private final List<Set<Tag>> tagsAddedByPerson = new ArrayList<>();
     private final List<Person> updatedPersons = new ArrayList<>();
 
     /**
