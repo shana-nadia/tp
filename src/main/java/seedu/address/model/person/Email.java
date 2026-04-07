@@ -14,16 +14,16 @@ public class Email {
             "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "\n"
-            + "The local-part should only contain alphanumeric characters and these special characters: excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "), and\n"
+            + "The local-part should only contain alphanumeric characters and these special characters: "
+            + SPECIAL_CHARACTERS + " (excluding the parentheses). Additionally, it:\n"
             + "1. must start and end with alphanumeric characters.\n"
             + "2. may not have consecutive special characters.\n"
             + "\n"
-            + "The domain name is made up of domain labels separated by periods, and\n"
-            + "1. each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
-            + "2. each domain label must start and end with alphanumeric characters\n"
-            + "3. must end with a domain label at least 2 characters long (e.g. '.com', '.co')\n"
-            + "4. must have at least one period separating domain labels (so 'google' is invalid)";
+            + "The domain name is made up of domain labels separated by periods, and:\n"
+            + "1. each domain label consists of alphanumeric characters, separated only by hyphens, if any.\n"
+            + "2. each domain label must start and end with alphanumeric characters.\n"
+            + "3. it must end with a domain label at least 2 characters long (e.g. '.com', '.co').\n"
+            + "4. it must have at least one period separating domain labels (so 'google' is invalid).";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
