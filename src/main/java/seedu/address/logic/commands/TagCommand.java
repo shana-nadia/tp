@@ -36,7 +36,7 @@ public abstract class TagCommand extends BatchCommand {
 
     /**
      * Formats a set of tags as a sorted, comma-separated list of tag names.
-     * 
+     *
      * @param tags The set of tags to format.
      * @return A string representation of the tags.
      */
@@ -49,7 +49,7 @@ public abstract class TagCommand extends BatchCommand {
 
     /**
      * Formats each person together with the exact tags that were changed for that person.
-     * 
+     *
      * @param persons The list of persons whose tags were changed.
      * @param tagsByPerson The list of sets of tags corresponding to each person.
      * @return A string representation of the persons and their changed tags.
