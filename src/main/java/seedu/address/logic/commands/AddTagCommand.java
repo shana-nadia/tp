@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -35,6 +36,8 @@ public class AddTagCommand extends TagCommand {
     public static final String MESSAGE_TAG_ALREADY_EXISTS =
             "One or more specified tags already exist for this person.";
 
+    private final List<Person> updatedPersons = new ArrayList<>();
+
     /**
      * Creates an AddTagCommand to add tags to persons at {@code targetIndices}.
      */
@@ -53,15 +56,19 @@ public class AddTagCommand extends TagCommand {
 
     @Override
     protected void executeBatch(List<Person> targetPersons, Model model) {
+        updatedPersons.clear();
         for (Person person : targetPersons) {
             model.addTagsToPerson(person, getTags());
+            updatedPersons.add(model.getFilteredPersonList().get(getDistinctTargetIndices()
+                    .get(updatedPersons.size()).getZeroBased()));
         }
     }
 
+
     @Override
     protected String formatSuccessMessage(List<Person> processedPersons) {
-        if (processedPersons.size() == 1) {
-            return String.format(MESSAGE_SUCCESS, Messages.format(processedPersons.get(0)));
+        if (updatedPersons.size() == 1) {
+            return String.format(MESSAGE_SUCCESS, Messages.format(updatedPersons.get(0)));
         }
         return String.format(MESSAGE_BATCH_SUCCESS, processedPersons.size(), joinNames(processedPersons));
     }
