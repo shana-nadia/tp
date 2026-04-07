@@ -50,7 +50,7 @@ public abstract class BatchCommand extends Command {
 
     private List<Person> collectPersons(List<Person> lastShownList) {
         List<Person> persons = new ArrayList<>();
-        for (Index index : targetIndices) {
+        for (Index index : getDistinctTargetIndices()) {
             persons.add(lastShownList.get(index.getZeroBased()));
         }
         return persons;
@@ -80,6 +80,15 @@ public abstract class BatchCommand extends Command {
      */
     protected List<Index> getTargetIndices() {
         return Collections.unmodifiableList(targetIndices);
+    }
+
+    /**
+     * Returns the target indices with duplicates removed while preserving input order.
+     */
+    protected List<Index> getDistinctTargetIndices() {
+        return targetIndices.stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     /**

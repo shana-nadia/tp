@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +26,9 @@ public class MarkCommand extends BatchCommand {
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked student as paid: %1$s";
     public static final String MESSAGE_MARK_PERSONS_SUCCESS = "Marked %1$d students as paid: %2$s";
-    public static final String MESSAGE_ALREADY_PAID = "This student has already been marked as paid.";
+    public static final String MESSAGE_ALREADY_PAID = "This student has already been marked as paid: %1$s";
+    public static final String MESSAGE_ALREADY_PAID_PLURAL =
+            "These students have already been marked as paid: %1$s";
 
     /**
      * Creates a MarkCommand to mark the persons at {@code targetIndices} as paid.
@@ -36,10 +39,21 @@ public class MarkCommand extends BatchCommand {
 
     @Override
     protected void checkPreconditions(List<Person> targetPersons) throws CommandException {
-        for (Person person : targetPersons) {
+        List<Index> distinctTargetIndices = getDistinctTargetIndices();
+        List<String> alreadyPaidNames = new ArrayList<>();
+        for (int i = 0; i < targetPersons.size(); i++) {
+            Person person = targetPersons.get(i);
             if (person.isPaid()) {
-                throw new CommandException(MESSAGE_ALREADY_PAID);
+                Index index = distinctTargetIndices.get(i);
+                alreadyPaidNames.add("(" + index.getOneBased() + ") " + person.getName());
             }
+        }
+        if (!alreadyPaidNames.isEmpty()) {
+            String names = String.join(", ", alreadyPaidNames);
+            String message = alreadyPaidNames.size() == 1
+                    ? String.format(MESSAGE_ALREADY_PAID, names)
+                    : String.format(MESSAGE_ALREADY_PAID_PLURAL, names);
+            throw new CommandException(message);
         }
     }
 

@@ -94,9 +94,12 @@ public class UnmarkCommandTest {
     @Test
     public void execute_alreadyUnpaid_throwsCommandException() {
         // Typical persons default to isPaid = false
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON));
 
-        assertCommandFailure(unmarkCommand, model, UnmarkCommand.MESSAGE_ALREADY_UNPAID);
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_ALREADY_UNPAID,
+                "(" + INDEX_FIRST_PERSON.getOneBased() + ") " + person.getName());
+        assertCommandFailure(unmarkCommand, model, expectedMessage);
     }
 
     @Test
@@ -119,6 +122,24 @@ public class UnmarkCommandTest {
 
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSONS_SUCCESS,
                 2, unmarkedFirst.getName() + ", " + unmarkedSecond.getName());
+
+        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateIndices_unmarksPersonOnce() {
+        Person personToUnmark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person paidPerson = new PersonBuilder(personToUnmark).withPaid(true).build();
+        model.setPerson(personToUnmark, paidPerson);
+
+        UnmarkCommand unmarkCommand = new UnmarkCommand(List.of(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON));
+
+        Person unmarkedPerson = new PersonBuilder(paidPerson).withPaid(false).build();
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS,
+                Messages.format(unmarkedPerson));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(paidPerson, unmarkedPerson);
 
         assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }

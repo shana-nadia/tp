@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +26,9 @@ public class UnmarkCommand extends BatchCommand {
 
     public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked student as unpaid: %1$s";
     public static final String MESSAGE_UNMARK_PERSONS_SUCCESS = "Marked %1$d students as unpaid: %2$s";
-    public static final String MESSAGE_ALREADY_UNPAID = "This student has already been marked as unpaid.";
+    public static final String MESSAGE_ALREADY_UNPAID = "This student has already been marked as unpaid: %1$s";
+    public static final String MESSAGE_ALREADY_UNPAID_PLURAL =
+            "These students have already been marked as unpaid: %1$s";
 
     /**
      * Creates an UnmarkCommand to mark the persons at {@code targetIndices} as unpaid.
@@ -36,10 +39,21 @@ public class UnmarkCommand extends BatchCommand {
 
     @Override
     protected void checkPreconditions(List<Person> targetPersons) throws CommandException {
-        for (Person person : targetPersons) {
+        List<Index> distinctTargetIndices = getDistinctTargetIndices();
+        List<String> alreadyUnpaidNames = new ArrayList<>();
+        for (int i = 0; i < targetPersons.size(); i++) {
+            Person person = targetPersons.get(i);
             if (!person.isPaid()) {
-                throw new CommandException(MESSAGE_ALREADY_UNPAID);
+                Index index = distinctTargetIndices.get(i);
+                alreadyUnpaidNames.add("(" + index.getOneBased() + ") " + person.getName());
             }
+        }
+        if (!alreadyUnpaidNames.isEmpty()) {
+            String names = String.join(", ", alreadyUnpaidNames);
+            String message = alreadyUnpaidNames.size() == 1
+                    ? String.format(MESSAGE_ALREADY_UNPAID, names)
+                    : String.format(MESSAGE_ALREADY_UNPAID_PLURAL, names);
+            throw new CommandException(message);
         }
     }
 
