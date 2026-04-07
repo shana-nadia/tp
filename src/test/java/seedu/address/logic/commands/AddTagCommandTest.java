@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
@@ -38,9 +39,45 @@ public class AddTagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTagsToPerson(personToTag, tagsToAdd);
         Person updatedPerson = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, Messages.format(updatedPerson));
+        String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, updatedPerson.getName());
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_someSelectedPersonsAlreadyHaveTags_updatesOnlyAffectedPersons() {
+        Set<Tag> tagsToAdd = Set.of(new Tag("friends"));
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON), tagsToAdd);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person thirdPerson = expectedModel.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        expectedModel.addTagsToPerson(thirdPerson, tagsToAdd);
+        Person updatedPerson = expectedModel.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, updatedPerson.getName());
+
+        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_someSpecifiedTagsAlreadyExist_addsRemainingTags() {
+        Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> tagsToAdd = Set.of(new Tag("friends"), new Tag("classmate"));
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tagsToAdd);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTagsToPerson(personToTag, tagsToAdd);
+        Person updatedPerson = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String expectedMessage = String.format(AddTagCommand.MESSAGE_SUCCESS, updatedPerson.getName());
+
+        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allSelectedPersonsAlreadyHaveTags_throwsCommandException() {
+        Set<Tag> tagsToAdd = Set.of(new Tag("friends"));
+        AddTagCommand addTagCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tagsToAdd);
+
+        assertCommandFailure(addTagCommand, model, AddTagCommand.MESSAGE_TAG_ALREADY_EXISTS);
     }
 
     @Test
