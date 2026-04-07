@@ -50,10 +50,11 @@ public class AddTagCommand extends TagCommand {
     protected void checkPreconditions(List<Person> targetPersons) throws CommandException {
         affectedPersons.clear();
         tagsAddedByPerson.clear();
+        Set<Tag> requestedTags = getTags();
 
         for (int i = 0; i < targetPersons.size(); i++) {
             Person person = targetPersons.get(i);
-            Set<Tag> tagsToAdd = new HashSet<>(getTags());
+            Set<Tag> tagsToAdd = new HashSet<>(requestedTags);
             tagsToAdd.removeAll(person.getTags());
 
             if (!tagsToAdd.isEmpty()) {

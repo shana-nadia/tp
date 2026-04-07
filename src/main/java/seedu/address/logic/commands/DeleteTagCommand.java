@@ -33,7 +33,7 @@ public class DeleteTagCommand extends TagCommand {
             + PREFIX_TAG + "Primary1 "
             + PREFIX_TAG + "Mathematics";
 
-    public static final String MESSAGE_SUCCESS = "Deleted tags %1$s from student: %2$s";
+    public static final String MESSAGE_SUCCESS = "Deleted tags (%1$s) from student: %2$s";
     public static final String MESSAGE_BATCH_SUCCESS = "Deleted tags from students: %1$s";
     public static final String MESSAGE_TAG_NOT_FOUND =
             "No students were updated because none have the specified tags.";
@@ -52,11 +52,12 @@ public class DeleteTagCommand extends TagCommand {
     protected void checkPreconditions(List<Person> targetPersons) throws CommandException {
         affectedPersons.clear();
         tagsDeletedByPerson.clear();
+        Set<Tag> requestedTags = getTags();
 
         for (int i = 0; i < targetPersons.size(); i++) {
             Person person = targetPersons.get(i);
             Set<Tag> tagsToDelete = new HashSet<>(person.getTags());
-            tagsToDelete.retainAll(getTags());
+            tagsToDelete.retainAll(requestedTags);
 
             if (!tagsToDelete.isEmpty()) {
                 affectedPersons.add(person);
