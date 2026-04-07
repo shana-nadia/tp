@@ -61,7 +61,8 @@ public class DeleteTagCommand extends TagCommand {
         }
 
         if (personsToUpdate.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personsToUpdate.get(0))));
+            Person updatedPerson = model.getFilteredPersonList().get(getTargetIndices().get(0).getZeroBased());
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedPerson)));
         }
         String names = personsToUpdate.stream()
                 .map(p -> p.getName().toString()).collect(Collectors.joining(", "));

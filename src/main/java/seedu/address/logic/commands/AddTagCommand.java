@@ -60,7 +60,8 @@ public class AddTagCommand extends TagCommand {
         }
 
         if (personsToTag.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personsToTag.get(0))));
+            Person updatedPerson = model.getFilteredPersonList().get(getTargetIndices().get(0).getZeroBased());
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedPerson)));
         }
         String names = personsToTag.stream()
                 .map(p -> p.getName().toString()).collect(Collectors.joining(", "));
