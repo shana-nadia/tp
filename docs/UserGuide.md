@@ -210,7 +210,7 @@ Refer to the [Features](#features) section below for the full details of each co
 | **Start Time** | `st/` | 24-hour format `HH:mm` (e.g., `09:00`, `14:30`)                                                                     | `st/14:00` |
 | **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                       | `et/16:00` |
 | **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40 | `r/50` |
-| **Tag** | `t/` | Alphanumeric characters only (no spaces); stored in lowercase                                                       | `t/math` |
+| **Tag** | `t/` | Any character allowed; must not be blank; leading/trailing spaces are trimmed; max 20 characters                    | `t/math` |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -385,14 +385,14 @@ Finds students who match all of the given tags.
 
 * The search is **case-insensitive**. e.g. `Math` will match `math`.
 * Only students matching **all** tags will be returned (i.e. `AND` search).
-* Tags are alphanumeric only (no spaces).
+* Tags can contain spaces and special characters.
 
 **Examples:**
 
-| Command | What it does |
-|---------|-------------|
-| `tag find t/math` | Returns students tagged with `math` |
-| `tag find t/primary3 t/science` | Returns students tagged with both `primary3` and `science` |
+| Command                          | What it does                                                |
+|----------------------------------|-------------------------------------------------------------|
+| `tag find t/Math`                | Returns students tagged with `Math`                         |
+| `tag find t/Primary 3 t/Science` | Returns students tagged with both `Primary 3` and `Science` |
 
 **Expected output:**
 > `2 persons listed!`
@@ -457,17 +457,17 @@ You can tag multiple students at once by specifying multiple indices. e.g. `tag 
 
 **Examples:**
 
-| Command | What it does |
-|---------|-------------|
-| `tag add 1 t/math` | Adds the tag `math` to the 1st student |
-| `tag add 2 t/primary3 t/science` | Adds tags `primary3` and `science` to the 2nd student |
-| `tag add 1 2 3 t/math` | Adds the tag `math` to the 1st, 2nd, and 3rd students if they do not have it |
+| Command                           | What it does                                                                 |
+|-----------------------------------|------------------------------------------------------------------------------|
+| `tag add 1 t/Math`                | Adds the tag `Math` to the 1st student                                       |
+| `tag add 2 t/Primary 3 t/Science` | Adds tags `Primary 3` and `Science` to the 2nd student                       |
+| `tag add 1 2 3 t/Math`            | Adds the tag `Math` to the 1st, 2nd, and 3rd students if they do not have it |
 
 **Expected output** (on success):
-> `Added tags math to student: John Doe`
+> `Added tags (Math) to student: John Doe`
 
-**Expected output** (on batch success):
-> `Added tags to students: John Doe (math); Jane Doe (science)`
+**Expected output** (on success):
+> `Added tags (Primary 3, Science) to student: John Doe`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -491,17 +491,14 @@ You can remove tags from multiple students at once by specifying multiple indice
 
 **Examples:**
 
-| Command | What it does |
-|---------|-------------|
-| `tag delete 1 t/math` | Removes the tag `math` from the 1st student |
-| `tag delete 2 t/primary3 t/science` | Removes tags `primary3` and `science` from the 2nd student |
-| `tag delete 1 2 3 t/math` | Removes the `math` tag from the 1st, 2nd, and 3rd students if they have it|
+| Command                              | What it does                                                               |
+|--------------------------------------|----------------------------------------------------------------------------|
+| `tag delete 1 t/Math`                | Removes the tag `Math` from the 1st student                                |
+| `tag delete 2 t/Primary 3 t/Science` | Removes tags `Primary 3` and `Science` from the 2nd student                |
+| `tag delete 1 2 3 t/Math`            | Removes the `Math` tag from the 1st, 2nd, and 3rd students if they have it |
 
 **Expected output** (on success):
-> `Deleted tags math from student: John Doe`
-
-**Expected output** (on batch success):
-> `Deleted tags from students: John Doe (math); Jane Doe (science)`
+> `Deleted tags (Math) from student: John Doe`
 
 --------------------------------------------------------------------------------------------------------------------
 
