@@ -59,8 +59,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Time end = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
 
-        Person person = new Person(name, phone, email, address, day, start, end, rate, false, tagList);
+        if (!end.isAfter(start)) {
+            throw new ParseException(Time.MESSAGE_COMPARISON_CONSTRAINTS);
+        }
 
+        Person person = new Person(name, phone, email, address, day, start, end, rate, false, tagList);
         return new AddCommand(person);
     }
 
