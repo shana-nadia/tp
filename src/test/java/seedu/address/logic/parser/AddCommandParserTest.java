@@ -332,4 +332,24 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB + RATE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_endTimeBeforeStartTime_failure() {
+        assertParseFailure(parser,
+                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + DAY_DESC_AMY + START_TIME_DESC_AMY + END_TIME_DESC_BOB
+                        + RATE_DESC_AMY,
+                Time.MESSAGE_COMPARISON_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_endTimeEqualsStartTime_failure() {
+        String input = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + DAY_DESC_AMY
+                + START_TIME_DESC_AMY
+                + " " + PREFIX_END + VALID_START_TIME_AMY
+                + RATE_DESC_AMY;
+
+        assertParseFailure(parser, input, Time.MESSAGE_COMPARISON_CONSTRAINTS);
+    }
 }
