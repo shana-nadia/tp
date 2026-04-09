@@ -532,7 +532,7 @@ You can mark multiple students as paid at once by specifying multiple indices. e
 | `find John` then `mark 1` | Marks the 1st student in the `find` results as paid |
 
 **Expected output** (on success):
-> `Marked student as paid: John Doe; Phone: ...`
+> `Marked 1 student(s) as paid: John Doe`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -560,7 +560,7 @@ You can unmark multiple students at once by specifying multiple indices. e.g. `u
 | `unmark 1 2 3` | Marks the 1st, 2nd, and 3rd students as unpaid |
 
 **Expected output** (on success):
-> `Marked student as unpaid: John Doe; Phone: ...`
+> `Marked 2 student(s) as paid: John Doe, Jane Smithn`
 
 --------------------------------------------------------------------------------------------------------------------
 
