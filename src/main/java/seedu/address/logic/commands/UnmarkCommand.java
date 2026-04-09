@@ -68,8 +68,8 @@ public class UnmarkCommand extends BatchCommand {
     }
 
     @Override
-    protected String formatSuccessMessage(List<Person> processedPersons) {
-        return String.format(MESSAGE_UNMARK_SUCCESS, processedPersons.size(), joinNames(processedPersons));
+    protected String formatSuccessMessage(List<Person> targetPersons) {
+        return String.format(MESSAGE_UNMARK_SUCCESS, targetPersons.size(), joinNames(targetPersons));
     }
 
     @Override

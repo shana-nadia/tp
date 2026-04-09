@@ -560,7 +560,7 @@ You can unmark multiple students at once by specifying multiple indices. e.g. `u
 | `unmark 1 2 3` | Marks the 1st, 2nd, and 3rd students as unpaid |
 
 **Expected output** (on success):
-> `Marked 2 student(s) as paid: John Doe, Jane Smithn`
+> `Marked 3 student(s) as unpaid: John Doe, Jane Smith, Vincent`
 
 --------------------------------------------------------------------------------------------------------------------
 
