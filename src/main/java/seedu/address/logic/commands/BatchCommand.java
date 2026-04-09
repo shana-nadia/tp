@@ -41,10 +41,17 @@ public abstract class BatchCommand extends Command {
     }
 
     private void validateIndices(List<Person> lastShownList) throws CommandException {
+        List<Integer> invalidIndices = new ArrayList<>();
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                invalidIndices.add(index.getOneBased());
             }
+        }
+        if (!invalidIndices.isEmpty()) {
+            String indices = invalidIndices.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ": " + indices);
         }
     }
 
