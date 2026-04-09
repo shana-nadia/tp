@@ -35,8 +35,9 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_PERSON));
 
         Person markedPerson = new PersonBuilder(personToMark).withPaid(true).build();
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(markedPerson));
+
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
+                1, "(" + INDEX_FIRST_PERSON.getOneBased() + ") " + markedPerson.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToMark, markedPerson);
@@ -61,8 +62,9 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_PERSON));
 
         Person markedPerson = new PersonBuilder(personToMark).withPaid(true).build();
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(markedPerson));
+
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
+                1, "(" + INDEX_FIRST_PERSON.getOneBased() + ") " + markedPerson.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToMark, markedPerson);
@@ -80,8 +82,10 @@ public class MarkCommandTest {
 
         MarkCommand markCommand = new MarkCommand(List.of(outOfBoundIndex));
 
-        assertCommandFailure(markCommand, model,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ": " + outOfBoundIndex.getOneBased());
+        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                + ": " + outOfBoundIndex.getOneBased();
+
+        assertCommandFailure(markCommand, model, expectedMessage);
     }
 
     @Test
@@ -110,7 +114,7 @@ public class MarkCommandTest {
         expectedModel.setPerson(firstPerson, markedFirst);
         expectedModel.setPerson(secondPerson, markedSecond);
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSONS_SUCCESS,
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
                 2, "(" + INDEX_FIRST_PERSON.getOneBased() + ") " + markedFirst.getName()
                 + ", (" + INDEX_SECOND_PERSON.getOneBased() + ") " + markedSecond.getName());
 
@@ -123,8 +127,9 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(List.of(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON));
 
         Person markedPerson = new PersonBuilder(personToMark).withPaid(true).build();
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(markedPerson));
+
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
+                1, "(" + INDEX_FIRST_PERSON.getOneBased() + ") " + markedPerson.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToMark, markedPerson);
