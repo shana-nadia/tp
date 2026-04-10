@@ -208,6 +208,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            // no-op for stub
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
