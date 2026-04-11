@@ -202,7 +202,7 @@ Refer to the [Features](#features) section below for the full details of each co
 
 | Parameter | Prefix | Constraints                                                                                                         | Example |
 |-----------|--------|---------------------------------------------------------------------------------------------------------------------|---------|
-| **Name** | `n/` | Letters and spaces only; cannot be blank                                                                            | `n/John Doe` |
+| **Name** | `n/` | Letters, spaces, and `/` only (e.g. `S/O`); cannot be blank                                                        | `n/Raj S/O Kumar` |
 | **Phone** | `p/` | Exactly 8 digits, starting with 6, 8, or 9 (Singapore format)                                                       | `p/91234567` |
 | **Email** | `e/` | Standard email format (`local@domain`)                                                                              | `e/john@example.com` |
 | **Address** | `a/` | At least 3 characters long, must not be blank                                                                       | `a/Blk 30, Geylang St 29` |
@@ -223,6 +223,7 @@ Adds a new student to OnlyTutors.
 </div>
 
 * All fields are required.
+* Day names are case-insensitive (e.g. `monday`, `Monday`, `MONDAY` are all accepted).
 * Tags cannot be added during the `add` command. Use [`tag add`](#adding-tags-to-a-student-tag-add) after adding the student.
 * New students are marked as **Unpaid** by default.
 
@@ -330,9 +331,6 @@ Editing tags with the `edit` command **replaces all existing tags**. If a studen
 To add tags without replacing, use [`tag add`](#adding-tags-to-a-student-tag-add) instead.
 </div>
 
-<div markdown="block" class="alert alert-info">
-</div>
-
 **Examples:**
 
 | Command | What it does |
@@ -394,7 +392,7 @@ Finds students who match all of the given tags exactly.
 | Command                         | What it does                                                |
 |---------------------------------|-------------------------------------------------------------|
 | `tag find t/Math`               | Returns students tagged with `Math`                         |
-| `tag find t/Primary3 t/Science` | Returns students tagged with both `Primary 3` and `Science` |
+| `tag find t/Primary3 t/Science` | Returns students tagged with both `Primary3` and `Science` |
 | `tag find t/ma`                 | Returns no students unless a student has the exact tag `ma` |
 
 **Invalid input:**
@@ -535,7 +533,7 @@ You can mark multiple students as paid at once by specifying multiple indices. e
 | `find John` then `mark 1` | Marks the 1st student in the `find` results as paid |
 
 **Expected output** (on success):
-> `Marked 1 student(s) as paid: John Doe`
+> `Marked 1 student(s) as paid: (8) John Doe`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -563,7 +561,7 @@ You can unmark multiple students at once by specifying multiple indices. e.g. `u
 | `unmark 1 2 3` | Marks the 1st, 2nd, and 3rd students as unpaid |
 
 **Expected output** (on success):
-> `Marked 3 student(s) as unpaid: John Doe, Jane Smith, Vincent`
+> `Marked 3 student(s) as unpaid: (8) John Doe, (9) Jane Smith, (10) Vincent`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -594,6 +592,8 @@ Shows a message with a link to this User Guide.
 **Format:** `help`
 </div>
 
+* Any extra text after `help` is ignored (e.g. `help abc` is treated as `help`).
+
 ![help message](images/helpMessage.png)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -605,6 +605,8 @@ Exits the program.
 <div markdown="span" class="alert alert-success">
 **Format:** `exit`
 </div>
+
+* Any extra text after `exit` is ignored (e.g. `exit abc` is treated as `exit`).
 
 --------------------------------------------------------------------------------------------------------------------
 
