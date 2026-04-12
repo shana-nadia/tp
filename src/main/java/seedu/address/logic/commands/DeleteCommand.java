@@ -21,7 +21,7 @@ public class DeleteCommand extends BatchCommand {
             + "Parameters: INDEX [INDEX]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$d persons: %2$s";
+    public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$d person(s): %2$s";
 
     /**
      * Creates a DeleteCommand to delete persons at {@code targetIndices}.
