@@ -42,4 +42,9 @@ public class DeleteTagCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "1 t/tag*", expectedMessage);
     }
+
+    @Test
+    public void parse_unknownPrefix_failure() {
+        assertParseFailure(parser, "1 t/friend z/unexpected", "Unknown prefix: z/");
+    }
 }

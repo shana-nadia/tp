@@ -67,7 +67,7 @@ import seedu.address.model.person.Time;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+        private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -258,6 +258,16 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_DAY_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB + RATE_DESC_BOB,
                 expectedMessage);
+
+        // unknown prefix present
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB + RATE_DESC_BOB + " z/extra",
+                "Unknown prefix: z/");
+
+        // uppercase unknown prefix present
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + DAY_DESC_BOB + START_TIME_DESC_BOB + END_TIME_DESC_BOB + RATE_DESC_BOB + " Z/extra",
+                "Unknown prefix: Z/");
 
         // missing start time prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

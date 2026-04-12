@@ -54,4 +54,9 @@ public class FindTagCommandParserTest {
             new TagsContainKeywordsPredicate(Arrays.asList("friends", "friends")));
         assertParseSuccess(parser, "t/friends t/friends", expected);
     }
+
+    @Test
+    public void parse_unknownPrefix_failure() {
+        assertParseFailure(parser, "t/friends z/unexpected", "Unknown prefix: z/");
+    }
 }
