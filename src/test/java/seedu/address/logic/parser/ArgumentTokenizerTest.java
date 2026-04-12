@@ -140,6 +140,17 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
+    public void tokenize_tabBeforeSlashToken_treatedAsPreamble() throws ParseException {
+        String argsString = "before\tu/value";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+
+        assertPreamblePresent(argMultimap, argsString);
+        assertArgumentAbsent(argMultimap, pSlash);
+        assertArgumentAbsent(argMultimap, dashT);
+        assertArgumentAbsent(argMultimap, hatQ);
+    }
+
+    @Test
     public void equalsMethod() {
         Prefix aaa = new Prefix("aaa");
 

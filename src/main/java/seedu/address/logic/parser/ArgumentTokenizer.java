@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  *    in the above example.<br>
  */
 public class ArgumentTokenizer {
-    private static final Pattern PREFIX_TOKEN_PATTERN = Pattern.compile("(^|\\s)([A-Za-z]+/)");
+    private static final Pattern PREFIX_TOKEN_PATTERN = Pattern.compile("(^| )([A-Za-z]+/)");
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
