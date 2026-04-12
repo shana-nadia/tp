@@ -302,6 +302,8 @@ Shows a list of all students in OnlyTutors.
 Use `list` after a [`find`](#finding-students-by-name-find) command to return to the full student list.
 </div>
 
+* Any extra text after `list` is ignored (e.g. `list abc` is treated as `list`).
+
 **Expected output:**
 > `Listed all persons`
 

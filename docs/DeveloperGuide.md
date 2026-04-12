@@ -375,11 +375,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1b. OnlyTutors detects a missing or invalid tag
-  * 1b1. OnlyTutors informs the tutor of the error.
-
-    Use case ends.
-
 * 2a. OnlyTutors detects that none of the specified tags exist on the student
   * 2a1. OnlyTutors informs the tutor that no changes were made.
 
