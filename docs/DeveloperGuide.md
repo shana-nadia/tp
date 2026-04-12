@@ -650,14 +650,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data file
 
-   1. Delete the `data/onlytutors.json` file if it exists.
+   1. Delete the `data/addressbook.json` file if it exists.
 
    1. Launch the app.<br>
       Expected: App starts with a set of sample student data.
 
 1. Dealing with corrupted data file
 
-   1. Open `data/onlytutors.json` and introduce invalid content (e.g., delete a required field or add invalid characters).
+   1. Open `data/addressbook.json` and introduce invalid content (e.g., delete a required field or add invalid characters).
 
    1. Launch the app.<br>
       Expected: App starts with an empty student list. A warning may be logged.
