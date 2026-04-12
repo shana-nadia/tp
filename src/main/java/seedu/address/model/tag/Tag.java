@@ -12,8 +12,9 @@ import java.util.Locale;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tag names can contain any characters, should not be blank, and must be 20 characters or less";
-    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,20}";
+            "Tag names can contain any characters except '/', should not be blank, "
+                    + "and must be 20 characters or less";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$)[^/]{1,20}$";
 
     public final String tagName;
 
