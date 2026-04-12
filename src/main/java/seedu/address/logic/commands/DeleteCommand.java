@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -22,8 +21,7 @@ public class DeleteCommand extends BatchCommand {
             + "Parameters: INDEX [INDEX]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_PERSONS_SUCCESS = "Deleted %1$d persons: %2$s";
+    public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$d persons: %2$s";
 
     /**
      * Creates a DeleteCommand to delete persons at {@code targetIndices}.
@@ -41,10 +39,7 @@ public class DeleteCommand extends BatchCommand {
 
     @Override
     protected String formatSuccessMessage(List<Person> processedPersons) {
-        if (processedPersons.size() == 1) {
-            return String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(processedPersons.get(0)));
-        }
-        return String.format(MESSAGE_DELETE_PERSONS_SUCCESS, processedPersons.size(),
+        return String.format(MESSAGE_DELETE_SUCCESS, processedPersons.size(),
                 joinNamesWithIndices(processedPersons));
     }
 
