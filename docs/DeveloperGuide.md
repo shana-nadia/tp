@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |---|----------|-------------|
 | 1 | Portability | Should work on any mainstream OS (Windows, Linux, macOS) as long as it has Java 17 or above installed. |
 | 2 | Standalone | Should work as a standalone application without requiring an installer. The app should be packaged as a single JAR file. |
-| 3 | Performance | Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. |
+| 3 | Performance | Should be able to hold up to 1000 students with all commands completing within 3 seconds under normal usage conditions. |
 | 4 | Response Time | Any command should complete and display results within 3 seconds under normal operating conditions. |
 | 5 | CLI Efficiency | A user with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse. |
 | 6 | Usability | A tutor with no prior technical background should be able to use the core features of the app after reading the user guide. |
@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: At least one student in the list.
 
    1. Test case: `clear`, then `y`<br>
-      Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? [y/N]:`. After entering `y`, all contacts are removed. Success message shown.
+      Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
 
    1. Test case: `clear`, then `n`<br>
       Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.
