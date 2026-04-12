@@ -14,8 +14,8 @@ public class Address {
                     + "can contain any characters except '/' and should not be blank.";
 
     /*
-     * The first and last characters of the address must not be whitespace, cannot contain slashes
-     * and the address must be at least 3 characters long.
+     * The address must not contain slashes, the first and last characters must not be whitespace,
+     * and must be at least 3 characters long.
      */
     public static final String VALIDATION_REGEX = "[^\\s/][^/]{1,}[^\\s/]";
 
