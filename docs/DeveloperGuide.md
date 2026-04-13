@@ -725,23 +725,7 @@ Team size: 5
       same.
     * Planned behavior: Duplication-checking logic should allow multiple entries with the same phone number and name,
       provided that the lesson day or time differs.
-2. **Specify feedback for tags:** Currently, upon adding a tag for a negative index, generic feedback is given that calls out invalid command format and gives the requirements for the correct format,
-but does not tell the user exactly what is wrong with the format. This could leave the user confused and having to read through the large block
-of text to figure out exactly what is wrong.
-    * Current behavior: Error message displayed:
-    `Invalid command format!
-      tag: Executes a tag subcommand
-      Subcommands:
-      tag add: Adds tag(s) to person(s) in the address book. Parameters: INDEX [INDEX]... (must be positive integers) t/TAG (must be alphanumeric characters only and up to 20 characters long)
-      Example: tag add 1 2 t/Primary1 t/Mathematics
-      tag delete: Deletes tag(s) from person(s) in the address book. Parameters: INDEX [INDEX]... (must be positive integers) t/TAG (must be a non-empty string)
-      Example: tag delete 1 2 t/Primary1 t/Mathematics
-      tag find: Finds all persons whose tags exactly match the specified tag keyword(s) (case-insensitive) and displays them as a list with index numbers.
-      Parameters: t/TAG (must be a non-empty string)
-      Example: tag find t/important`
-    * Planned behavior: Specific error message displayed for negative indices, for example:
-        `The person index provided is invalid: -1`
-3.  **List indexes alongside names for batch tag add and batch tag delete:** Currently, batch tag add and batch tag delete
+2. **List indexes alongside names for batch tag add and batch tag delete:** Currently, batch tag add and batch tag delete
    return the list of names of people who have successfully been tagged or had their tags removed. However, list indexes are not
    shown beside the names. Thus, users cannot easily map the affected students to their positions in the displayed list.
    This is also inconsistent with other batch commands such as mark/unmark and delete which already include indices.
