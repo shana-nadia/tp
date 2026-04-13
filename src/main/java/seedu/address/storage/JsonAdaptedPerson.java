@@ -150,6 +150,10 @@ class JsonAdaptedPerson {
         }
         final Time modelEndTime = new Time(endTime);
 
+        if (!modelEndTime.isAfter(modelStartTime)) {
+            throw new IllegalValueException(Time.MESSAGE_COMPARISON_CONSTRAINTS);
+        }
+
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }

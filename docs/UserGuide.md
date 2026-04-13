@@ -600,7 +600,7 @@ OnlyTutors data is saved to the hard disk automatically after any command that c
 
 ### Editing the data file
 
-OnlyTutors data is saved automatically as a JSON file at `[JAR file location]/data/onlytutors.json`. Advanced users are welcome to update data directly by editing that file.
+OnlyTutors data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 If your changes to the data file make its format invalid, OnlyTutors may discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it. Furthermore, certain edits can cause OnlyTutors to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident that you can update it correctly.

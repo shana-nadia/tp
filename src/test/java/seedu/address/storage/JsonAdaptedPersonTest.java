@@ -182,6 +182,18 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_startTimeAfterEndTime_throwsIllegalValueException() {
+        String startTime = "18:00";
+        String endTime = "08:00";
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_DAY, startTime, endTime, VALID_RATE, false, VALID_TAGS);
+
+        String expectedMessage = Time.MESSAGE_COMPARISON_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidRate_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
