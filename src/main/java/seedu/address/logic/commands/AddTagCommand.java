@@ -22,7 +22,7 @@ public class AddTagCommand extends TagCommand {
     public static final String SUBCOMMAND_WORD = "add";
     public static final String COMMAND_PHRASE = TagCommand.COMMAND_WORD + " " + SUBCOMMAND_WORD;
 
-    public static final String MESSAGE_USAGE = COMMAND_PHRASE + ": Adds tag(s) to person(s) in the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_PHRASE + ": Adds tag(s) to student(s) in the address book. "
             + "Parameters: "
             + "INDEX [INDEX]... (must be positive integers) "
             + PREFIX_TAG + "TAG (can contain any characters except '/', must not be empty "

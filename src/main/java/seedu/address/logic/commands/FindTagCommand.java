@@ -14,12 +14,12 @@ import seedu.address.model.person.TagsContainKeywordsPredicate;
  * Tag matching is case insensitive.
  */
 public class FindTagCommand extends Command {
-    public static final String MESSAGE_TAG_NOT_FOUND = "No persons found with the specified tag(s).";
+    public static final String MESSAGE_TAG_NOT_FOUND = "No students found with the specified tag(s).";
 
     public static final String SUBCOMMAND_WORD = "find";
     public static final String COMMAND_PHRASE = TagCommand.COMMAND_WORD + " " + SUBCOMMAND_WORD;
 
-    public static final String MESSAGE_USAGE = COMMAND_PHRASE + ": Finds all persons whose tags exactly match the "
+    public static final String MESSAGE_USAGE = COMMAND_PHRASE + ": Finds all students whose tags exactly match the "
             + "specified tag keyword(s) (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_TAG + "TAG (must be a non-empty string)\n"

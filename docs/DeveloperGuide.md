@@ -576,8 +576,13 @@ Clearing the address book with confirmation
 
 1. Prerequisites: At least one student in the list.
 
+<<<<<<< personToStudent
+   1. Test case: `clear`, then `y`<br>
+      Expected: First command shows confirmation prompt `This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all student contacts are removed. Success message shown.
+=======
 2. Test case: `clear`, then `y`<br>
    Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
+>>>>>>> master
 
 3. Test case: `clear`, then `n`<br>
    Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.

@@ -24,7 +24,7 @@ public class DeleteTagCommand extends TagCommand {
     public static final String COMMAND_PHRASE = TagCommand.COMMAND_WORD + " " + SUBCOMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_PHRASE
-            + ": Deletes tag(s) from person(s) in the address book. "
+            + ": Deletes tag(s) from student(s) in the address book. "
             + "Parameters: "
             + "INDEX [INDEX]... (must be positive integers) "
             + PREFIX_TAG + "TAG (must be a non-empty string)\n"
