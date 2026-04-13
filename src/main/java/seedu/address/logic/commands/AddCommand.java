@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -33,6 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_START + "START "
             + PREFIX_END + "END "
             + PREFIX_RATE + "RATE "
+            + "[" + PREFIX_TAG + "TAG]... "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -42,7 +44,9 @@ public class AddCommand extends Command {
             + PREFIX_DAY + "Monday "
             + PREFIX_START + "15:00 "
             + PREFIX_END + "17:00 "
-            + PREFIX_RATE + "150 ";
+            + PREFIX_RATE + "150 "
+            + PREFIX_TAG + "P5 "
+            + PREFIX_TAG + "learningMath";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in OnlyTutors";

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_MATH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -20,15 +20,15 @@ public class DeleteTagCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Set<Tag> tags = Set.of(new Tag("classmate"), new Tag("friend!!!"));
+        Set<Tag> tags = Set.of(new Tag("classmate"), new Tag("math!!!"));
         DeleteTagCommand expectedCommand = new DeleteTagCommand(List.of(INDEX_FIRST_PERSON), tags);
-        assertParseSuccess(parser, "1" + TAG_DESC_FRIEND + " t/classmate", expectedCommand);
+        assertParseSuccess(parser, "1" + TAG_DESC_MATH + " t/classmate", expectedCommand);
     }
 
     @Test
     public void parse_missingIndex_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, TAG_DESC_FRIEND, expectedMessage);
+        assertParseFailure(parser, TAG_DESC_MATH, expectedMessage);
     }
 
     @Test
