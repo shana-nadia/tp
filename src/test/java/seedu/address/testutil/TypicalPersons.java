@@ -18,7 +18,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
