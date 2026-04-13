@@ -195,7 +195,12 @@ Refer to the [Features](#features) section below for the full details of each co
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+When copying multi-line commands from a PDF, space characters surrounding line-breaks may be omitted or replaced by hidden newlines (\n).
+
+**To ensure accuracy:** Paste the command into a plain text editor (like TextEdit or Notepad) first to verify it is a single, continuous line before running it in the application.
 </div>
 
 ### Parameter Summary
@@ -262,7 +267,8 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 **:information_source: Notes on Tuition Rate:**
 
 * Hourly Basis: The rate r/ represents the amount charged per hour.
-* Data Normalization: Leading zeros will be automatically removed (e.g., r/0050 will be saved as 50).
+* Voluntary Work: You may enter r/0 for students you are offering tuition services for free.
+* Leading zeros will be automatically removed (e.g., r/0050 will be saved as 50).
 * Validation: To prevent typos, the app caps the rate at 5000.
 </div>
 
@@ -560,8 +566,8 @@ This deletes **all** student data and cannot be undone. Use with caution.
 </div>
 
 **Expected output:**
-> This will delete all contacts. Are you sure? [y/N]: (after entering clear)
->
+> This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.>
+> 
 > Cleared all contacts. (after entering y or Y)
 
 --------------------------------------------------------------------------------------------------------------------
