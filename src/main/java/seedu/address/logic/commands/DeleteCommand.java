@@ -17,11 +17,11 @@ public class DeleteCommand extends BatchCommand {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person(s) identified by the index number(s) used in the displayed person list.\n"
+            + ": Deletes the student(s) identified by the index number(s) used in the displayed student list.\n"
             + "Parameters: INDEX [INDEX]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$d person(s): %2$s";
+    public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$d student(s): %2$s";
 
     /**
      * Creates a DeleteCommand to delete persons at {@code targetIndices}.

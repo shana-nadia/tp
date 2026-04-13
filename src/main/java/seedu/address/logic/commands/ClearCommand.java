@@ -26,10 +26,10 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     // Updated prompt to suggest that non-y input defaults to 'No'
     public static final String MESSAGE_CONFIRM_PROMPT =
-            "This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.";
-    public static final String MESSAGE_EMPTY = "There are no contacts to clear.";
+            "This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.";
+    public static final String MESSAGE_EMPTY = "There are no students to clear.";
     public static final String MESSAGE_ABORTED = "Clear aborted.";
-    public static final String MESSAGE_SUCCESS = "Cleared all contacts.";
+    public static final String MESSAGE_SUCCESS = "Cleared all students.";
 
     private final ClearState state;
 
