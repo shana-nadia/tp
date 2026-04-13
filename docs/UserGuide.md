@@ -567,7 +567,7 @@ This deletes **all** student data and cannot be undone. Use with caution.
 
 **Expected output:**
 > This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.>
-> 
+>
 > Cleared all contacts. (after entering y or Y)
 
 --------------------------------------------------------------------------------------------------------------------
