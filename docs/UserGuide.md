@@ -470,6 +470,14 @@ You can tag multiple students at once by specifying multiple indices. e.g. `tag 
 **Expected output** (on success):
 > `Added tags (Primary 3, Science) to student: John Doe`
 
+**Before `tag add 1 t/Math`** (student 1 has only the `friends` tag):
+
+![Tag Add Before](images/tagAddBefore.png)
+
+**After `tag add 1 t/Math`** (student 1 now has both `friends` and `Math` tags):
+
+![Tag Add After](images/tagAddAfter.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting tags from a student: `tag delete`
@@ -500,6 +508,14 @@ You can remove tags from multiple students at once by specifying multiple indice
 
 **Expected output** (on success):
 > `Deleted tags (Math) from student: John Doe`
+
+**Before `tag delete 1 t/Math`** (student 1 has both `friends` and `Math` tags):
+
+![Tag Delete Before](images/tagDeleteBefore.png)
+
+**After `tag delete 1 t/Math`** (student 1 now has only the `friends` tag):
+
+![Tag Delete After](images/tagDeleteAfter.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -532,6 +548,14 @@ You can mark multiple students as paid at once by specifying multiple indices. e
 **Expected output** (on success):
 > `Marked 1 student(s) as paid: (1) John Doe`
 
+**Before `mark 1`** (student 1 is Unpaid):
+
+![Mark Before](images/markBefore.png)
+
+**After `mark 1`** (student 1 is now Paid):
+
+![Mark After](images/markAfter.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Marking a student as unpaid: `unmark`
@@ -559,6 +583,14 @@ You can unmark multiple students at once by specifying multiple indices. e.g. `u
 
 **Expected output** (on success):
 > `Marked 3 student(s) as unpaid: (1) John Doe, (2) Jane Smith, (3) Vincent`
+
+**Before `unmark 1`** (student 1 is Paid):
+
+![Unmark Before](images/markAfter.png)
+
+**After `unmark 1`** (student 1 is now Unpaid):
+
+![Unmark After](images/markBefore.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
