@@ -24,14 +24,14 @@ A quick reference of all available commands. Click any command name to jump to i
 
 | Action | Format                                                                                               | Example                                                                                                 |
 |--------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-student-add) | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DAY st/START et/END r/RATE [t/TAG]...`                       | `add n/John Doe p/98765432 e/johnd@example.com a/Clementi Ave 2 d/Monday st/15:00 et/17:00 r/50 t/math` |
+| [**Add**](#adding-a-student-add) | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DAY st/START et/END r/RATE [t/TAG]...`                       | `add n/John Doe p/98765432 e/johnd@example.com a/Clementi Ave 2 d/Monday st/15:00 et/17:00 r/50 t/Math` |
 | [**List**](#listing-all-students-list) | `list`                                                                                               | `list`                                                                                                  |
 | [**Edit**](#editing-a-student-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DAY] [st/START] [et/END] [r/RATE] [t/TAG]…​` | `edit 1 p/91234567 d/Friday`                                                                            |
 | [**Find**](#finding-students-by-name-find) | `find KEYWORD [MORE_KEYWORDS]…​`                                                                     | `find John Alice`                                                                                       |
-| [**Tag Find**](#finding-students-by-tag-tag-find) | `tag find t/TAG [t/TAG]…​`                                                                           | `tag find t/math t/primary3`                                                                            |
+| [**Tag Find**](#finding-students-by-tag-tag-find) | `tag find t/TAG [t/TAG]…​`                                                                           | `tag find t/Math t/Primary 3`                                                                           |
 | [**Delete**](#deleting-a-student-delete) | `delete INDEX [INDEX]…​`                                                                             | `delete 1 3 7`                                                                                          |
-| [**Tag Add**](#adding-tags-to-a-student-tag-add) | `tag add INDEX [INDEX]…​ t/TAG [t/TAG]…​`                                                            | `tag add 1 2 3 t/math`                                                                                  |
-| [**Tag Delete**](#deleting-tags-from-a-student-tag-delete) | `tag delete INDEX [INDEX]…​ t/TAG [t/TAG]…​`                                                         | `tag delete 1 2 t/math`                                                                                 |
+| [**Tag Add**](#adding-tags-to-a-student-tag-add) | `tag add INDEX [INDEX]…​ t/TAG [t/TAG]…​`                                                            | `tag add 1 2 3 t/Math`                                                                                  |
+| [**Tag Delete**](#deleting-tags-from-a-student-tag-delete) | `tag delete INDEX [INDEX]…​ t/TAG [t/TAG]…​`                                                         | `tag delete 1 2 t/Math`                                                                                 |
 | [**Mark**](#marking-a-student-as-paid-mark) | `mark INDEX [INDEX]…​`                                                                               | `mark 1 2 3`                                                                                            |
 | [**Unmark**](#marking-a-student-as-unpaid-unmark) | `unmark INDEX [INDEX]…​`                                                                             | `unmark 1 2 3`                                                                                          |
 | [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                              | `clear`                                                                                                 |
@@ -160,15 +160,15 @@ The screenshot below shows the OnlyTutors interface with sample data. Each stude
 
 Try entering these commands one at a time to get a feel for OnlyTutors:
 
-| Step | Command | What it does |
-|------|---------|-------------|
-| 1 | `list` | Lists all students |
+| Step | Command                                                                                                       | What it does                                       |
+|------|---------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| 1 | `list`                                                                                                        | Lists all students                                 |
 | 2 | `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50` | Adds a student named John Doe with a Monday lesson |
-| 3 | `tag add 1 t/math` | Adds the tag `math` to the 1st student |
-| 4 | `mark 1` | Marks the 1st student as paid |
-| 5 | `find John` | Searches for students with "John" in their name |
-| 6 | `list` | Returns to the full student list |
-| 7 | `delete 3` | Deletes the 3rd student shown in the list |
+| 3 | `tag add 1 t/Math`                                                                                            | Adds the tag `Math` to the 1st student             |
+| 4 | `mark 1`                                                                                                      | Marks the 1st student as paid                      |
+| 5 | `find John`                                                                                                   | Searches for students with "John" in their name    |
+| 6 | `list`                                                                                                        | Returns to the full student list                   |
+| 7 | `delete 3`                                                                                                    | Deletes the 3rd student shown in the list          |
 
 Refer to the [Features](#features) section below for the full details of each command.
 
@@ -187,7 +187,7 @@ Refer to the [Features](#features) section below for the full details of each co
   e.g. `[n/NAME]` means the `n/NAME` parameter can be omitted.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/math`, `t/math t/primary3` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Math`, `t/Math t/Primary 3` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
@@ -205,17 +205,17 @@ When copying multi-line commands from a PDF, space characters surrounding line-b
 
 ### Parameter Summary
 
-| Parameter | Prefix | Constraints                                                                                                              | Example |
-|-----------|--------|--------------------------------------------------------------------------------------------------------------------------|---------|
-| **Name** | `n/` | English alphabets with words separated by a single space; may include apostrophes ('), hyphens (-), and periods (.); cannot be blank | `n/Tan Ah Kow` |
-| **Phone** | `p/` | Exactly 8 digits, starting with 6, 8, or 9 (Singapore format)                                                            | `p/91234567` |
-| **Email** | `e/` | Standard email format (`local@domain`)                                                                                   | `e/john@example.com` |
+| Parameter | Prefix | Constraints                                                                                                              | Example                  |
+|-----------|--------|--------------------------------------------------------------------------------------------------------------------------|--------------------------|
+| **Name** | `n/` | English alphabets with words separated by a single space; may include apostrophes ('), hyphens (-), and periods (.); cannot be blank | `n/Tan Ah Kow`           |
+| **Phone** | `p/` | Exactly 8 digits, starting with 6, 8, or 9 (Singapore format)                                                            | `p/91234567`             |
+| **Email** | `e/` | Standard email format (`local@domain`)                                                                                   | `e/john@example.com`     |
 | **Address** | `a/` | At least 3 characters long; must not start or end with whitespace; must not contain '/'                                  | `a/Blk 30 Geylang St 29` |
-| **Day** | `d/` | A day of the week (case-insensitive): Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday                     | `d/Monday` |
-| **Start Time** | `st/` | 24-hour format `HH:mm` (e.g., `09:00`, `14:30`)                                                                          | `st/14:00` |
-| **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                            | `et/16:00` |
-| **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40      | `r/50` |
-| **Tag** | `t/` | Any character except '/'; must not be blank; leading/trailing spaces are trimmed; max 20 characters                      | `t/math` |
+| **Day** | `d/` | A day of the week (case-insensitive): Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday                     | `d/Monday`               |
+| **Start Time** | `st/` | 24-hour format `HH:mm` (e.g., `09:00`, `14:30`)                                                                          | `st/14:00`               |
+| **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                            | `et/16:00`               |
+| **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40      | `r/50`                   |
+| **Tag** | `t/` | Any character except '/'; must not be blank; leading/trailing spaces are trimmed; max 20 characters                      | `t/Math`                 |
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a student: `add`
@@ -229,7 +229,7 @@ Adds a new student to OnlyTutors.
 * All fields except tags are required.
 * Day names are case-insensitive (e.g. `monday`, `Monday`, `MONDAY` are all accepted).
 * Each student can only have **one lesson schedule** (one day and time). Support for multiple lessons is planned for a future version.
-* Optional tags can be added using the t/ prefix. Multiple tags can be added by repeating the prefix (e.g., t/math t/primary3).
+* Optional tags can be added using the t/ prefix. Multiple tags can be added by repeating the prefix (e.g., t/Math t/Primary 3).
 * New students are marked as **Unpaid** by default.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
@@ -241,11 +241,11 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 
 | Command                                                                                                              | What it does                                                                            |
 |----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50 t/math` | Adds student John Doe with a Monday 3–5pm lesson at $50/hour, and tags them with `math` |
+| `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50 t/Math` | Adds student John Doe with a Monday 3–5pm lesson at $50/hour, and tags them with `Math` |
 | `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/hour                    |
 
 **Expected output** (on success):
-> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [math]`
+> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
 
 ### ⚠️ Common mistakes when adding a student
 
@@ -311,7 +311,7 @@ Edits the details of an existing student in OnlyTutors.
 * Note the same rules for adding a person apply here, i.e. person name must contain only alphabets, end time must be strictly after start time and so on.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Editing tags with the `edit` command **replaces all existing tags**. If a student has tags `math` and `primary3`, running `edit 1 t/science` will result in only the `science` tag remaining.
+Editing tags with the `edit` command **replaces all existing tags**. If a student has tags `Math` and `Primary 3`, running `edit 1 t/Science` will result in only the `Science` tag remaining.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -370,17 +370,17 @@ Finds students who match all of the given tags exactly.
 </div>
 
 * The search is **case-insensitive**. e.g. `Math` will match `math`.
-* Tags must match **exactly**. e.g. `ma` will not match `math`.
+* Tags must match **exactly**. e.g. `Ma` will not match `Math`.
 * Only students matching **all** tags will be returned (i.e. `AND` search).
 * Tags can contain spaces and special characters except '/', but must not be empty.
 
 **Examples:**
 
-| Command                         | What it does                                                |
-|---------------------------------|-------------------------------------------------------------|
-| `tag find t/Math`               | Returns students tagged with `Math`                         |
-| `tag find t/Primary3 t/Science` | Returns students tagged with both `Primary3` and `Science` |
-| `tag find t/ma`                 | Returns no students unless a student has the exact tag `ma` |
+| Command                          | What it does                                                |
+|----------------------------------|-------------------------------------------------------------|
+| `tag find t/Math`                | Returns students tagged with `Math`                         |
+| `tag find t/Primary 3 t/Science` | Returns students tagged with both `Primary 3` and `Science` |
+| `tag find t/ma`                  | Returns no students unless a student has the exact tag `ma` |
 
 **Invalid input:**
 * `tag find t/` is rejected because tags cannot be empty.
@@ -444,7 +444,7 @@ Adds one or more tags to a student **without replacing** existing tags.
 * The command fails only if it would not change any selected student.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can tag multiple students at once by specifying multiple indices. e.g. `tag add 1 2 3 t/math` adds the `math` tag to the 1st, 2nd, and 3rd students.
+You can tag multiple students at once by specifying multiple indices. e.g. `tag add 1 2 3 t/Math` adds the `Math` tag to the 1st, 2nd, and 3rd students.
 </div>
 
 **Examples:**
@@ -478,7 +478,7 @@ Removes one or more tags from a student.
 * The command fails if it would not change any selected student.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can remove tags from multiple students at once by specifying multiple indices. e.g. `tag delete 1 2 3 t/math` removes the `math` tag from the 1st, 2nd, and 3rd students.
+You can remove tags from multiple students at once by specifying multiple indices. e.g. `tag delete 1 2 3 t/Math` removes the `Math` tag from the 1st, 2nd, and 3rd students.
 </div>
 
 **Examples:**
@@ -620,7 +620,7 @@ If your changes to the data file make its format invalid, OnlyTutors may discard
 **A**: Install OnlyTutors on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous OnlyTutors home folder.
 
 **Q**: Can I add tags when adding a new student?<br>
-**A**: Yes. You can add tags immediately by appending the `t/` prefix to your `add` command (e.g., `... r/50 t/math`).
+**A**: Yes. You can add tags immediately by appending the `t/` prefix to your `add` command (e.g., `... r/50 t/Math`).
 
 **Q**: How do I change a student's lesson day or time?<br>
 **A**: Use the [`edit`](#editing-a-student-edit) command. For example, `edit 1 d/Tuesday st/10:00 et/12:00` changes the 1st student's lesson to Tuesday, 10:00–12:00.
@@ -642,14 +642,14 @@ If your changes to the data file make its format invalid, OnlyTutors may discard
 
 ## Glossary
 
-| Term | Meaning |
-|------|---------|
-| **CLI** | Command Line Interface — a text-based way to interact with the app by typing commands |
-| **GUI** | Graphical User Interface — the visual window you see when running the app |
-| **Home folder** | The folder where you placed the OnlyTutors `.jar` file; data is saved here |
-| **Index** | The number shown beside each student in the displayed list (e.g., 1, 2, 3) |
-| **JavaFX** | A Java library used to build the graphical interface of OnlyTutors |
-| **JDK** | Java Development Kit — the software needed to run Java applications like OnlyTutors |
-| **JSON** | A data file format used by OnlyTutors to store your student data |
+| Term | Meaning                                                                                        |
+|------|------------------------------------------------------------------------------------------------|
+| **CLI** | Command Line Interface — a text-based way to interact with the app by typing commands          |
+| **GUI** | Graphical User Interface — the visual window you see when running the app                      |
+| **Home folder** | The folder where you placed the OnlyTutors `.jar` file; data is saved here                     |
+| **Index** | The number shown beside each student in the displayed list (e.g., 1, 2, 3)                     |
+| **JavaFX** | A Java library used to build the graphical interface of OnlyTutors                             |
+| **JDK** | Java Development Kit — the software needed to run Java applications like OnlyTutors            |
+| **JSON** | A data file format used by OnlyTutors to store your student data                               |
 | **PATH** | An environment variable that tells your operating system where to find programs (e.g., `java`) |
-| **Tag** | A label you can attach to a student for categorisation (e.g., `math`, `primary3`) |
+| **Tag** | A label you can attach to a student for categorisation (e.g., `Math`, `Primary 3`)             |
