@@ -725,31 +725,8 @@ Currently, each student can only have one lesson per week. Each student is repre
 * **Planned behavior:** Duplicate-checking logic will allow multiple entries with the same name and phone number, provided that the lesson day or time differs.
 
 ---
-2. **Specify feedback for tags:**
 
-Currently, when a user enters a non-positive for tag add or tag delete commands, the application returns a generic "invalid command format" message. This does not clearly indicate what part of the input is incorrect.
-
-* **Current behavior:**
-  Invalid command format!
-
-Subcommands:
-
-tag add: Adds tag(s) to person(s) in the address book.
-Parameters: INDEX [INDEX]... (must be positive integers)
-t/TAG (can contain any characters except '/', must not be empty and cannot have more than 20 characters)
-Example: tag add 1 2 t/Primary1 t/Mathematics
-
-tag delete: Deletes tag(s) from person(s) in the address book.
-Parameters: INDEX [INDEX]... (must be positive integers)
-t/TAG (must be a non-empty string)
-Example: tag delete 1 2 t/Primary1 t/Mathematics
-
-* **Planned behavior:**
-`The person index provided is invalid: -1`
-
----
-
-3. **List indexes alongside names for batch tag add and batch tag delete:**
+2. **List indexes alongside names for batch tag add and batch tag delete:**
 
 Currently, batch tag add and batch tag delete commands return only the names of students who were affected. However, indexes are not shown, making it difficult to map results back to the displayed list. This is also inconsistent with other batch commands such as mark/unmark and delete, which already include indices.
 
@@ -758,3 +735,75 @@ Currently, batch tag add and batch tag delete commands return only the names of 
 
 * **Planned behavior:**
 `Added tags to students: (1) Alex Yeoh (math); (2) Bernice Yu (math); (3) Charlotte Oliveiro (math)`
+
+---
+
+3. **Support international and variable-length phone numbers:**
+
+While OnlyTutors is primarily designed for tutors in Singapore, students or their parents may use international phone numbers (e.g., Malaysian +60, Indonesian +62). The current validation restricts tutors from storing these contacts.
+
+* **Current behavior:** Phone number validation strictly requires exactly 8 digits starting with 6, 8, or 9.
+* **Planned behavior:** Phone number validation will be relaxed to accept 10-12 digit numbers and optional country codes (e.g., starting with `+`) to accommodate standard international formats.
+
+---
+
+4. **Allow overnight tutoring sessions:**
+
+Although overnight sessions are rare, they occur occasionally (e.g., intense study sessions during exam periods that cross midnight). The system currently assumes all lessons start and end on the exact same day.
+
+* **Current behavior:** The system prevents adding or editing a student if the lesson's start time is chronologically after its end time.
+* **Planned behavior:** Time validation will be updated to allow the start time to be later than the end time specifically for sessions that roll over into the next day (e.g., `23:00` to `02:00`).
+
+---
+
+5. **Improve error reporting for partial successes during batch tag deletion:**
+
+When deleting tags from multiple contacts simultaneously, the command does not clearly inform the user if some students in the batch did not actually have the tag.
+
+* **Current behavior:** Executing `tag delete 8 9 t/math` when only entry 8 has the tag will indicate a blanket success, without notifying the user that entry 9 was skipped.
+* **Planned behavior:** The command result message will be updated to explicitly state which students had the tag successfully removed and which students were skipped because the tag was not found.
+
+---
+
+6. **Prevent or warn against overlapping lesson times:**
+
+The system does not currently cross-check a tutor's schedule for clashes. Tutors can accidentally assign multiple students to the exact same time slot, leading to potential timetable conflicts.
+
+* **Current behavior:** The system allows multiple students to be added with overlapping lesson times on the same day without any warnings.
+* **Planned behavior:** The system will check the existing timetable and either actively prevent the addition of overlapping schedules, or display a prominent warning requiring user confirmation before proceeding.
+
+---
+
+7. **Standardize internal spacing in tags to prevent usability traps:**
+
+The application allows users to create tags containing multiple consecutive spaces (e.g., `Primary     3`). Because the GUI condenses these spaces visually, users cannot easily know how many spaces to type when attempting to delete the tag later, effectively trapping the tag in the system.
+
+* **Current behavior:** Tags preserve user-inputted multiple internal spaces, forcing users to guess the exact string match or use the `edit` command to clear all tags.
+* **Planned behavior:** The system will automatically sanitize tag inputs by collapsing multiple consecutive internal spaces into a single space during creation and deletion.
+
+---
+
+8. **Improve UI display for long names to prevent truncation:**
+
+On larger monitors with plenty of available screen space, long student names are still being cut off prematurely. This makes it impossible to distinguish between students with similar long names (e.g., "Maximillian Tan Wei Yu" vs "Maximillian Tan Wen Kai").
+
+* **Current behavior:** Names longer than 13 characters are truncated with ellipses regardless of the actual window size or available container space.
+* **Planned behavior:** The UI constraints will be updated to use text wrapping or dynamic expansion, allowing full names to be displayed when screen space permits.
+
+---
+
+9. **Filter students by payment status:**
+
+A core value proposition of OnlyTutors is tracking income. However, tutors currently lack a quick way to isolate students who owe them money.
+
+* **Current behavior:** A tutor must manually scan the entire list of contacts to visually identify which students have an unpaid status.
+* **Planned behavior:** A new filter command will be introduced (e.g., `filter paid` or `filter unpaid`) to exclusively list students matching the desired payment status.
+
+---
+
+10. **Strengthen input sanitization for text fields:**
+
+Currently, the system accepts excessive and redundant punctuation in free-text fields. For example, an address like `311,,,,,,,,,Clementi Ave` is accepted without warnings. This flaw extends to other fields where users might accidentally input multiple hyphens in names or trailing slashes.
+
+* **Current behavior:** The parser accepts unstructured free-text fields exactly as inputted, saving unformatted strings with duplicate punctuation.
+* **Planned behavior:** The system will aggressively sanitize text inputs across the board. It will automatically strip invalid edge-case characters and collapse consecutive identical punctuation marks (like commas or hyphens) into a single instance before saving.
