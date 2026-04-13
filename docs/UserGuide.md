@@ -14,7 +14,7 @@ OnlyTutors helps you manage your tutoring business more effectively than traditi
 * **Set tuition rates** — keep track of the hourly rate for each student.
 * **Monitor payment status** — mark students as Paid or Unpaid to stay on top of collections.
 * **Organise with tags** — label students by subject, level, or any category that suits you (e.g. `Math`, `Primary 3`).
-* **Search and filter** — find students quickly by name or tag.
+* **Search and filter** — find students quickly by [name](#finding-students-by-name-find) or [tag](#finding-students-by-tag-tag-find).
 
 **Who is this guide for?** Private tutors who are comfortable typing commands and want a fast, no-frills way to keep track of their students.
 
@@ -627,7 +627,7 @@ If your changes to the data file make its format invalid, OnlyTutors may discard
 **A**: Install OnlyTutors on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous OnlyTutors home folder.
 
 **Q**: Can I add tags when adding a new student?<br>
-**A**: Yes. You can add tags immediately by appending the `t/` prefix to your `add` command (e.g., `... r/50 t/Math`).
+**A**: Yes. You can add tags immediately by appending the `t/` prefix to your [`add`](#adding-a-student-add) command (e.g., `... r/50 t/Math`).
 
 **Q**: How do I change a student's lesson day or time?<br>
 **A**: Use the [`edit`](#editing-a-student-edit) command. For example, `edit 1 d/Tuesday st/10:00 et/12:00` changes the 1st student's lesson to Tuesday, 10:00–12:00.
