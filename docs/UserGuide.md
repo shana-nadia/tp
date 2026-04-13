@@ -22,21 +22,21 @@ OnlyTutors helps you manage your tutoring business more effectively than traditi
 
 A quick reference of all available commands. Click any command name to jump to its detailed section.
 
-| Action | Format | Example |
-|--------|--------|---------|
-| [**Add**](#adding-a-student-add) | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DAY st/START et/END r/RATE` | `add n/John Doe p/98765432 e/johnd@example.com a/Clementi Ave 2 d/Monday st/15:00 et/17:00 r/50` |
-| [**List**](#listing-all-students-list) | `list` | `list` |
-| [**Edit**](#editing-a-student-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DAY] [st/START] [et/END] [r/RATE] [t/TAG]…​` | `edit 1 p/91234567 d/Friday` |
-| [**Find**](#finding-students-by-name-find) | `find KEYWORD [MORE_KEYWORDS]…​` | `find John Alice` |
-| [**Tag Find**](#finding-students-by-tag-tag-find) | `tag find t/TAG [t/TAG]…​` | `tag find t/math t/primary3` |
-| [**Delete**](#deleting-a-student-delete) | `delete INDEX [INDEX]…​` | `delete 1 3 7` |
-| [**Tag Add**](#adding-tags-to-a-student-tag-add) | `tag add INDEX [INDEX]…​ t/TAG [t/TAG]…​` | `tag add 1 2 3 t/math` |
-| [**Tag Delete**](#deleting-tags-from-a-student-tag-delete) | `tag delete INDEX [INDEX]…​ t/TAG [t/TAG]…​` | `tag delete 1 2 t/math` |
-| [**Mark**](#marking-a-student-as-paid-mark) | `mark INDEX [INDEX]…​` | `mark 1 2 3` |
-| [**Unmark**](#marking-a-student-as-unpaid-unmark) | `unmark INDEX [INDEX]…​` | `unmark 1 2 3` |
-| [**Clear**](#clearing-all-entries-clear) | `clear` | `clear` |
-| [**Help**](#viewing-help-help) | `help` | `help` |
-| [**Exit**](#exiting-the-program-exit) | `exit` | `exit` |
+| Action | Format                                                                                               | Example                                                                                                 |
+|--------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-student-add) | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DAY st/START et/END r/RATE [t/TAG]...`                       | `add n/John Doe p/98765432 e/johnd@example.com a/Clementi Ave 2 d/Monday st/15:00 et/17:00 r/50 t/math` |
+| [**List**](#listing-all-students-list) | `list`                                                                                               | `list`                                                                                                  |
+| [**Edit**](#editing-a-student-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DAY] [st/START] [et/END] [r/RATE] [t/TAG]…​` | `edit 1 p/91234567 d/Friday`                                                                            |
+| [**Find**](#finding-students-by-name-find) | `find KEYWORD [MORE_KEYWORDS]…​`                                                                     | `find John Alice`                                                                                       |
+| [**Tag Find**](#finding-students-by-tag-tag-find) | `tag find t/TAG [t/TAG]…​`                                                                           | `tag find t/math t/primary3`                                                                            |
+| [**Delete**](#deleting-a-student-delete) | `delete INDEX [INDEX]…​`                                                                             | `delete 1 3 7`                                                                                          |
+| [**Tag Add**](#adding-tags-to-a-student-tag-add) | `tag add INDEX [INDEX]…​ t/TAG [t/TAG]…​`                                                            | `tag add 1 2 3 t/math`                                                                                  |
+| [**Tag Delete**](#deleting-tags-from-a-student-tag-delete) | `tag delete INDEX [INDEX]…​ t/TAG [t/TAG]…​`                                                         | `tag delete 1 2 t/math`                                                                                 |
+| [**Mark**](#marking-a-student-as-paid-mark) | `mark INDEX [INDEX]…​`                                                                               | `mark 1 2 3`                                                                                            |
+| [**Unmark**](#marking-a-student-as-unpaid-unmark) | `unmark INDEX [INDEX]…​`                                                                             | `unmark 1 2 3`                                                                                          |
+| [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                              | `clear`                                                                                                 |
+| [**Help**](#viewing-help-help) | `help`                                                                                               | `help`                                                                                                  |
+| [**Exit**](#exiting-the-program-exit) | `exit`                                                                                               | `exit`                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,13 +223,13 @@ When copying multi-line commands from a PDF, space characters surrounding line-b
 Adds a new student to OnlyTutors.
 
 <div markdown="span" class="alert alert-success">
-**Format:** `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DAY st/START_TIME et/END_TIME r/RATE`
+**Format:** `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DAY st/START_TIME et/END_TIME r/RATE [t/TAG]...`
 </div>
 
-* All fields are required.
+* All fields except tags are required.
 * Day names are case-insensitive (e.g. `monday`, `Monday`, `MONDAY` are all accepted).
 * Each student can only have **one lesson schedule** (one day and time). Support for multiple lessons is planned for a future version.
-* Tags cannot be added during the `add` command. Use [`tag add`](#adding-tags-to-a-student-tag-add) after adding the student.
+* Optional tags can be added using the t/ prefix. Multiple tags can be added by repeating the prefix (e.g., t/math t/primary3).
 * New students are marked as **Unpaid** by default.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
@@ -239,13 +239,13 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 
 **Examples:**
 
-| Command | What it does |
-|---------|-------------|
-| `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50` | Adds student John Doe with a Monday 3–5pm lesson at $50/lesson |
-| `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60` | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/lesson |
+| Command                                                                                                              | What it does                                                                             |
+|----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50 t/math` | Adds student John Doe with a Monday 3–5pm lesson at $50/lesson, and tags them with `math` |
+| `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/lesson                   |
 
 **Expected output** (on success):
-> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags:`
+> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [math]`
 
 ### ⚠️ Common mistakes when adding a student
 
@@ -620,7 +620,7 @@ If your changes to the data file make its format invalid, OnlyTutors may discard
 **A**: Install OnlyTutors on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous OnlyTutors home folder.
 
 **Q**: Can I add tags when adding a new student?<br>
-**A**: No. Tags must be added after the student is created using the [`tag add`](#adding-tags-to-a-student-tag-add) command.
+**A**: Yes. You can add tags immediately by appending the `t/` prefix to your `add` command (e.g., `... r/50 t/math`).
 
 **Q**: How do I change a student's lesson day or time?<br>
 **A**: Use the [`edit`](#editing-a-student-edit) command. For example, `edit 1 d/Tuesday st/10:00 et/12:00` changes the 1st student's lesson to Tuesday, 10:00–12:00.
