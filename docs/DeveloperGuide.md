@@ -743,7 +743,7 @@ Currently, batch tag add and batch tag delete commands return only the names of 
 While OnlyTutors is primarily designed for tutors in Singapore, students or their parents may use international phone numbers (e.g., Malaysian +60, Indonesian +62). The current validation restricts tutors from storing these contacts.
 
 * **Current behavior:** Phone number validation strictly requires exactly 8 digits starting with 6, 8, or 9.
-* **Planned behavior:** Phone number validation will be relaxed to accept 10-12 digit numbers and optional country codes (e.g., starting with `+`) to accommodate standard international formats.
+* **Planned behavior:** Phone number validation will be relaxed to accept up to 15 digit numbers and optional country codes (e.g., starting with `+`) to accommodate standard international formats.
 
 ---
 
