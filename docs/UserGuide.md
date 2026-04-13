@@ -256,8 +256,6 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 **Expected output** (on success):
 > `New student added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
 
-> `New student added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
-
 ### ⚠️ Common mistakes when adding a student
 
 | Mistake             | Why it fails                                     |

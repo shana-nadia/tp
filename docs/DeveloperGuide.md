@@ -235,7 +235,7 @@ The following activity diagram summarizes the workflow when a user executes the 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                  | I want to …​                                                   | So that I can…​                                                 |
+| Priority | As a …​                  | I want to …​                                                   | So that I can …​                                                |
 |--------|--------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
 | `* * *` | new tutor                | see usage instructions                                         | refer to instructions when I forget how to use the App          |
 | `* * *` | tutor                    | add a student                                                  | begin managing their details                                    |
