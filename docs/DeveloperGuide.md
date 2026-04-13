@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: At least one student in the list.
 
    1. Test case: `clear`, then `y`<br>
-      Expected: First command shows confirmation prompt `This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
+      Expected: First command shows confirmation prompt `This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all student contacts are removed. Success message shown.
 
    1. Test case: `clear`, then `n`<br>
       Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.
