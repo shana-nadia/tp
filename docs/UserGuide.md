@@ -7,7 +7,14 @@ title: User Guide
 
 While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard. This design prioritises clear and consistent command syntax to ensure reliable input handling.
 
-OnlyTutors helps you manage your tutoring business more effectively than traditional apps by allowing you to maintain various data not seen in traditional apps.
+OnlyTutors helps you manage your tutoring business more effectively than traditional apps. Here is what you can do:
+
+* **Track student details** — store each student's name, phone number, email and address in one place.
+* **Schedule lessons** — record the day and time of each student's weekly lesson.
+* **Set tuition rates** — keep track of the hourly rate for each student.
+* **Monitor payment status** — mark students as Paid or Unpaid to stay on top of collections.
+* **Organise with tags** — label students by subject, level, or any category that suits you (e.g. `Math`, `Primary 3`).
+* **Search and filter** — find students quickly by [name](#finding-students-by-name-find) or [tag](#finding-students-by-tag-tag-find).
 
 **Who is this guide for?** Private tutors who are comfortable typing commands and want a fast, no-frills way to keep track of their students.
 
@@ -59,14 +66,16 @@ If the output shows `java version "17"` or higher, skip to [Step 2](#step-2-down
 </div>
 
 **Windows:**
-1. Go to [https://www.oracle.com/java/technologies/downloads/#java17](https://www.oracle.com/java/technologies/downloads/#java17).
+1. Go to the [Oracle Java 17 Downloads page](https://www.oracle.com/java/technologies/downloads/#java17).
 2. Under the **Windows** tab, download the **x64 Installer** (`.exe` file).
 3. Run the installer and follow the on-screen instructions.
 4. After installation, open Command Prompt and run `java -version` to verify.
 
 **macOS:**
-> Follow the precise JDK 17 installation guide for Mac [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-> Using the wrong JDK version on macOS can cause display issues with the GUI — use the exact version prescribed.
+1. Follow the [macOS-specific JDK 17 installation guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+2. After installation, verify with `java -version`.
+
+> **Note:** Using the wrong JDK version on macOS can cause display issues with the GUI — use the exact version prescribed.
 
 **Linux (Ubuntu/Debian):**
 1. Open a terminal and run:
@@ -216,7 +225,6 @@ When copying multi-line commands from a PDF, space characters surrounding line-b
 | **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                            | `et/16:00`               |
 | **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40      | `r/50`                   |
 | **Tag** | `t/` | Any character except '/'; must not be blank; leading/trailing spaces are trimmed; max 20 characters                      | `t/Math`                 |
---------------------------------------------------------------------------------------------------------------------
 
 ### Adding a student: `add`
 
@@ -245,7 +253,11 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 | `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/hour                    |
 
 **Expected output** (on success):
+<<<<<<< personToStudent
 > `New student added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
+=======
+> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
+>>>>>>> master
 
 ### ⚠️ Common mistakes when adding a student
 
@@ -567,7 +579,7 @@ This deletes **all** student data and cannot be undone. Use with caution.
 
 **Expected output:**
 > This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.>
->
+
 > Cleared all students. (after entering y or Y)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -620,7 +632,7 @@ If your changes to the data file make its format invalid, OnlyTutors may discard
 **A**: Install OnlyTutors on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous OnlyTutors home folder.
 
 **Q**: Can I add tags when adding a new student?<br>
-**A**: Yes. You can add tags immediately by appending the `t/` prefix to your `add` command (e.g., `... r/50 t/Math`).
+**A**: Yes. You can add tags immediately by appending the `t/` prefix to your [`add`](#adding-a-student-add) command (e.g., `... r/50 t/Math`).
 
 **Q**: How do I change a student's lesson day or time?<br>
 **A**: Use the [`edit`](#editing-a-student-edit) command. For example, `edit 1 d/Tuesday st/10:00 et/12:00` changes the 1st student's lesson to Tuesday, 10:00–12:00.
