@@ -725,31 +725,8 @@ Currently, each student can only have one lesson per week. Each student is repre
 * **Planned behavior:** Duplicate-checking logic will allow multiple entries with the same name and phone number, provided that the lesson day or time differs.
 
 ---
-2. **Specify feedback for tags:**
 
-Currently, when a user enters a non-positive for tag add or tag delete commands, the application returns a generic "invalid command format" message. This does not clearly indicate what part of the input is incorrect.
-
-* **Current behavior:**
-  Invalid command format!
-
-Subcommands:
-
-tag add: Adds tag(s) to person(s) in the address book.
-Parameters: INDEX [INDEX]... (must be positive integers)
-t/TAG (can contain any characters except '/', must not be empty and cannot have more than 20 characters)
-Example: tag add 1 2 t/Primary1 t/Mathematics
-
-tag delete: Deletes tag(s) from person(s) in the address book.
-Parameters: INDEX [INDEX]... (must be positive integers)
-t/TAG (must be a non-empty string)
-Example: tag delete 1 2 t/Primary1 t/Mathematics
-
-* **Planned behavior:**
-`The person index provided is invalid: -1`
-
----
-
-3. **List indexes alongside names for batch tag add and batch tag delete:**
+2. **List indexes alongside names for batch tag add and batch tag delete:**
 
 Currently, batch tag add and batch tag delete commands return only the names of students who were affected. However, indexes are not shown, making it difficult to map results back to the displayed list. This is also inconsistent with other batch commands such as mark/unmark and delete, which already include indices.
 
