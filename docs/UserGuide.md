@@ -417,7 +417,7 @@ This action cannot be undone. Make sure you have selected the correct student(s)
 | `find Betsy` then `delete 1` | Deletes the 1st student in the `find` results |
 
 **Expected output** (on success):
-> `Deleted Person: Betsy Crowe; Phone: ...`
+> `Deleted 3 Person(s): (1) John Doe, (3) Jane Smith, (7) Sandrone`
 
 --------------------------------------------------------------------------------------------------------------------
 
