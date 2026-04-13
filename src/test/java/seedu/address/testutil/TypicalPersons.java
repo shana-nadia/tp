@@ -16,8 +16,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,12 +80,12 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_MATH)
             .withDay(VALID_DAY_AMY).withStartTime(VALID_START_TIME_AMY).withEndTime(VALID_END_TIME_AMY)
             .withRate(VALID_RATE_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_PHYSICS, VALID_TAG_MATH)
             .withDay(VALID_DAY_BOB).withStartTime(VALID_START_TIME_BOB).withEndTime(VALID_END_TIME_BOB)
             .withRate(VALID_RATE_BOB).build();
 

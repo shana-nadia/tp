@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_END_TIME_BOB = "12:00";
     public static final String VALID_RATE_AMY = "40";
     public static final String VALID_RATE_BOB = "50";
-    public static final String VALID_TAG_HUSBAND = "husband~~";
-    public static final String VALID_TAG_FRIEND = "friend!!!";
+    public static final String VALID_TAG_PHYSICS = "physics~~";
+    public static final String VALID_TAG_MATH = "math!!!";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -64,8 +64,8 @@ public class CommandTestUtil {
     public static final String END_TIME_DESC_BOB = " " + PREFIX_END + VALID_END_TIME_BOB;
     public static final String RATE_DESC_AMY = " " + PREFIX_RATE + VALID_RATE_AMY;
     public static final String RATE_DESC_BOB = " " + PREFIX_RATE + VALID_RATE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_MATH = " " + PREFIX_TAG + VALID_TAG_MATH;
+    public static final String TAG_DESC_PHYSICS = " " + PREFIX_TAG + VALID_TAG_PHYSICS;
 
     public static final boolean VALID_IS_PAID_AMY = true;
     public static final boolean VALID_IS_PAID_BOB = false;
@@ -92,12 +92,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withDay(VALID_DAY_AMY).withStartTime(VALID_START_TIME_AMY).withEndTime(VALID_END_TIME_AMY)
                 .withIsPaid(VALID_IS_PAID_AMY).withRate(VALID_RATE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_MATH).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withDay(VALID_DAY_BOB).withStartTime(VALID_START_TIME_BOB).withEndTime(VALID_END_TIME_BOB)
                 .withRate(VALID_RATE_AMY).withIsPaid(VALID_IS_PAID_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_PHYSICS, VALID_TAG_MATH).build();
     }
 
     /**
