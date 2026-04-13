@@ -239,10 +239,10 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 
 **Examples:**
 
-| Command                                                                                                              | What it does                                                                             |
-|----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50 t/math` | Adds student John Doe with a Monday 3–5pm lesson at $50/lesson, and tags them with `math` |
-| `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/lesson                   |
+| Command                                                                                                              | What it does                                                                            |
+|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50 t/math` | Adds student John Doe with a Monday 3–5pm lesson at $50/hour, and tags them with `math` |
+| `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/hour                    |
 
 **Expected output** (on success):
 > `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [math]`
