@@ -488,179 +488,174 @@ testers are expected to do more *exploratory* testing.
 </div>
 
 ### Launch and shut down
+Initial launch
 
-1. Initial launch
+1. Download the jar file and copy into an empty folder
 
-   1. Download the jar file and copy into an empty folder
+2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+Saving window preferences
 
-1. Saving window preferences
+1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. Re-launch the app by double-clicking the jar file.<br>
+    Expected: The most recent window size and location is retained.
 
 ### Adding a student
+Adding a student with all required fields
 
-1. Adding a student with all required fields
+1. Prerequisites: None.
 
-   1. Prerequisites: None.
+2. Test case: `add n/John Doe p/91234567 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/10:00 et/12:00 r/50`<br>
+   Expected: Student is added to the list. Details of the added student shown in the status message.
 
-   1. Test case: `add n/John Doe p/91234567 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/10:00 et/12:00 r/50`<br>
-      Expected: Student is added to the list. Details of the added student shown in the status message.
+3. Test case: `add n/John Doe p/91234567 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/12:00 et/10:00 r/50`<br>
+   Expected: No student is added. Error details about invalid time range shown in the status message.
 
-   1. Test case: `add n/John Doe p/91234567 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/12:00 et/10:00 r/50`<br>
-      Expected: No student is added. Error details about invalid time range shown in the status message.
-
-   1. Other incorrect add commands to try: `add`, `add n/John` (missing required fields)<br>
-      Expected: No student is added. Error details shown in the status message.
+4. Other incorrect add commands to try: `add`, `add n/John` (missing required fields)<br>
+   Expected: No student is added. Error details shown in the status message.
 
 ### Editing a student
+Editing a student's new fields (day, start time, end time, rate)
 
-1. Editing a student's new fields (day, start time, end time, rate)
+1. Prerequisites: List all students using the `list` command. At least one student in the list.
 
-   1. Prerequisites: List all students using the `list` command. At least one student in the list.
+2. Test case: `edit 1 d/Tuesday st/14:00 et/16:00 r/60`<br>
+   Expected: First student's day, time, and rate are updated. Success message shown.
 
-   1. Test case: `edit 1 d/Tuesday st/14:00 et/16:00 r/60`<br>
-      Expected: First student's day, time, and rate are updated. Success message shown.
-
-   1. Test case: `edit 1 st/18:00` (when student 1's end time is 16:00)<br>
-      Expected: No change. Error message about invalid time range shown (start time must be before end time).
+3. Test case: `edit 1 st/18:00` (when student 1's end time is 16:00)<br>
+   Expected: No change. Error message about invalid time range shown (start time must be before end time).
 
 ### Deleting a student
+Deleting a student while all students are being shown
 
-1. Deleting a student while all students are being shown
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+2. Test case: `delete 1`<br>
+   Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
+3. Test case: `delete 1 2`<br>
+   Expected: First and second students are deleted. Count and names of deleted students shown in the status message.
 
-   1. Test case: `delete 1 2`<br>
-      Expected: First and second students are deleted. Count and names of deleted students shown in the status message.
+4. Test case: `delete 0`<br>
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+5. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Marking and unmarking payment status
+Marking a student as paid
 
-1. Marking a student as paid
+1. Prerequisites: List all students using the `list` command. At least one student in the list with unpaid status.
 
-   1. Prerequisites: List all students using the `list` command. At least one student in the list with unpaid status.
+2. Test case: `mark 1`<br>
+   Expected: First student is marked as paid. Success message with student name shown in the status message.
 
-   1. Test case: `mark 1`<br>
-      Expected: First student is marked as paid. Success message with student name shown in the status message.
+3. Test case: `mark 1 2` (when both students are unpaid)<br>
+   Expected: First and second students are marked as paid. Success message with count and names shown.
 
-   1. Test case: `mark 1 2` (when both students are unpaid)<br>
-      Expected: First and second students are marked as paid. Success message with count and names shown.
+4. Test case: `mark 1` (when student 1 is already paid)<br>
+   Expected: No change. Error message with the student's index and name shown (e.g., `This student has already been marked as paid: (1) John Doe`).
 
-   1. Test case: `mark 1` (when student 1 is already paid)<br>
-      Expected: No change. Error message with the student's index and name shown (e.g., `This student has already been marked as paid: (1) John Doe`).
+Marking a student as unpaid
 
-1. Unmarking a student as unpaid
+1. Prerequisites: At least one student in the list with paid status.
 
-   1. Prerequisites: At least one student in the list with paid status.
+2. Test case: `unmark 1`<br>
+   Expected: First student is marked as unpaid. Success message with student name shown.
 
-   1. Test case: `unmark 1`<br>
-      Expected: First student is marked as unpaid. Success message with student name shown.
+3. Test case: `unmark 1 2` (when both students are paid)<br>
+   Expected: First and second students are marked as unpaid. Success message with count and names shown.
 
-   1. Test case: `unmark 1 2` (when both students are paid)<br>
-      Expected: First and second students are marked as unpaid. Success message with count and names shown.
-
-   1. Test case: `unmark 1` (when student 1 is already unpaid)<br>
-      Expected: No change. Error message with the student's index and name shown (e.g., `This student has already been marked as unpaid: (1) John Doe`).
+4. Test case: `unmark 1` (when student 1 is already unpaid)<br>
+   Expected: No change. Error message with the student's index and name shown (e.g., `This student has already been marked as unpaid: (1) John Doe`).
 
 ### Clearing all entries
 
-1. Clearing the address book with confirmation
+Clearing the address book with confirmation
 
-   1. Prerequisites: At least one student in the list.
+1. Prerequisites: At least one student in the list.
 
-   1. Test case: `clear`, then `y`<br>
-      Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
+2. Test case: `clear`, then `y`<br>
+   Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
 
-   1. Test case: `clear`, then `n`<br>
-      Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.
+3. Test case: `clear`, then `n`<br>
+   Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.
 
-   1. Test case: `clear`, then any other input (e.g., `hello`)<br>
-      Expected: First command shows confirmation prompt. Non-`y` input is treated as abort. No contacts are removed.
+4. Test case: `clear`, then any other input (e.g., `hello`)<br>
+   Expected: First command shows confirmation prompt. Non-`y` input is treated as abort. No contacts are removed.
 
 ### Managing tags
 
-1. Adding a tag to a student
+Adding a tag to a student
 
-   1. Prerequisites: List all students using the `list` command. At least one student in the list.
+1. Prerequisites: List all students using the `list` command. At least one student in the list.
 
-   1. Test case: `tag add 1 t/Math`<br>
-      Expected: Tag `Math` is added to the first student. Success message shows the exact added tag and student.
+2. Test case: `tag add 1 t/Math`<br>
+   Expected: Tag `Math` is added to the first student. Success message shows the exact added tag and student.
 
-   1. Test case: `tag add 1 t/Math` (when student already has `math` tag)<br>
-      Expected: No change. Error message shown because the command would be a no-op.
+3. Test case: `tag add 1 t/Math` (when student already has `math` tag)<br>
+   Expected: No change. Error message shown because the command would be a no-op.
 
-   1. Test case: `tag add 1 2 t/Science` <br>
-      Expected: Tag `Science` is added to both students. Batch success message shows each affected student with the exact added tags.
+4. Test case: `tag add 1 2 t/Science` <br>
+   Expected: Tag `Science` is added to both students. Batch success message shows each affected student with the exact added tags.
 
-   1. Test case: `tag add 1 3 t/Friends` (when student 1 already has `friends`, student 3 does not)<br>
-      Expected: Only student 3 is updated. Success message shows `friends` as the exact added tag for student 3.
+5. Test case: `tag add 1 3 t/Friends` (when student 1 already has `friends`, student 3 does not)<br>
+   Expected: Only student 3 is updated. Success message shows `friends` as the exact added tag for student 3.
 
-   1. Test case: `tag add 1 t/Friends t/Science` (when student 1 already has `friends` but not `science`)<br>
-      Expected: `science` is added and `friends` remains. Success message shows only `science` as the added tag.
+6. Test case: `tag add 1 t/Friends t/Science` (when student 1 already has `friends` but not `science`)<br>
+   Expected: `science` is added and `friends` remains. Success message shows only `science` as the added tag.
 
-   1. Test case: `tag add 1 2 t/Science t/Math` <br>
-      Expected: Each student is updated only with the tags they were missing. Batch success message shows the exact added tags per student.
+7. Test case: `tag add 1 2 t/Science t/Math` <br>
+   Expected: Each student is updated only with the tags they were missing. Batch success message shows the exact added tags per student.
 
-1. Deleting a tag from a student
+Deleting a tag from a student
 
-   1. Prerequisites: At least one student with a tag in the list.
+1. Prerequisites: At least one student with a tag in the list.
 
-   1. Test case: `tag delete 1 t/Math` (when student 1 has `math` tag)<br>
-      Expected: Tag `math` is removed. Success message shows the exact deleted tag and student.
+2. Test case: `tag delete 1 t/Math` (when student 1 has `math` tag)<br>
+   Expected: Tag `math` is removed. Success message shows the exact deleted tag and student.
 
-   1. Test case: `tag delete 1 t/Math` (when student 1 does not have `math` tag)<br>
-      Expected: No change. Error message shown because the command would be a no-op.
+3. Test case: `tag delete 1 t/Math` (when student 1 does not have `math` tag)<br>
+   Expected: No change. Error message shown because the command would be a no-op.
 
-   1. Test case: `tag delete 1 3 t/Friends` (when student 1 has `friends`, student 3 does not)<br>
-      Expected: Only student 1 is updated. Success message shown.
+4. Test case: `tag delete 1 3 t/Friends` (when student 1 has `friends`, student 3 does not)<br>
+   Expected: Only student 1 is updated. Success message shown.
 
-   1. Test case: `tag delete 1 t/Friends t/Science` (when student 1 has `friends` but not `science`)<br>
-      Expected: `friends` is deleted and the missing `science` tag is ignored. Success message shown.
+5. Test case: `tag delete 1 t/Friends t/Science` (when student 1 has `friends` but not `science`)<br>
+   Expected: `friends` is deleted and the missing `science` tag is ignored. Success message shown.
 
-1. Finding students by tag
+Finding students by tag
 
-   1. Prerequisites: At least one student with a tag in the list.
+1. Prerequisites: At least one student with a tag in the list.
 
-   1. Test case: `tag find t/Math`<br>
-      Expected: All students with the exact `math` tag are listed. Count shown in status message.
+2. Test case: `tag find t/Math`<br>
+   Expected: All students with the exact `math` tag are listed. Count shown in status message.
 
-   1. Test case: `tag find t/ma`<br>
-      Expected: No students listed unless a student has the exact tag `ma`. Partial matches such as `math` are not returned.
+3. Test case: `tag find t/ma`<br>
+   Expected: No students listed unless a student has the exact tag `ma`. Partial matches such as `math` are not returned.
 
-   1. Test case: `tag find t/NonExistentTag`<br>
-      Expected: No students listed. Message indicating no students found shown.
+4. Test case: `tag find t/NonExistentTag`<br>
+   Expected: No students listed. Message indicating no students found shown.
 
-   1. Test case: `tag find t/`<br>
-      Expected: Command is rejected with a validation error because tag values cannot be empty.
+5. Test case: `tag find t/`<br>
+   Expected: Command is rejected with a validation error because tag values cannot be empty.
 
 ### Saving data
 
-1. Dealing with missing data file
+Dealing with missing data file
 
-   1. Delete the `data/addressbook.json` file if it exists.
+1. Delete the `data/addressbook.json` file if it exists.
 
-   1. Launch the app.<br>
-      Expected: App starts with a set of sample student data.
+2. Launch the app.<br>
+   Expected: App starts with a set of sample student data.
 
-1. Dealing with corrupted data file
+Dealing with corrupted data file
 
-   1. Open `data/addressbook.json` and introduce invalid content (e.g., delete a required field or add invalid characters).
+1. Open `data/addressbook.json` and introduce invalid content (e.g., delete a required field or add invalid characters).
 
-   1. Launch the app.<br>
-      Expected: App starts with an empty student list. A warning may be logged.
+2. Launch the app.<br>
+   Expected: App starts with an empty student list. A warning may be logged.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -724,7 +719,6 @@ Currently, each student can only have one lesson per week. Each student is repre
 * **Current behavior:** Duplicate-checking logic treats entries as duplicates if the name and phone number are the same.
 * **Planned behavior:** Duplicate-checking logic will allow multiple entries with the same name and phone number, provided that the lesson day or time differs.
 
----
 
 2. **List indexes alongside names for batch tag add and batch tag delete:**
 
@@ -736,7 +730,6 @@ Currently, batch tag add and batch tag delete commands return only the names of 
 * **Planned behavior:**
 `Added tags to students: (1) Alex Yeoh (math); (2) Bernice Yu (math); (3) Charlotte Oliveiro (math)`
 
----
 
 3. **Support international and variable-length phone numbers:**
 
@@ -745,7 +738,6 @@ While OnlyTutors is primarily designed for tutors in Singapore, students or thei
 * **Current behavior:** Phone number validation strictly requires exactly 8 digits starting with 6, 8, or 9.
 * **Planned behavior:** Phone number validation will be relaxed to accept up to 15 digit numbers and optional country codes (e.g., starting with `+`) to accommodate standard international formats.
 
----
 
 4. **Allow overnight tutoring sessions:**
 
@@ -754,7 +746,6 @@ Although overnight sessions are rare, they occur occasionally (e.g., intense stu
 * **Current behavior:** The system prevents adding or editing a student if the lesson's start time is chronologically after its end time.
 * **Planned behavior:** Time validation will be updated to allow the start time to be later than the end time specifically for sessions that roll over into the next day (e.g., `23:00` to `02:00`).
 
----
 
 5. **Improve error reporting for partial successes during batch tag deletion:**
 
@@ -763,7 +754,6 @@ When deleting tags from multiple contacts simultaneously, the command does not c
 * **Current behavior:** Executing `tag delete 8 9 t/math` when only entry 8 has the tag will indicate a blanket success, without notifying the user that entry 9 was skipped.
 * **Planned behavior:** The command result message will be updated to explicitly state which students had the tag successfully removed and which students were skipped because the tag was not found.
 
----
 
 6. **Prevent or warn against overlapping lesson times:**
 
@@ -772,7 +762,6 @@ The system does not currently cross-check a tutor's schedule for clashes. Tutors
 * **Current behavior:** The system allows multiple students to be added with overlapping lesson times on the same day without any warnings.
 * **Planned behavior:** The system will check the existing timetable and either actively prevent the addition of overlapping schedules, or display a prominent warning requiring user confirmation before proceeding.
 
----
 
 7. **Standardize internal spacing in tags to prevent usability traps:**
 
@@ -781,7 +770,6 @@ The application allows users to create tags containing multiple consecutive spac
 * **Current behavior:** Tags preserve user-inputted multiple internal spaces, forcing users to guess the exact string match or use the `edit` command to clear all tags.
 * **Planned behavior:** The system will automatically sanitize tag inputs by collapsing multiple consecutive internal spaces into a single space during creation and deletion.
 
----
 
 8. **Improve UI display for long names to prevent truncation:**
 
@@ -790,7 +778,6 @@ On larger monitors with plenty of available screen space, long student names are
 * **Current behavior:** Names longer than 13 characters are truncated with ellipses regardless of the actual window size or available container space.
 * **Planned behavior:** The UI constraints will be updated to use text wrapping or dynamic expansion, allowing full names to be displayed when screen space permits.
 
----
 
 9. **Filter students by payment status:**
 
@@ -799,7 +786,6 @@ A core value proposition of OnlyTutors is tracking income. However, tutors curre
 * **Current behavior:** A tutor must manually scan the entire list of contacts to visually identify which students have an unpaid status.
 * **Planned behavior:** A new filter command will be introduced (e.g., `filter paid` or `filter unpaid`) to exclusively list students matching the desired payment status.
 
----
 
 10. **Strengthen input sanitization for text fields:**
 
