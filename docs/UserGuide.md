@@ -254,7 +254,7 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 | `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/hour                    |
 
 **Expected output** (on success):
-> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
+> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
 
 ### ⚠️ Common mistakes when adding a student
 
