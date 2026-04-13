@@ -289,7 +289,7 @@ Use `list` after a [`find`](#finding-students-by-name-find) command to return to
 * Any extra text after `list` is ignored (e.g. `list abc` is treated as `list`).
 
 **Expected output:**
-> `Listed all persons`
+> `Listed all person(s)`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -353,7 +353,7 @@ Finds students whose names contain any of the given keywords.
 | `find alex david` | Returns `Alex Yeoh` and `David Li` |
 
 **Expected output:**
-> `2 persons listed!`
+> `2 person(s) listed!`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After using `find`, use [`list`](#listing-all-students-list) to return to the full student list.
@@ -386,7 +386,7 @@ Finds students who match all of the given tags exactly.
 * `tag find t/` is rejected because tags cannot be empty.
 
 **Expected output:**
-> `2 persons listed!`
+> `2 person(s) listed!`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After using `tag find`, use [`list`](#listing-all-students-list) to return to the full student list.
