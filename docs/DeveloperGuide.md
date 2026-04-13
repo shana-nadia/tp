@@ -67,7 +67,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -242,9 +242,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | tutor                    | delete students whom I no longer teach                         | remove clutter and keep my list up-to-date                      |
 | `* * *` | busy tutor               | see all upcoming lessons                                       | plan my days efficiently                                        |
 | `* * *` | travelling tutor         | record lesson's location                                       | know where to go                                                |
-| `* * *` | organized tutor          | see my student's level and subjects                            | prepare and bring the appropriate materials                     |
+| `* * *` | organized tutor          | see my students' level and subjects                            | prepare and bring the appropriate materials                     |
 | `* * *` | miserly tutor            | record tuition rates and payment status                        | track my income properly                                        |
-| `* *`  | humble tutor             | edit my student's information easily                           | correct any wrong or outdated contact info without hassle       |
+| `* *`  | humble tutor             | edit my students' information easily                           | correct any wrong or outdated contact info without hassle       |
 | `* *`  | tutor with many students | search for a student by name                                   | quickly locate a student without scrolling through the list     |
 | `* *`  | tutor with many students | filter students by tags                                        | quickly find a specific group of students                       |
 | `* *`  | tutor                    | export and import my data                                      | backup or switch devices                                        |
@@ -252,8 +252,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`    | analytical tutor         | view a summary of my monthly teaching hours and income         | evaluate my profile and workload                                |
 | `*`    | busy tutor               | get quick message templates (e.g., “running 10 mins late”)     | message efficiently                                             |
 | `*`    | tutor                    | mark whether a student is currently taking lessons or on break | they don't clutter my list but I also don't have to delete them |
-| `*`    | disciplined tutor        | record my student's personality                                | know whether to bring my rattan cane                            |
-| `*`    | prideful tutor           | record my student's performance                                | measure improvement                                             |
+| `*`    | disciplined tutor        | record my students' personality                                | know whether to bring my rattan cane                            |
+| `*`    | prideful tutor           | record my students' performance                                 | measure improvement                                             |
 
 ### Use cases
 
@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case 06: Mark a student's payment as paid**
+**Use case 06: Mark a student's payment status as paid**
 
 **Guarantees**
 * A student's payment status is set to paid if and only if the `INDEX` parameter is valid and the student is not already marked as paid.
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case 07: Unmark a student's payment as unpaid**
+**Use case 07: Unmark a student's payment status as unpaid**
 
 **Guarantees**
 * A student's payment status is set to unpaid if and only if the `INDEX` parameter is valid and the student is not already marked as unpaid.
@@ -576,18 +576,10 @@ Clearing the address book with confirmation
 
 1. Prerequisites: At least one student in the list.
 
-<<<<<<< personToStudent
-   1. Test case: `clear`, then `y`<br>
-      Expected: First command shows confirmation prompt `This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all student contacts are removed. Success message shown.
-=======
 2. Test case: `clear`, then `y`<br>
-   Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
->>>>>>> master
+   Expected: First command shows confirmation prompt `This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all student contacts are removed. Success message shown.
 
-3. Test case: `clear`, then `n`<br>
-   Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.
-
-4. Test case: `clear`, then any other input (e.g., `hello`)<br>
+3. Test case: `clear`, then any other input (e.g., `hello`)<br>
    Expected: First command shows confirmation prompt. Non-`y` input is treated as abort. No contacts are removed.
 
 ### Managing tags
@@ -681,13 +673,13 @@ The project was of **moderate-to-high** difficulty. The team had to:
 
 The following features were added beyond AB3:
 
-| Feature | Description |
-|---------|-------------|
+| Feature | Description                                                                                                                                                      |
+|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **New Person Fields** | Added `Day`, `StartTime`, `EndTime`, `Rate`, and `isPaid` fields to the `Person` model, requiring updates to the parser, storage (JSON), UI card, and sample data |
-| **Mark / Unmark** | Commands to toggle a student's payment status, with batch support (multiple indices) |
-| **Tag Commands** | `tag add`, `tag delete`, and `tag find` subcommands for flexible tag management, using a subcommand-based parsing architecture |
-| **Batch Delete** | Extended `delete` to accept multiple indices in a single command |
-| **Clear Confirmation** | Added a two-step confirmation flow for the `clear` command to prevent accidental data loss |
+| **Mark / Unmark** | Commands to toggle students' payment status, with batch support (multiple indices)                                                                               |
+| **Tag Commands** | `tag add`, `tag delete`, and `tag find` subcommands for flexible tag management, using a subcommand-based parsing architecture                                   |
+| **Batch Delete** | Extended `delete` to accept multiple indices in a single command                                                                                                 |
+| **Clear Confirmation** | Added a two-step confirmation flow for the `clear` command to prevent accidental data loss                                                                       |
 
 ### Effort Relative to AB3
 
@@ -717,84 +709,82 @@ This reuse is estimated to have saved roughly 30–40% of total effort, allowing
 
 Team size: 5
 
-1. **Support multiple lessons per student:**
-
+### Enhancement 1: Support multiple lessons per student
 Currently, each student can only have one lesson per week. Each student is represented by a single entry with one lesson day and time. In practice, tutors often teach the same student multiple times per week. The current implementation does not support this, forcing users to overwrite existing lesson details or be blocked by duplicate detection.
 
 * **Current behavior:** Duplicate-checking logic treats entries as duplicates if the name and phone number are the same.
+
 * **Planned behavior:** Duplicate-checking logic will allow multiple entries with the same name and phone number, provided that the lesson day or time differs.
 
-
-2. **List indexes alongside names for batch tag add and batch tag delete:**
+### Enhancement 2: List indices alongside names for batch tag add and batch tag delete
 
 Currently, batch tag add and batch tag delete commands return only the names of students who were affected. However, indexes are not shown, making it difficult to map results back to the displayed list. This is also inconsistent with other batch commands such as mark/unmark and delete, which already include indices.
 
-* **Current behavior:**
-`Added tags to students: Alex Yeoh (math); Bernice Yu (math); Charlotte Oliveiro (math)`
+* **Current behavior:** `Added tags to students: Alex Yeoh (math); Bernice Yu (math); Charlotte Oliveiro (math)`
 
-* **Planned behavior:**
-`Added tags to students: (1) Alex Yeoh (math); (2) Bernice Yu (math); (3) Charlotte Oliveiro (math)`
+* **Planned behavior:** `Added tags to students: (1) Alex Yeoh (math); (2) Bernice Yu (math); (3) Charlotte Oliveiro (math)`
 
-
-3. **Support international and variable-length phone numbers:**
+### Enhancement 3: Support international and variable-length phone numbers
 
 While OnlyTutors is primarily designed for tutors in Singapore, students or their parents may use international phone numbers (e.g., Malaysian +60, Indonesian +62). The current validation restricts tutors from storing these contacts.
 
 * **Current behavior:** Phone number validation strictly requires exactly 8 digits starting with 6, 8, or 9.
+
 * **Planned behavior:** Phone number validation will be relaxed to accept up to 15 digit numbers and optional country codes (e.g., starting with `+`) to accommodate standard international formats.
 
-
-4. **Allow overnight tutoring sessions:**
+### Enhancement 4: Allow overnight tutoring sessions
 
 Although overnight sessions are rare, they occur occasionally (e.g., intense study sessions during exam periods that cross midnight). The system currently assumes all lessons start and end on the exact same day.
 
 * **Current behavior:** The system prevents adding or editing a student if the lesson's start time is chronologically after its end time.
+
 * **Planned behavior:** Time validation will be updated to allow the start time to be later than the end time specifically for sessions that roll over into the next day (e.g., `23:00` to `02:00`).
 
-
-5. **Improve error reporting for partial successes during batch tag deletion:**
+### Enhancement 5: Improve error reporting for partial successes during batch tag deletion
 
 When deleting tags from multiple contacts simultaneously, the command does not clearly inform the user if some students in the batch did not actually have the tag.
 
 * **Current behavior:** Executing `tag delete 8 9 t/math` when only entry 8 has the tag will indicate a blanket success, without notifying the user that entry 9 was skipped.
+
 * **Planned behavior:** The command result message will be updated to explicitly state which students had the tag successfully removed and which students were skipped because the tag was not found.
 
-
-6. **Prevent or warn against overlapping lesson times:**
+### Enhancement 6: Prevent or warn against overlapping lesson times
 
 The system does not currently cross-check a tutor's schedule for clashes. Tutors can accidentally assign multiple students to the exact same time slot, leading to potential timetable conflicts.
 
 * **Current behavior:** The system allows multiple students to be added with overlapping lesson times on the same day without any warnings.
+
 * **Planned behavior:** The system will check the existing timetable and either actively prevent the addition of overlapping schedules, or display a prominent warning requiring user confirmation before proceeding.
 
-
-7. **Standardize internal spacing in tags to prevent usability traps:**
+### Enhancement 7: Standardize internal spacing in tags to prevent usability traps
 
 The application allows users to create tags containing multiple consecutive spaces (e.g., `Primary     3`). Because the GUI condenses these spaces visually, users cannot easily know how many spaces to type when attempting to delete the tag later, effectively trapping the tag in the system.
 
 * **Current behavior:** Tags preserve user-inputted multiple internal spaces, forcing users to guess the exact string match or use the `edit` command to clear all tags.
+
 * **Planned behavior:** The system will automatically sanitize tag inputs by collapsing multiple consecutive internal spaces into a single space during creation and deletion.
 
-
-8. **Improve UI display for long names to prevent truncation:**
+### Enhancement 8: Improve UI display for long names to prevent truncation
 
 On larger monitors with plenty of available screen space, long student names are still being cut off prematurely. This makes it impossible to distinguish between students with similar long names (e.g., "Maximillian Tan Wei Yu" vs "Maximillian Tan Wen Kai").
 
 * **Current behavior:** Names longer than 13 characters are truncated with ellipses regardless of the actual window size or available container space.
+
 * **Planned behavior:** The UI constraints will be updated to use text wrapping or dynamic expansion, allowing full names to be displayed when screen space permits.
 
-
-9. **Filter students by payment status:**
+### Enhancement 9: Filter students by payment status
 
 A core value proposition of OnlyTutors is tracking income. However, tutors currently lack a quick way to isolate students who owe them money.
 
 * **Current behavior:** A tutor must manually scan the entire list of contacts to visually identify which students have an unpaid status.
+
 * **Planned behavior:** A new filter command will be introduced (e.g., `filter paid` or `filter unpaid`) to exclusively list students matching the desired payment status.
 
 
-10. **Strengthen input sanitization for text fields:**
+### Enhancement 10: Strengthen input sanitization for text fields
 
 Currently, the system accepts excessive and redundant punctuation in free-text fields. For example, an address like `311,,,,,,,,,Clementi Ave` is accepted without warnings. This flaw extends to other fields where users might accidentally input multiple hyphens in names or trailing slashes.
 
 * **Current behavior:** The parser accepts unstructured free-text fields exactly as inputted, saving unformatted strings with duplicate punctuation.
+
 * **Planned behavior:** The system will aggressively sanitize text inputs across the board. It will automatically strip invalid edge-case characters and collapse consecutive identical punctuation marks (like commas or hyphens) into a single instance before saving.

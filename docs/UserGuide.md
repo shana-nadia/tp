@@ -252,12 +252,11 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 | `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/Monday st/15:00 et/17:00 r/50 t/Math` | Adds student John Doe with a Monday 3–5pm lesson at $50/hour, and tags them with `Math` |
 | `add n/Alice Tan p/81234567 e/alice@example.com a/Blk 30 Geylang St 29, #06-40 d/Wednesday st/10:00 et/12:00 r/60`   | Adds student Alice Tan with a Wednesday 10am–12pm lesson at $60/hour                    |
 
+
 **Expected output** (on success):
-<<<<<<< personToStudent
-> `New student added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
-=======
-> `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
->>>>>>> master
+> `New student added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
+
+> `New student added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: Monday; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags: [Math]`
 
 ### ⚠️ Common mistakes when adding a student
 
@@ -578,7 +577,7 @@ This deletes **all** student data and cannot be undone. Use with caution.
 </div>
 
 **Expected output:**
-> This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.>
+> This will delete all students. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.
 
 > Cleared all students. (after entering y or Y)
 
