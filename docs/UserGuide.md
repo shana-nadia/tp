@@ -5,7 +5,7 @@ title: User Guide
 
 **OnlyTutors** is a desktop management suite purpose-built for private tutors in Singapore to streamline students, lessons, and payments.
 
-While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard.
+While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard. This design prioritises clear and consistent command syntax to ensure reliable input handling.
 
 OnlyTutors helps you manage your tutoring business more effectively than traditional apps by allowing you to maintain various data not seen in traditional apps.
 
@@ -200,18 +200,17 @@ Refer to the [Features](#features) section below for the full details of each co
 
 ### Parameter Summary
 
-| Parameter | Prefix | Constraints                                                                                                         | Example |
-|-----------|--------|---------------------------------------------------------------------------------------------------------------------|---------|
-| **Name** | `n/` | English alphabets, spaces, and `/` only (e.g. `S/O`); cannot be blank                                              | `n/Raj S/O Kumar` |
-| **Phone** | `p/` | Exactly 8 digits, starting with 6, 8, or 9 (Singapore format)                                                       | `p/91234567` |
-| **Email** | `e/` | Standard email format (`local@domain`)                                                                              | `e/john@example.com` |
-| **Address** | `a/` | At least 3 characters long, must not be blank                                                                       | `a/Blk 30, Geylang St 29` |
-| **Day** | `d/` | A day of the week (case-insensitive): Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday                | `d/Monday` |
-| **Start Time** | `st/` | 24-hour format `HH:mm` (e.g., `09:00`, `14:30`)                                                                     | `st/14:00` |
-| **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                       | `et/16:00` |
-| **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40 | `r/50` |
-| **Tag** | `t/` | Any character allowed; must not be blank; leading/trailing spaces are trimmed; max 20 characters                    | `t/math` |
-
+| Parameter | Prefix | Constraints                                                                                                              | Example |
+|-----------|--------|--------------------------------------------------------------------------------------------------------------------------|---------|
+| **Name** | `n/` | English alphabets with words separated by a single space; may include apostrophes ('), hyphens (-), and periods (.); cannot be blank | `n/Tan Ah Kow` |
+| **Phone** | `p/` | Exactly 8 digits, starting with 6, 8, or 9 (Singapore format)                                                            | `p/91234567` |
+| **Email** | `e/` | Standard email format (`local@domain`)                                                                                   | `e/john@example.com` |
+| **Address** | `a/` | At least 3 characters long; must not start or end with whitespace; must not contain '/'                                  | `a/Blk 30 Geylang St 29` |
+| **Day** | `d/` | A day of the week (case-insensitive): Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday                     | `d/Monday` |
+| **Start Time** | `st/` | 24-hour format `HH:mm` (e.g., `09:00`, `14:30`)                                                                          | `st/14:00` |
+| **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                            | `et/16:00` |
+| **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40      | `r/50` |
+| **Tag** | `t/` | Any character except '/'; must not be blank; leading/trailing spaces are trimmed; max 20 characters                      | `t/math` |
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a student: `add`
@@ -243,18 +242,16 @@ OnlyTutors does not allow duplicate students. Two students are considered duplic
 **Expected output** (on success):
 > `New contact added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Day: MONDAY; Start Time: 15:00; End Time: 17:00; Rate: 50; Tags:`
 
-**Expected output** (on fail):
-> `Names should contain only English characters, with words separated by a single space or '/', e.g. 'Tan Ah Kow' or 'Raj S/O Kumar'. Names must not start or end with a space or '/', and must not contain consecutive spaces or '/' characters`
-
 ### ⚠️ Common mistakes when adding a student
 
 | Mistake             | Why it fails                                     |
 |---------------------|--------------------------------------------------|
 | `r/$40`             | Symbols are not allowed; rate must be a number   |
 | `r/40.0`            | Decimals are not allowed; must be a whole number |
-| `r/9000`            | Hourly rate exceeds the maximum cap of 5000                                                 |
+| `r/9000`            | Hourly rate exceeds the maximum cap of 5000      |
 | `n/John123`         | Name cannot contain numbers                      |
 | `n/`                | Name cannot be empty                             |
+| `n/Raj S/O Kumar`   | '/' is not allowed in names                      |
 | `p/12345678`        | Must start with 6, 8, or 9                       |
 | `d/Mon`             | Must use full day name (e.g. Monday)             |
 | `st/3pm`            | Must use 24-hour format (e.g. 15:00)             |
@@ -369,7 +366,7 @@ Finds students who match all of the given tags exactly.
 * The search is **case-insensitive**. e.g. `Math` will match `math`.
 * Tags must match **exactly**. e.g. `ma` will not match `math`.
 * Only students matching **all** tags will be returned (i.e. `AND` search).
-* Tags can contain spaces and special characters but must not be empty.
+* Tags can contain spaces and special characters except '/', but must not be empty.
 
 **Examples:**
 
@@ -435,7 +432,7 @@ Adds one or more tags to a student **without replacing** existing tags.
 * Adds the specified tag(s) to the student(s) at the specified `INDEX`(es).
 * The index **must be a positive integer** (1, 2, 3, …).
 * At least one tag must be provided.
-* Tags can contain any characters but must not be empty and cannot have more than 20 characters.
+* Tags can contain any characters except '/', must not be empty, and cannot have more than 20 characters.
 * Tags are **case-insensitive** — `Math`, `math`, and `MATH` are treated as the same tag. The display preserves the casing of the first version added.
 * The command updates every selected student who is missing at least one of the specified tags.
 * The command fails only if it would not change any selected student.
