@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Day;
@@ -26,6 +28,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
 
     private final String name;
     private final String phone;
@@ -35,7 +38,7 @@ class JsonAdaptedPerson {
     private final String startTime;
     private final String endTime;
     private final String rate;
-    private final boolean isPaid;
+    private final Boolean isPaid;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -46,7 +49,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("day") String day, @JsonProperty("startTime") String startTime,
                              @JsonProperty("endTime") String endTime, @JsonProperty("rate") String rate,
-                             @JsonProperty("isPaid") boolean isPaid,
+                             @JsonProperty("isPaid") Boolean isPaid,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -147,6 +150,10 @@ class JsonAdaptedPerson {
         }
         final Time modelEndTime = new Time(endTime);
 
+        if (!modelEndTime.isAfter(modelStartTime)) {
+            throw new IllegalValueException(Time.MESSAGE_COMPARISON_CONSTRAINTS);
+        }
+
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }
@@ -155,9 +162,17 @@ class JsonAdaptedPerson {
         }
         final Rate modelRate = new Rate(rate);
 
+        final boolean modelIsPaid;
+        if (isPaid == null) {
+            logger.warning("isPaid field is missing for person: " + name + ". Defaulting to Unpaid.");
+            modelIsPaid = false;
+        } else {
+            modelIsPaid = isPaid;
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelDay, modelStartTime, modelEndTime, modelRate, isPaid, modelTags);
+                modelDay, modelStartTime, modelEndTime, modelRate, modelIsPaid, modelTags);
     }
 
 }

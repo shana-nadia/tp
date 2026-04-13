@@ -10,21 +10,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should contain only English characters, with words separated by a single space or '/', "
-                    + "e.g. 'Tan Ah Kow' or 'Raj S/O Kumar'. "
+            "Names should contain only English characters, with words separated by a single space, "
+                    + "e.g. 'Tan Ah Kow'. "
                     + "Names may also contain apostrophes, hyphens, and periods, "
                     + "e.g. 'O'Brien' or 'Mary-Jane'. "
-                    + "Names must not start or end with a space or '/', "
-                    + "and must not contain consecutive spaces or '/' characters";
+                    + "Names must not start or end with a space, "
+                    + "and must not contain consecutive spaces.";
 
     /*
      * 1. Must start with a letter: [a-zA-Z]
      * 2. Letters may be followed by apostrophes, hyphens, or periods: [a-zA-Z'.\\-]
-     * 3. Words can be separated by a single space or slash: [ /]
+     * 3. Words can be separated by a single space:
      * 4. This ensures no consecutive spaces or slashes and no trailing spaces or slashes.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z'.\\-]*(([ /][a-zA-Z])[a-zA-Z'.\\-]*)*$";
-
+    public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z'.\\-]*(\\s[a-zA-Z][a-zA-Z'.\\-]*)*$";
     public final String fullName;
 
     /**

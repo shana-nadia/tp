@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |---|----------|-------------|
 | 1 | Portability | Should work on any mainstream OS (Windows, Linux, macOS) as long as it has Java 17 or above installed. |
 | 2 | Standalone | Should work as a standalone application without requiring an installer. The app should be packaged as a single JAR file. |
-| 3 | Performance | Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. |
+| 3 | Performance | Should be able to hold up to 1000 students with all commands completing within 3 seconds under normal usage conditions. |
 | 4 | Response Time | Any command should complete and display results within 3 seconds under normal operating conditions. |
 | 5 | CLI Efficiency | A user with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse. |
 | 6 | Usability | A tutor with no prior technical background should be able to use the core features of the app after reading the user guide. |
@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: At least one student in the list.
 
    1. Test case: `clear`, then `y`<br>
-      Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? [y/N]:`. After entering `y`, all contacts are removed. Success message shown.
+      Expected: First command shows confirmation prompt `This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.`. After entering `y`, all contacts are removed. Success message shown.
 
    1. Test case: `clear`, then `n`<br>
       Expected: First command shows confirmation prompt. After entering `n`, clear is aborted. No contacts are removed.
@@ -650,14 +650,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data file
 
-   1. Delete the `data/onlytutors.json` file if it exists.
+   1. Delete the `data/addressbook.json` file if it exists.
 
    1. Launch the app.<br>
       Expected: App starts with a set of sample student data.
 
 1. Dealing with corrupted data file
 
-   1. Open `data/onlytutors.json` and introduce invalid content (e.g., delete a required field or add invalid characters).
+   1. Open `data/addressbook.json` and introduce invalid content (e.g., delete a required field or add invalid characters).
 
    1. Launch the app.<br>
       Expected: App starts with an empty student list. A warning may be logged.
@@ -717,19 +717,21 @@ This reuse is estimated to have saved roughly 30–40% of total effort, allowing
 
 Team size: 5
 
-1. **Support multiple lessons per student:** Currently, each student can only have lessons once per week. Each student
-   is represented by a single entry with one lesson day and time. In practice, tutors often teach the same student multiple
-   times per week. The current implementation does not support this, forcing users to either overwrite existing lesson
-   details or be blocked by duplicate detection.
-    * Current behavior: Duplication-checking logic marks entries as duplicate if the phone number and name are the
-      same.
-    * Planned behavior: Duplication-checking logic should allow multiple entries with the same phone number and name,
-      provided that the lesson day or time differs.
-2. **List indexes alongside names for batch tag add and batch tag delete:** Currently, batch tag add and batch tag delete
-   return the list of names of people who have successfully been tagged or had their tags removed. However, list indexes are not
-   shown beside the names. Thus, users cannot easily map the affected students to their positions in the displayed list.
-   This is also inconsistent with other batch commands such as mark/unmark and delete which already include indices.
-    * Current behavior: Success message displayed without list indexes beside the names:
-    `Added tags to students: Alex Yeoh (math); Bernice Yu (math); Charlotte Oliveiro (math)`
-    * Planned behavior: Success message displayed with list indexes beside the names:
-      `Added tags to students: (1) Alex Yeoh (math); (2) Bernice Yu (math); (3) Charlotte Oliveiro (math)`
+1. **Support multiple lessons per student:**
+
+Currently, each student can only have one lesson per week. Each student is represented by a single entry with one lesson day and time. In practice, tutors often teach the same student multiple times per week. The current implementation does not support this, forcing users to overwrite existing lesson details or be blocked by duplicate detection.
+
+* **Current behavior:** Duplicate-checking logic treats entries as duplicates if the name and phone number are the same.
+* **Planned behavior:** Duplicate-checking logic will allow multiple entries with the same name and phone number, provided that the lesson day or time differs.
+
+---
+
+2. **List indexes alongside names for batch tag add and batch tag delete:**
+
+Currently, batch tag add and batch tag delete commands return only the names of students who were affected. However, indexes are not shown, making it difficult to map results back to the displayed list. This is also inconsistent with other batch commands such as mark/unmark and delete, which already include indices.
+
+* **Current behavior:**
+`Added tags to students: Alex Yeoh (math); Bernice Yu (math); Charlotte Oliveiro (math)`
+
+* **Planned behavior:**
+`Added tags to students: (1) Alex Yeoh (math); (2) Bernice Yu (math); (3) Charlotte Oliveiro (math)`
