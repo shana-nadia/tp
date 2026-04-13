@@ -7,7 +7,14 @@ title: User Guide
 
 While most apps rely on slow "point-and-click" menus, OnlyTutors is a Command-Line-First application. It is designed for those who want the efficiency of a terminal-based workflow without sacrificing the visual clarity of a modern dashboard. This design prioritises clear and consistent command syntax to ensure reliable input handling.
 
-OnlyTutors helps you manage your tutoring business more effectively than traditional apps by allowing you to maintain various data not seen in traditional apps.
+OnlyTutors helps you manage your tutoring business more effectively than traditional apps. Here is what you can do:
+
+* **Track student details** — store each student's name, phone number, email and address in one place.
+* **Schedule lessons** — record the day and time of each student's weekly lesson.
+* **Set tuition rates** — keep track of the hourly rate for each student.
+* **Monitor payment status** — mark students as Paid or Unpaid to stay on top of collections.
+* **Organise with tags** — label students by subject, level, or any category that suits you (e.g. `Math`, `Primary 3`).
+* **Search and filter** — find students quickly by name or tag.
 
 **Who is this guide for?** Private tutors who are comfortable typing commands and want a fast, no-frills way to keep track of their students.
 
