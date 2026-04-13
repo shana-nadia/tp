@@ -225,7 +225,6 @@ When copying multi-line commands from a PDF, space characters surrounding line-b
 | **End Time** | `et/` | 24-hour format `HH:mm`; **must be strictly after** start time                                                            | `et/16:00`               |
 | **Rate** | `r/` | A non-negative whole number (max 5000) representing the hourly rate. Leading zeroes will be removed e.g. 0040 -> 40      | `r/50`                   |
 | **Tag** | `t/` | Any character except '/'; must not be blank; leading/trailing spaces are trimmed; max 20 characters                      | `t/Math`                 |
---------------------------------------------------------------------------------------------------------------------
 
 ### Adding a student: `add`
 
@@ -576,7 +575,7 @@ This deletes **all** student data and cannot be undone. Use with caution.
 
 **Expected output:**
 > This will delete all contacts. Are you sure? Enter 'y' or 'Y' to confirm; any other input will abort.>
->
+
 > Cleared all contacts. (after entering y or Y)
 
 --------------------------------------------------------------------------------------------------------------------
