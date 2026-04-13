@@ -66,14 +66,16 @@ If the output shows `java version "17"` or higher, skip to [Step 2](#step-2-down
 </div>
 
 **Windows:**
-1. Go to [https://www.oracle.com/java/technologies/downloads/#java17](https://www.oracle.com/java/technologies/downloads/#java17).
+1. Go to the [Oracle Java 17 Downloads page](https://www.oracle.com/java/technologies/downloads/#java17).
 2. Under the **Windows** tab, download the **x64 Installer** (`.exe` file).
 3. Run the installer and follow the on-screen instructions.
 4. After installation, open Command Prompt and run `java -version` to verify.
 
 **macOS:**
-> Follow the precise JDK 17 installation guide for Mac [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-> Using the wrong JDK version on macOS can cause display issues with the GUI — use the exact version prescribed.
+1. Follow the [macOS-specific JDK 17 installation guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+2. After installation, verify with `java -version`.
+
+> **Note:** Using the wrong JDK version on macOS can cause display issues with the GUI — use the exact version prescribed.
 
 **Linux (Ubuntu/Debian):**
 1. Open a terminal and run:
