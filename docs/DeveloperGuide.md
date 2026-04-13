@@ -236,24 +236,24 @@ The following activity diagram summarizes the workflow when a user executes the 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                  | I want to …​                                                   | So that I can…​                                                 |
-|----------|--------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | new tutor                | see usage instructions                                         | refer to instructions when I forget how to use the App          |
-| `* * *`  | tutor                    | add a student                                                  | begin managing their details                                    |
-| `* * *`  | tutor                    | delete students whom I no longer teach                         | remove clutter and keep my list up-to-date                      |
-| `* * *`  | busy tutor               | see all upcoming lessons                                       | plan my days efficiently                                        |
-| `* * *`  | travelling tutor         | record lesson's location                                       | know where to go                                                |
-| `* * *`  | organized tutor          | see my student's level and subjects                            | prepare and bring the appropriate materials                     |
-| `* * *`  | miserly tutor            | record tuition rates and payment status                        | track my income properly                                        |
-| `* *`    | careless tutor           | undo my actions                                                | rectify my mistakes                                             |
-| `* *`    | humble tutor             | edit my student's information easily                           | correct any wrong or outdated contact info without hassle       |
-| `* *`    | tutor with many students | search for a student by name                                   | quickly locate a student without scrolling through the list     |
-| `* *`    | tutor with many students | filter students by tags                                        | quickly find a specific group of students                       |
-| `* *`    | tutor                    | export and import my data                                      | backup or switch devices                                        |
-| `*`      | analytical tutor         | view a summary of my monthly teaching hours and income         | evaluate my profile and workload                                |
-| `*`      | busy tutor               | get quick message templates (e.g., “running 10 mins late”)     | message efficiently                                             |
-| `*`      | tutor                    | mark whether a student is currently taking lessons or on break | they don't clutter my list but I also don't have to delete them |
-| `*`      | disciplined tutor        | record my student's personality                                | know whether to bring my rattan cane                            |
-| `*`      | prideful tutor           | record my student's performance                                | measure improvement                                             |
+|--------|--------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
+| `* * *` | new tutor                | see usage instructions                                         | refer to instructions when I forget how to use the App          |
+| `* * *` | tutor                    | add a student                                                  | begin managing their details                                    |
+| `* * *` | tutor                    | delete students whom I no longer teach                         | remove clutter and keep my list up-to-date                      |
+| `* * *` | busy tutor               | see all upcoming lessons                                       | plan my days efficiently                                        |
+| `* * *` | travelling tutor         | record lesson's location                                       | know where to go                                                |
+| `* * *` | organized tutor          | see my student's level and subjects                            | prepare and bring the appropriate materials                     |
+| `* * *` | miserly tutor            | record tuition rates and payment status                        | track my income properly                                        |
+| `* *`  | humble tutor             | edit my student's information easily                           | correct any wrong or outdated contact info without hassle       |
+| `* *`  | tutor with many students | search for a student by name                                   | quickly locate a student without scrolling through the list     |
+| `* *`  | tutor with many students | filter students by tags                                        | quickly find a specific group of students                       |
+| `* *`  | tutor                    | export and import my data                                      | backup or switch devices                                        |
+| `*`    | careless tutor           | undo my actions                                                | rectify my mistakes                                             |
+| `*`    | analytical tutor         | view a summary of my monthly teaching hours and income         | evaluate my profile and workload                                |
+| `*`    | busy tutor               | get quick message templates (e.g., “running 10 mins late”)     | message efficiently                                             |
+| `*`    | tutor                    | mark whether a student is currently taking lessons or on break | they don't clutter my list but I also don't have to delete them |
+| `*`    | disciplined tutor        | record my student's personality                                | know whether to bring my rattan cane                            |
+| `*`    | prideful tutor           | record my student's performance                                | measure improvement                                             |
 
 ### Use cases
 
