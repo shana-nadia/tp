@@ -20,7 +20,7 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Set<Tag> tags = Set.of(new Tag("classmate"), new Tag("friend!!!"));
+        Set<Tag> tags = Set.of(new Tag("classmate"), new Tag("math!!!"));
         AddTagCommand expectedCommand = new AddTagCommand(List.of(INDEX_FIRST_PERSON), tags);
         assertParseSuccess(parser, "1" + TAG_DESC_MATH + " t/classmate", expectedCommand);
     }
